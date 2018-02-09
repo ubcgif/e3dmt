@@ -9,7 +9,7 @@ Running the Program
 -------------------
 
 
-
+**NEED A PRACTICE RUN**
 
 
 
@@ -60,7 +60,7 @@ The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
 
 .. _e3dmt_fwd_ln6:
 
-    - **Topography:** The user may supply the file path to an active cells model file, type "ALL_ACTIVE" or type "VALUE" followed by a space and a numerical value (i.e. "VALUE 128.6". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
+    - **Topography:** The user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
 
 
 
