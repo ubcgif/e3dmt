@@ -138,7 +138,7 @@ necessary refinement can be obtained without added computational expense. Figure
 example of an Octree mesh, with nine cells, eight of which are the base mesh minimum size.
 
 
-.. figure:: programs/images/create_octree_input.png
+.. figure:: images/OcTree.png
      :align: center
      :width: 700
 

@@ -11,7 +11,7 @@ Input and output files
   .. toctree::
     :maxdepth: 1
 
-    OcTree Mesh Generation (MTcreate_octree_mesh_e3d.exe) <programs/createOcTree>
+    OcTree Mesh Generation <programs/createOcTree>
     Create Models <programs/createModel>
     Forward Modeling (e3dMTfwd.inp) <programs/forward>
     Inversion (e3dMTinv.exe) <programs/inversion>
