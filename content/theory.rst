@@ -4,7 +4,7 @@ Background Theory
 =================
 
 This section aims to provide the user with a basic review of the physics, discretization, and optimization techniques used to solve the frequency domain quasi-static electromagnetics problem. It
-is assumed that the user has some background in these areas. For further reading see (Nabighian, 2006) (**CITE**).
+is assumed that the user has some background in these areas. For further reading see :cite:`Nabighian1991`.
 
 .. _theory_fundamentals:
 
@@ -22,7 +22,7 @@ equations are:
 	\end{align}
 	:label:
 
-where :math:`\mathbf{E}` and :math:`\mathbf{H}` are the electric and magnetic fields, s is some external source, and :math:`\mu`, :math:`\sigma` and :math:`\omega` are the magnetic permeability, conductivity, and angular frequency respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in (Nabighian, 2006) (**CITE**). By doing so, some difficulties arise when
+where :math:`\mathbf{E}` and :math:`\mathbf{H}` are the electric and magnetic fields, s is some external source, and :math:`\mu`, :math:`\sigma` and :math:`\omega` are the magnetic permeability, conductivity, and angular frequency respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
 solving the system;
 
 	- the curl operator has a non-trivial null space making the resulting linear system highly ill-conditioned
@@ -106,7 +106,7 @@ such that:
 ZTEM Data
 ^^^^^^^^^
 
-The Z-Axis Tipper Electromagnetic Technique (ZTEM) (Lo and Zang, 2008)(**CITE**) records
+The Z-Axis Tipper Electromagnetic Technique (ZTEM) (Lo2008) records
 the vertical component of the magnetic field everywhere above the survey area while recording
 the horizontal fields at a ground base reference station. In the same manner as demonstrated for
 MT, transfer functions are computed which relate the vertical fields to the ground based horizontal
@@ -138,7 +138,9 @@ necessary refinement can be obtained without added computational expense. Figure
 example of an Octree mesh, with nine cells, eight of which are the base mesh minimum size.
 
 
-**ADD IMAGE OF OCTREE MESH**
+.. figure:: programs/images/create_octree_input.png
+     :align: center
+     :width: 700
 
 
 When working with Octree meshes, the underlying mesh is defined as a regular 3D orthogonal grid where
@@ -155,7 +157,7 @@ Discretization of Operators
 
 The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`impedance_tensor`, they are required for the solution of the system. The divergence
 operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please
-see (Haber et al. (2012)) (**CITE**) for a detailed description of the discretization process.
+see :cite:`Haber2012` for a detailed description of the discretization process.
 
 
 
@@ -223,7 +225,7 @@ where :math:`\Sigma` is a matrix of the inverse standard deviation for each meas
 An important consideration comes when discretizing the regularization. The gradient operates on
 cell centered variables in this instance. Applying a short distance approximation is second order
 accurate on a domain with uniform cells, but only :math:`\mathcal{O}(1)` on areas where cells are non-uniform. To
-rectify this a higher order approximation is used (Haber et al., 2012). The discrete regularization
+rectify this a higher order approximation is used (:cite:`Haber2012`). The discrete regularization
 operator can then be expressed as
 
 .. math::
@@ -266,7 +268,7 @@ The resulting optimization problem is therefore:
 
 where :math:`\alpha` is a regularization parameter, and :math:`\mathbf{m_L}` and :math:`\mathbf{m_H}` are upper and lower bounds provided by some a prior geological information.
 A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
-information refer again to (Haber et al., 2012)(**CITE**) and references therein.
+information refer again to :cite:`Haber2012` and references therein.
 
 
 
