@@ -24,7 +24,7 @@ This section provides a description of each program in the E3DMT library.
 General Files for E3DMT Executables
 -----------------------------------
 
-Here, we describe the formats of files used to run E3DMT executable files.
+Here, we describe the formats of supplementary files used to run E3DMT executable files. The input files for each executable program are described in the :ref:`running the programs<running>` section.
 
 
 .. toctree::
@@ -32,6 +32,9 @@ Here, we describe the formats of files used to run E3DMT executable files.
 
     Data File <files/dataFile>
     Topography File <files/topoFile>
+    Tensor Mesh File <files/tensor_mesh>
+    Octree Mesh File <files/octree_mesh>
+    Model File <files/model>
 
 
 
