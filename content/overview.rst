@@ -51,7 +51,7 @@ Since then, improvements have been implemented as time and resources permit.
 E3DMT Program Library Content
 -----------------------------
 
-The E3DMT program library consists of the following executable programs:
+The main executable programs within the E3DMT program library are:
 
     - **MTcreate_octree_mesh_e3d:** Creates the OcTree used in forward simulations and inversions from survey data.
     - **blk3cell:** Creates simple conductivity models on a core tensor mesh
@@ -59,7 +59,7 @@ The E3DMT program library consists of the following executable programs:
     - **e3dMTfwd:** Performs the forward simulation
     - **e3dMTinv:** Inverts observed data in order to recover a conductivity model
 
-  3. **Additional Octree utilities??**.
+Also included are the following Octree utility programs:
 
       - create weight file
       - face weights

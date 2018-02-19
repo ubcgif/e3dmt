@@ -8,7 +8,7 @@ The data file contains the survey information and includes: the number of transm
 .. note::
     - Bolded entries are fixed flags recognized by the Fortran codes and blue hyperlinked entries are values/regular expressions specified by the user
     - Each unique data type, frequency and set of observation locations corresponds to a unique "transmitter"; e.g. 2 transmitters must be specified if the same data are collected at the same locations at 2 different frequencies.
-    - Each block containing DATATYPE, FREQUENCY, N_RECV and the data array is separated by an empty line
+    - Each block containing DATATYPE, FREQUENCY, N_RECV and the data array
 
 
 The lines of a data file with one or more transmitters are formatted as follows:

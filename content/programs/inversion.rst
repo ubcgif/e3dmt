@@ -3,15 +3,16 @@
 Inversion Program
 =================
 
-The inversion is run using the executable program **e3dMTinv.exe**. 
+The inversion is run using the executable program **e3dMTinv.exe**. Parameters necessary for running the forward modeling code are set in the file **e3dMT_octree_inv.inp**.
 
 Running the Program
 -------------------
 
+To run the inversion, open a command line window. Type the path to the code **e3dMTinv.exe**, followed by a space, followed by the path to the input file.
 
-**NEED A PRACTICE RUN**
-
-
+.. figure:: images/run_e3dmt_inv.png
+     :align: center
+     :width: 700
 
 
 Input

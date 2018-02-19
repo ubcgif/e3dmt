@@ -3,19 +3,21 @@
 Forward Modeling Program
 ========================
 
-The forward problem is solved using the executable program **e3dMTfwd.exe**. 
+The forward problem is solved using the executable program **e3dMTfwd.exe**. Parameters necessary for running the forward modeling code are set in the file **e3dMT_octree_fwd.inp**.
 
 Running the Program
 -------------------
 
+To run the forward modeling program, open a command line window. Type the path to the code **e3dMTfwd.exe**, followed by a space, followed by the path to the input file.
 
-**NEED A PRACTICE RUN**
-
-
+.. figure:: images/run_e3dmt_fwd.png
+     :align: center
+     :width: 700
 
 
 Input
 -----
+
 
 The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
 
@@ -24,16 +26,18 @@ The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
 | :ref:`Real Conductivity<e3dmt_fwd_ln3>`
 | :ref:`Imaginary Conductivity<e3dmt_fwd_ln4>`
 | :ref:`1D Background Conductivity<e3dmt_fwd_ln5>`
-| :ref:`Topography<e3dmt_fwd_ln6>`
+| :ref:`Background Susceptibility<e3dmt_fwd_ln6>`
+| :ref:`Topography<e3dmt_fwd_ln7>`
 |
 |
 
 
-.. figure:: images/e3dmt_fwd_input.png
+
+.. figure:: images/create_octree_input.png
      :align: center
      :width: 700
 
-     Example input file for solving the forward problem.
+     Example input file for forward modeling program.
 
 
 **Line Descriptions:**
@@ -60,8 +64,11 @@ The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
 
 .. _e3dmt_fwd_ln6:
 
-    - **Topography:** The user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
+    - **Background Susceptibility:** The user may provide the file path to a background susceptibility model on this line. If a constant susceptibility is being used, "VALUE" may be entered and followed by the background susceptibility. For no background susceptibility, the flag "NO_SUS" is used.
 
+.. _e3dmt_fwd_ln7:
+
+    - **Topography:** The user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
 
 
 

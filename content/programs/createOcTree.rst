@@ -3,12 +3,12 @@
 Create OcTree Mesh
 ==================
 
-OcTree meshes used in the E3DMT code are created using the program **MTcreate_octree_mesh_e3d.exe**. Parameters necessary for defining the OcTree mesh are set in the file **MTcreate_mesh.inp**.
+:ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **MTcreate_octree_mesh_e3d.exe**. Parameters necessary for defining the OcTree mesh are set in the file **MTcreate_mesh.inp**.
 
 Running MTcreate_octree_mesh_e3d
 --------------------------------
 
-To generate an OcTree mesh, open a command line window in the directory which contains the :ref:`input file<e3dmt_octree_input>` and all other necessary files. Type the path to the code **MTcreate_octree_mesh_e3d.exe**, followed by a space, followed by the name of the input file.
+To generate an OcTree mesh, open a command window. Type the path to the code **MTcreate_octree_mesh_e3d.exe**, followed by a space, followed by the path to the input file.
 
 .. figure:: images/run_create_octree_mesh.png
      :align: center
@@ -25,7 +25,7 @@ The lines of input file (**MTcreate_mesh.inp**) are formatted as follows:
 | :ref:`x_pad y_pad down_pad up_pad<e3dmt_octree_ln2>`
 | :ref:`dist_1 dist_2 dist_3<e3dmt_octree_ln3>`
 | :ref:`n1 n2 n3<e3dmt_octree_ln4>`
-| :ref:`dataFile<e3dmt_octree_ln5>`
+| :ref:`locFile<e3dmt_octree_ln5>`
 | :ref:`topoFile<e3dmt_octree_ln6>`
 | :ref:`shift_data<e3dmt_octree_ln7>`
 | :ref:`interp_topo<e3dmt_octree_ln8>`
@@ -61,7 +61,7 @@ The lines of input file (**MTcreate_mesh.inp**) are formatted as follows:
 
 .. _e3dmt_octree_ln5:
 
-	- **dataFile:** File path to a :ref:`data points<dataFile_points>` or :ref:`observed data<dataFile_obs>` file
+	- **locFile:** Contains the locations of the receivers. The user may either enter the file path to an :ref:`observed data<dataFile_obs>` file, or the flag "ONLY_LOC" followed by the path to a :ref:`data points<dataFile_points>` file. 
 
 .. _e3dmt_octree_ln6:
 
@@ -80,12 +80,11 @@ The lines of input file (**MTcreate_mesh.inp**) are formatted as follows:
 	- **start_point:** Set as either "START_LARGE_CELLS" or "START_SMALL_CELLS". This line sets the starting point for the mesh generation. Starting the mesh population from large cells greatly reduces initial memory required and is therefore suggested. Large cells are divided in this algorithm to produce the OcTree mesh.
 
 
-.. figure:: images/create_octree_input.png
+.. figure:: images/octree_example.png
      :align: center
-     :width: 700
+     :width: 400
 
-     OcTree mesh created with the above input file. Truncation in the horizontal and vertical have been used to cell sizes in various portions of the mesh.
-
+     Octree mesh showing and surface topography. Cells below the surface topography are assigned a value of 1 in the active cells model.
 
 Approximate versus Good Topography
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -95,7 +94,7 @@ Below, we see the difference between entering "APPROXTOPO" (top) and "GOODTOPO" 
 
 .. figure:: images/create_octree_topo.png
      :align: center
-     :width: 700
+     :width: 500
 
 .. _e3dmt_octree_output:
 
@@ -104,13 +103,13 @@ Output Files
 
 The program **MTcreate_octree_mesh_e3d.exe** creates 5 output files:
 
-	- **3D_mesh.txt:** the regular underlying tensor mesh, number of cells in each direction (powers of 2)
+	- **3D_mesh.txt:** the underlying regular :ref:`tensor mesh<tensorFile>`. This mesh is comprised of the smallest cell size and is very large (>> 1M cells). As a result, it is unwise to plot this mesh.
 
-	- **3D_core_mesh.txt:** the same as 3D mesh.txt, summary for the core region
+	- **3D_core_mesh.txt:** A 3D regular :ref:`tensor mesh<tensorFile>` defining the core region. 
 
-	- **octree_mesh.txt:** OcTree mesh used in the forward modeling and inversion codes
+	- **octree_mesh.txt:** :ref:`OcTree mesh<octreeFile>` used in the forward modeling and inversion codes
 
-	- **active_cells.txt:** active cells model on the OcTree mesh. Cells are active if assigned a value of 1 and inactive if assigned a value of 0 
+	- **active_cells.txt:** :ref:`active cells model<modelFile>` on the OcTree mesh. Cells are active if assigned a value of 1 and inactive if assigned a value of 0 
 
 	- **create_mesh.log:** log file
 
