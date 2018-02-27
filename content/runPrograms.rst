@@ -6,6 +6,10 @@ Running the programs
 The software package E3DMT contains the following Fortran executable codes:
 
 - ``MTcreate_octree_mesh_e3d``: Creates OcTree mesh
+- ``blk3cell``: Creates block model on tensor mesh
+- ``3DModel2Octree``: Interpolates tensor model to Octree mesh
+- ``e3dmtfwd``: Forward models synthetic MT and ZTEM data
+- ``e3dmtinv``: Inverts MT and ZTEM data
 
 
 .. note::
