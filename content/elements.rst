@@ -30,11 +30,14 @@ Here, we describe the formats of supplementary files used to run E3DMT executabl
 .. toctree::
     :maxdepth: 1
 
-    Data File <files/dataFile>
+    Survey/Locations File <files/surveyFile>
+    Predicted Data File <files/preFile>
+    Observations File <files/obsFile>
     Topography File <files/topoFile>
     Tensor Mesh File <files/tensor_mesh>
     Octree Mesh File <files/octree_mesh>
     Model File <files/model>
+    Model and Face Weights Files <files/weights>
 
 
 

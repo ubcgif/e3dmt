@@ -60,7 +60,7 @@ The lines of input file (**e3dMT_octree_inv.inp**) are formatted as follows:
 
 .. _e3dmt_inv_ln3:
 
-    - **1D Background Conductivity:** The user may supply the file path to a 1D background conductivity model (**EXPLAIN AND LINK**). If a homogeneous background conductivity is being used, the user enters "VALUE" followed by a space and a numerical value; example "VALUE 0.01"
+    - **1D Background Conductivity:** The user may supply the file path to a `1D background conductivity model <http://em1dfm.readthedocs.io/en/latest/content/files/supporting.html#files-for-reference-and-starting-models>`__ . If a homogeneous background conductivity is being used, the user enters "VALUE" followed by a space and a numerical value; example "VALUE 0.01"
 
 .. _e3dmt_inv_ln4:
 
@@ -80,11 +80,11 @@ The lines of input file (**e3dMT_octree_inv.inp**) are formatted as follows:
 
 .. _e3dmt_inv_ln8:
 
-    - **Cell Weights:** Here, the user specifies whether cell weights are supplied. If so, the user provides the file path to a cell weights file (**LINK**). If no additional cell weights are supplied, the user enters "NO_WEIGHT".
+    - **Cell Weights:** Here, the user specifies whether cell weights are supplied. If so, the user provides the file path to a :ref:`cell weights file <weightsFile>`  If no additional cell weights are supplied, the user enters "NO_WEIGHT".
 
 .. _e3dmt_inv_ln9:
 
-    - **Face Weights:** Here, the user specifies whether face weights are supplied. If so, the user provides the file path to a face weights file (**LINK**). If no additional cell weights are supplied, the user enters "NO_FACE_WEIGHT". The user may also enter "EKBLOM" for 1-norm approximation to recover sharper edges.
+    - **Face Weights:** Here, the user specifies whether face weights are supplied. If so, the user provides the file path to a face weights file :ref:`cell weights file <weightsFile>`. If no additional cell weights are supplied, the user enters "NO_FACE_WEIGHT". The user may also enter "EKBLOM" for 1-norm approximation to recover sharper edges.
 
 .. _e3dmt_inv_ln10:
 

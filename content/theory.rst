@@ -202,7 +202,7 @@ and
 
 The matrix :math:`Q_c` is an interpolation matrix from cell centers to receiver locations, :math:`A_{f2c}` averages from faces to cell centers, and :math:`A_{e2c}` averages from edges to cell centers.
 
-
+.. _theory_inv:
 
 Inverse Problem
 ---------------
@@ -230,15 +230,15 @@ operator can then be expressed as
 
 .. math::
 	\begin{align}
-	\Phi_{reg}(\mathbf{m}) &= \frac{1}{2} \int_\Omega \big | \nabla m \big |^2 dV
-	& \approx \frac{1}{2}  \alpha \mathbf{ m^T G_c^T} textrm{diag}(\mathbf{A_f^T v}) \mathbf{G_c m}
+	\Phi_{reg}(\mathbf{m}) &= \frac{1}{2} \int_\Omega \big | \nabla m \big |^2 dV \\
+	& \approx \frac{1}{2}  \beta \mathbf{ m^T G_c^T} \textrm{diag} (\mathbf{A_f^T v}) \mathbf{G_c m}
 	\end{align}
 	:label:
 
 where :math:`\mathbf{A_f}` is an averaging matrix from faces to cell centres, :math:`\mathbf{G}` is the cell centre to cell face gradient operator, and v is the cell volume For the benefit of the user, let :math:`\mathbf{WTW}` be the weighting matrix given by
 
 .. math::
-	\mathbf{WTW} = \alpha \mathbf{ G_c^T} \textrm{diag}(\mathbf{A_f^T v}) \mathbf{G_c m} =
+	\mathbf{WTW} = \beta \mathbf{ G_c^T} \textrm{diag}(\mathbf{A_f^T v}) \mathbf{G_c m} =
 	\begin{bmatrix} \mathbf{\alpha_x} & & \\ & \mathbf{\alpha_y} & \\ & & \mathbf{\alpha_z} \end{bmatrix} \big ( \mathbf{G_x^T \; G_y^T \; G_z^T} \big ) \textrm{diag} (\mathbf{v_f}) \begin{bmatrix} \mathbf{G_x} \\ \mathbf{G_y} \\ \mathbf{G_z} \end{bmatrix}
 	:label:
 
@@ -261,12 +261,12 @@ The resulting optimization problem is therefore:
 
 .. math::
 	\begin{align}
-	&\min_m \;\; \Phi_{mis} (\mathbf{m}) + \alpha \Phi_{reg}(\mathbf{m - m_{ref}}) \\
+	&\min_m \;\; \Phi_{mis} (\mathbf{m}) + \beta \Phi_{reg}(\mathbf{m - m_{ref}}) \\
 	&\; \textrm{s.t.} \;\; \mathbf{m_L \leq m \leq m_H}
 	\end{align}
 	:label:
 
-where :math:`\alpha` is a regularization parameter, and :math:`\mathbf{m_L}` and :math:`\mathbf{m_H}` are upper and lower bounds provided by some a prior geological information.
+where :math:`\beta` is a regularization parameter, and :math:`\mathbf{m_L}` and :math:`\mathbf{m_H}` are upper and lower bounds provided by some a prior geological information.
 A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
 information refer again to :cite:`Haber2012` and references therein.
 

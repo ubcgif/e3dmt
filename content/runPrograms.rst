@@ -29,6 +29,7 @@ Input and output files
 
     OcTree Mesh Generation <programs/createOcTree>
     Create Models <programs/createModel>
-    Forward Modeling (e3dMTfwd.inp) <programs/forward>
-    Inversion (e3dMTinv.exe) <programs/inversion>
+    Forward Modeling <programs/forward>
+    Additional Cell and Face Weights <programs/weightsFiles>
+    Inversion <programs/inversion>
 

@@ -33,7 +33,7 @@ The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
 
 
 
-.. figure:: images/create_octree_input.png
+.. figure:: images/e3dmt_fwd_input.png
      :align: center
      :width: 700
 
@@ -60,7 +60,7 @@ The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
 
 .. _e3dmt_fwd_ln5:
 
-    - **1D Background Conductivity:** The user may supply the file path to a 1D background conductivity model (**EXPLAIN AND LINK**). If a homogeneous background conductivity is being used, the user enters "VALUE" followed by a space and a numerical value; example "VALUE 0.01"
+    - **1D Background Conductivity:** The user may supply the file path to a `1D background conductivity model <http://em1dfm.readthedocs.io/en/latest/content/files/supporting.html#files-for-reference-and-starting-models>`__ . If a homogeneous background conductivity is being used, the user enters "VALUE" followed by a space and a numerical value; example "VALUE 0.01"
 
 .. _e3dmt_fwd_ln6:
 

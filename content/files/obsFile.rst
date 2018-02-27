@@ -1,9 +1,9 @@
-.. _dataFile:
+.. _obsFile:
 
-Data File
-=========
+Observations File
+=================
 
-The data file contains the survey information and includes: the number of transmitters (groups of natural source data), data types, measurement frequencies, receiver locations, fields measurements and uncertainties. 
+This file is input when inverting field-collected data. This file contains the survey information, field observations and data uncertainties. 
 
 .. note::
     - Bolded entries are fixed flags recognized by the Fortran codes and blue hyperlinked entries are values/regular expressions specified by the user
@@ -13,25 +13,25 @@ The data file contains the survey information and includes: the number of transm
 
 The lines of a data file with one or more transmitters are formatted as follows:
 
-| **N_TRX** :math:`\;` :ref:`A<e3dmt_data_ln1>`
-| **!IGNORE** :math:`\;` :ref:`B<e3dmt_data_ln2>`
+| **N_TRX** :math:`\;` :ref:`A<e3dmt_obs_ln1>`
+| **!IGNORE** :math:`\;` :ref:`B<e3dmt_obs_ln2>`
 |
-| **DATATYPE** :math:`\;` :ref:`C<e3dmt_data_ln3>`
-| **FREQUENCY** :math:`\;` :ref:`D<e3dmt_data_ln4>`
-| **N_RECV** :math:`\;` :ref:`E<e3dmt_data_ln5>`
-| :ref:`Data Array<e3dmt_data_ln6>`
+| **DATATYPE** :math:`\;` :ref:`C<e3dmt_obs_ln3>`
+| **FREQUENCY** :math:`\;` :ref:`D<e3dmt_obs_ln4>`
+| **N_RECV** :math:`\;` :ref:`E<e3dmt_obs_ln5>`
+| :ref:`Data Array<e3dmt_obs_ln6>`
 |
-| **DATATYPE** :math:`\;` :ref:`C<e3dmt_data_ln3>`
-| **FREQUENCY** :math:`\;` :ref:`D<e3dmt_data_ln4>`
-| **N_RECV** :math:`\;` :ref:`E<e3dmt_data_ln5>`
-| :ref:`Data Array<e3dmt_data_ln6>`
+| **DATATYPE** :math:`\;` :ref:`C<e3dmt_obs_ln3>`
+| **FREQUENCY** :math:`\;` :ref:`D<e3dmt_obs_ln4>`
+| **N_RECV** :math:`\;` :ref:`E<e3dmt_obs_ln5>`
+| :ref:`Data Array<e3dmt_obs_ln6>`
 |
 | :math:`\;\;\;\;\;\;\;\; \vdots`
 |
-| **DATATYPE** :math:`\;` :ref:`C<e3dmt_data_ln3>`
-| **FREQUENCY** :math:`\;` :ref:`D<e3dmt_data_ln4>`
-| **N_RECV** :math:`\;` :ref:`E<e3dmt_data_ln5>`
-| :ref:`Data Array<e3dmt_data_ln6>`
+| **DATATYPE** :math:`\;` :ref:`C<e3dmt_obs_ln3>`
+| **FREQUENCY** :math:`\;` :ref:`D<e3dmt_obs_ln4>`
+| **N_RECV** :math:`\;` :ref:`E<e3dmt_obs_ln5>`
+| :ref:`Data Array<e3dmt_obs_ln6>`
 |
 |
 
@@ -48,15 +48,15 @@ Parameter Descriptions
 ----------------------
 
 
-.. _e3dmt_data_ln1:
+.. _e3dmt_obs_ln1:
 
     - **(A) Number of transmitters:** In line 1, the number of transmitters/groups of natural source EM data is specified. Example: *N_TRX 3*
 
-.. _e3dmt_data_ln2:
+.. _e3dmt_obs_ln2:
 
     - **(B) Flag to ignore data entries:** A regular expression is entered, signifying data in the data structure which is ignored during the inversion. Example: *!IGNORE -0*
 
-.. _e3dmt_data_ln3:
+.. _e3dmt_obs_ln3:
 
     - **(C) Data type:**. For the data corresponding to each transmitter, this line sets the type of data. Example: *DATATYPE MTZ*. There are 4 options for DATATYPE:
 
@@ -65,20 +65,20 @@ Parameter Descriptions
         - "MTT" - ZTEM data (Hx and Hy constant at first receiver location and first receiver station defines base station)
         - "MTH" - ZTEM data (reference is at the data points)
         
-.. _e3dmt_data_ln4:
+.. _e3dmt_obs_ln4:
 
     - **(D) Frequency:** Frequency at which the corresponding set of field observations are made. Example: *FREQUENCY 1.0000E+002*.
 
-.. _e3dmt_data_ln5:
+.. _e3dmt_obs_ln5:
 
     - **(E) Number of receivers:** Number of receivers collecting data at the aforementioned frequency for the aforementioned data type. Example: *N_RECV 900*.
 
-.. _e3dmt_data_ln6:
+.. _e3dmt_obs_ln6:
 
-    - **Data Array:** Contains the locations and field observations for the data specified by :ref:`data type<e3dmt_data_ln3>`. The number of lines in this array is equal to the number of receivers. The number of columns depends on the type of data specified. The columns for defined for each array are show :ref:`below<dataFile_obs>`.
+    - **Data Array:** Contains the locations and field observations for the data specified by :ref:`data type<e3dmt_obs_ln3>`. The number of lines in this array is equal to the number of receivers. The number of columns depends on the type of data specified. The columns for defined for each array are show :ref:`below<obsFile_data>`.
 
 
-.. _dataFile_obs:
+.. _obsFile_data:
 
 Data Arrays by Type
 -------------------
@@ -126,12 +126,6 @@ where
 
 and similarly for :math:`y`.
 
-
-.. _dataFile_points:
-
-**Data Points File:**
-
-This type array is only used in the creation of OcTree meshes and to forward model data. For this type of file, only the x, y and z positions of the receivers are needed.
 
 
 
