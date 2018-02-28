@@ -127,6 +127,12 @@ where
 and similarly for :math:`y`.
 
 
+.. important::
+
+	- For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Only the x,y and z locations are required. **However**, each remaining field must be given a flag value "i". *Example for first row:* :math:`350 \;\; 200 \;\; 0 \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i`
+	- For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Data and uncertainty values are required for all rows.
+
+
 
 
 

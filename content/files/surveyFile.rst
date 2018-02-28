@@ -92,6 +92,12 @@ No matter what data type is being used (DATATYPE = MTZ, MTE, MTT or MTH), each r
     | \; x \; | \; y \; | \; z \; |
 
 
+.. important::
+
+	- For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTT", the forward model will output :math:`N-1` predicted data.
+	- For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Thus if these are :math:`N` receiver locations specified for a given array with data type "MTH", the forward model will output :math:`N` predicted data.
+
+
 
 
 
