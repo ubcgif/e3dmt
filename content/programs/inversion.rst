@@ -8,11 +8,14 @@ The inversion is run using the executable program **e3dMTinv.exe**. Parameters n
 Running the Program
 -------------------
 
-To run the inversion, open a command line window. Type the path to the code **e3dMTinv.exe**, followed by a space, followed by the path to the input file.
+To run the inversion, open a command line window and type the following:
 
 .. figure:: images/run_e3dmt_inv.png
      :align: center
      :width: 700
+
+The *mpiexec* call is used for parallelization. This is followed by the flag *-n*, then the number of frequencies (*"nFreq"*). This is followed by the inversion executable and the corresponding input file.
+
 
 
 Input
@@ -56,7 +59,7 @@ The lines of input file (**e3dMT_octree_inv.inp**) are formatted as follows:
 
 .. _e3dmt_inv_ln2:
 
-    - **Observation File:** file path to the :ref:`MT data file<dataFile>`
+    - **Observation File:** file path to the :ref:`observed data file<obsFile>`
 
 .. _e3dmt_inv_ln3:
 

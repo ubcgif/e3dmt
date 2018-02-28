@@ -48,7 +48,7 @@ The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
 
 .. _e3dmt_fwd_ln2:
 
-    - **Receiver Locations:** file path to the :ref:`MT data file<dataFile>`. Within this file, only the locations of the receivers are required; see :ref:`data points file<dataFile_points>`.
+    - **Receiver Locations:** file path to the :ref:`survey file<surveyFile>`.
 
 .. _e3dmt_fwd_ln3:
 

@@ -8,6 +8,9 @@ Create Model
 Next, **3Dmodel2octree.exe** is used to interpolate the tensor model onto an :ref:`Octree mesh<octreeFile>`. The tensor mesh (**3D_mesh.txt**), tensor :ref:`model<modelFile>` (**3Dmodel.con**) and octree mesh (**octree_mesh.txt**) are specified in the file **3Dmodel2octree.inp**.
 
 
+.. note:: This workflow can also be used to create a model weights file.
+
+
 Running blk3cell
 ----------------
 
