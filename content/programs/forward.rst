@@ -15,6 +15,20 @@ To run the forward modeling program, open a command line window. Type the path t
      :width: 700
 
 
+Units:
+------
+
+**Input:**
+
+    - **Conductivity model:** S/m
+    - **Background susceptibility model:** SI
+
+**Output:**
+
+    - **MT data:** Real and imaginary components of impedance tensor entries (V/A)
+    - **ZTEM data:** Real and imaginary components of transfer function entries (unitless)
+
+
 Input
 -----
 
@@ -71,6 +85,11 @@ The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
     - **Topography:** The user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
 
 
+.. figure:: images/fwd_results.png
+     :align: center
+     :width: 700
+
+     In-phase (left) and quadrature (right) components of impedance tensor element :math:`Z_{xy}` for the L-shaped conductor.
 
 
 .. _e3dmt_fwd_output:
