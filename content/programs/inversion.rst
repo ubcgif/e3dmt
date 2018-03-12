@@ -140,7 +140,7 @@ The lines of input file (**e3dMT_octree_inv.inp**) are formatted as follows:
 
 .. _e3dmt_inv_ln17:
 
-	- **Hard Constraints:** Choose to run the inversion without implementing a reference model (essential :math:`m_{ref}=0` (**SHOULDN'T THIS BE SMALLNESS ONLY**). Choose "SMOOTH_MODEL_DIF" to constrain the inversion using a reference model.
+	- **Hard Constraints:** SMOOTH_MOD runs the inversion without implementing a reference model (essential :math:`m_{ref}=0`). "SMOOTH_MOD_DIF" constrains the inversion in the smallness and smoothness terms using a reference model.
 
 .. _e3dmt_inv_ln18:
 

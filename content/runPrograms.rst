@@ -23,16 +23,13 @@ The software package E3DMT contains the following Fortran executable codes:
 	Executable files should **not** be renamed. However, input file names can be specified by the user if desired.
 
 
-
-
-Input and output files
-----------------------
+To become proficient at using the E3DMT package, we suggest becoming familiar with programming in the following sections:
 
   .. toctree::
     :maxdepth: 1
 
     OcTree Mesh Generation <programs/createOcTree>
-    Create Models <programs/createModel>
+    Creating Octree Models <programs/createModel>
     Forward Modeling <programs/forward>
     Additional Cell and Face Weights <programs/weightsFiles>
     Inversion <programs/inversion>
