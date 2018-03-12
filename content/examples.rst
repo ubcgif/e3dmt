@@ -10,9 +10,9 @@ Here, you will be provided with all the necessary tools to:
 	- invert MT and/or ZTEM data
 
 
-The files provided correspond to the input files and outputs found in the :ref:`"running the programs" <running>` section.
+The files provided correspond to the input files and outputs found in the :ref:`"running the programs" <running>` section. As a result, we will link to the aforementioned section in order to provide instructions.
 
-	- Download files for example (**link**)
+	- `Download files for example <https://github.com/ubcgif/e3dmt/raw/master/assets/e3dmt_example.zip>`__
 
 
 Creating an Octree mesh
