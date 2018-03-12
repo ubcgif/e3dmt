@@ -85,11 +85,12 @@ The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
     - **Topography:** The user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
 
 
+
 .. figure:: images/fwd_results.png
      :align: center
      :width: 700
 
-     In-phase (left) and quadrature (right) components of impedance tensor element :math:`Z_{xy}` for the L-shaped conductor.
+     In-phase (left) and quadrature (right) components of impedance tensor element :math:`Z_{xy}` over the L-shaped conductor.
 
 
 .. _e3dmt_fwd_output:
@@ -99,7 +100,7 @@ Output Files
 
 The program **e3dMTfwd.exe** creates 2 output files:
 
-    - **MT_data.txt:** data predicted using the model conductivity model provided (**REAL/IMAGINARY? WHAT ARE THE UNITS?**)
+    - **MT_data.txt:** data predicted using the conductivity model provided
 
     - **ed3MT_octree_fwd.log:** log file
 

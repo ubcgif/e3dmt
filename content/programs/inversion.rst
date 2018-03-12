@@ -3,14 +3,17 @@
 Inversion Program
 =================
 
-The inversion is run using the executable program **e3dMTinv.exe**. Parameters necessary for running the forward modeling code are set in the file **e3dMT_octree_inv.inp**.
+There are two options for inversion executables, both of which require parameters set through an input file (**e3dMT_octree_inv.inp**). The two executable files are:
+
+    - **e3dMTinv.exe:** Uses a direct solver. Faster but larger memory requirements
+    - **e3dMTinv_iter.exe:** Uses an iterative solver. Slower run-time but less memory requirements
 
 Running the Program
 -------------------
 
 To run the inversion, open a command line window and type the following:
 
-.. figure:: images/run_e3dmt_inv.png
+.. figure:: images/run_e3dmt_inv_iter.png
      :align: center
      :width: 700
 
@@ -26,6 +29,9 @@ Units:
     - **Reference/starting conductivity model:** S/m 
     - **Background susceptibility model:** SI
     - **Model/interface weights:** unitless
+
+
+.. important:: The current version of the code requires both components for all entries within the impedance tensor. For example, the user cannot invert only the off-diagonal impedance tensor data. Instead the user must supply large uncertainties for the diagonal data.
 
 **Output:**
 
@@ -54,7 +60,7 @@ The lines of input file (**e3dMT_octree_inv.inp**) are formatted as follows:
 | :ref:`Reference Model Update<e3dmt_inv_ln16>`
 | :ref:`Hard Constraints<e3dmt_inv_ln17>`
 | :ref:`Bounds<e3dmt_inv_ln18>`
-| :ref:`BICG Parameters<e3dmt_inv_ln19>`
+| :ref:`BICG Parameters (Iterative .exe only)<e3dmt_inv_ln19>`
 |
 |
 

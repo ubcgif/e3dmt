@@ -21,7 +21,7 @@ The predicted data file is output from **e3dmtfwd.exe** and contains the locatio
 MT data (DATATYPE = MTZ or MTE)
 -------------------------------
 
-Each row in the array contains the elements of the impedance tensor at a particular location, split into real and imaginary components. The columns for this data format are as follows:
+Each row in the array contains the elements of the impedance tensor at a particular location separated into real and imaginary components. The units for predicted MT data are (V/A). The columns for this data format are as follows:
 
 .. math::
     | \; x \; | \; y \; | \; z \; | \; Z^\prime_{11} \; | \; Z^{\prime \prime}_{11} \; | \; Z^\prime_{12} \; | \; Z^{\prime \prime}_{12} \; | \; Z^\prime_{21} \; | \; Z^{\prime \prime}_{21} \; | \; Z^\prime_{22} \; | \; Z^{\prime \prime}_{22} \; |
@@ -35,7 +35,7 @@ where
 ZTEM data (DATATYPE = MTT or MTH)
 ---------------------------------
 
-Each row in the array contains the elements of the transfer function at a particular location, split into real and imaginary components. The columns for this data format are as follows:
+Each row in the array contains the elements of the transfer function at a particular location separated into real and imaginary components. Predicted ZTEM data are unitless with no normalization factor. The columns for this data format are as follows:
 
 .. math::
     | \; x \; | \; y \; | \; z \; | \; T^\prime_x \; | \; T^{\prime \prime}_x \; | \; T^\prime_y \; | \; T^{\prime \prime}_y \; |

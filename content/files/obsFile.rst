@@ -85,7 +85,7 @@ Data Arrays by Type
 
 **MT data (DATATYPE = MTZ or MTE):**
 
-Each row in the array contains the elements of the impedance tensor at a particular location, split into real and imaginary components, along with the corresponding uncertainties. The columns for this data format are as follows:
+Each row in the array contains the elements of the impedance tensor at a particular location separated into real and imaginary components, along with the corresponding uncertainties. The units for MT data are (V/A). The columns for this data format are as follows:
 
 .. math::
     | \; x \; | \; y \; | \; z \; | \;\;\; Z_{11} \; data \;\;\; | \;\;\; Z_{12} \; data \;\;\; | \;\;\; Z_{21} \; data \;\;\; | \;\;\; Z_{22} \; data \;\;\; |
@@ -106,7 +106,7 @@ where
 
 **ZTEM data (DATATYPE = MTT or MTH):**
 
-Each row in the array contains the elements of the transfer function at a particular location, split into real and imaginary components, along with the corresponding uncertainties. The columns for this data format are as follows:
+Each row in the array contains the elements of the transfer function at a particular location separated into real and imaginary components, along with the corresponding uncertainties. Data values and uncertainties are unitless with no normalization factor. The columns for this data format are as follows:
 
 .. math::
     | \; x \; | \; y \; | \; z \; | \;\;\; T_x \; data \;\;\; | \;\;\; T_y \; data \;\;\; |
