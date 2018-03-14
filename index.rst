@@ -1,12 +1,10 @@
 .. GIFtoolsCookbook documentation master file, created by
-   sphinx-quickstart on Wed Oct 28 13:40:17 2015.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+
 
 ED3MT package
 ==============
 
-E3DMT is a program library for carrying out forward modelling and inversion of surface, borehole, and airborne gravity data in 3D. The contents of this manual are as follows:
+E3DMT is a program library for carrying out forward modelling and inversion of magnetotelluric and Z-axis tipper EM data 3D. The contents of this manual are as follows:
 
 .. toctree::
     :numbered:
@@ -20,8 +18,5 @@ E3DMT is a program library for carrying out forward modelling and inversion of s
     References <references>
     
 
-..    File formats <content/elements>
-..    Running the programs <content/run>
-..    Examples <content/examples>
 
 
