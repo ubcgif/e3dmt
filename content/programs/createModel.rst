@@ -76,12 +76,19 @@ The file **Model2Octree.inp** contains the paths to the tensor mesh (**3D_mesh.t
 | :math:`Octree \; mesh\;\;\;\;\;\;\;\;\;` ! File path to Octree mesh
 | :math:`Tensor \; mesh\;\;\;\;\;\;\;\;\;` ! File path to tensor mesh
 | :math:`Tensor \; model\;\;\;\;\;\;\;\;\;` ! 3D model on tensor mesh
-| :math:`Output \; mesh \; name\;\;\;\;\;\;\;\;\;` ! Name for duplicate Octree mesh or enter *USE_INPUT_MESH*
+| :math:`Output \; mesh \; name\;\;\;\;\;\;\;\;\;` ! Name for re-meshed Octree mesh or enter *USE_INPUT_MESH*
 | :math:`Output \; model \; name\;\;\;\;\;\;\;\;\;` ! File name for conductivity model on Octree mesh
 | :math:`Start \; point \;\;\;\;\;\;\;\;\;` ! Either :ref:`START_LARGE_CELLS<e3dmt_octree_ln9>` or :ref:`START_SMALL_CELLS<e3dmt_octree_ln9>`
 |
 |
 |
+
+
+.. note::
+
+     Consider the following with regards to **line 5**:
+          - The edges of structures defined within the underlying tensor mesh may bisect larger cells within the Octree mesh. If an output name is provided, the program will output a new Octree mesh with refined cells such that the edges of structures do not bisect cells. Thus the input and output Octree mesh may have a different number of cells.
+          - If *USE_INPUT_MESH* is entered, the model on the underlying tensor mesh is interpolated onto the pre-existing Octree mesh.
 
 
 An example input file and the resulting conductivity model on the octree mesh are shown below
