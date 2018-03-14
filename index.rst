@@ -6,7 +6,7 @@
 ED3MT package
 ==============
 
-GRAV3D is a program library for carrying out forward modelling and inversion of surface, borehole, and airborne gravity data in 3D. The contents of this manual are as follows:
+E3DMT is a program library for carrying out forward modelling and inversion of surface, borehole, and airborne gravity data in 3D. The contents of this manual are as follows:
 
 .. toctree::
     :numbered:
