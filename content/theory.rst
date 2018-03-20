@@ -172,7 +172,7 @@ The solutions for the :math:`\mathbf{H}` and :math:`\mathbf{E}` fields are compu
 
 where :math:`\mathbf{A}` is a vector potential and :math:`\phi` is a scalar potential. For MT or ZTEM data, :eq:`NSEM_system` is solved by eliminating the curl operator and solving for :math:`\mathbf{A}` and :math:`\phi`.
 
-The forward problem of simulating data can now be written in the following form. Let :math:`\mathbf{D(m)}` be the discrete linear system obtained by the discretization of Maxwell's equations, where :math:`\mathbf{m} = log(:mathbf{\sigma})`.
+The forward problem of simulating data can now be written in the following form. Let :math:`\mathbf{D(m)}` be the discrete linear system obtained by the discretization of Maxwell's equations, where :math:`\mathbf{m} = log(\mathbf{\sigma})`.
 The electric fields :math:`U` on the edges everywhere in the mesh are then:
 
 .. math::

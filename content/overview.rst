@@ -8,7 +8,7 @@ Description
 
 This manual provides instruction and background for the e3dMT program library for the forward
 modeling and inversion of magnetotelluric survey data. The e3dMT library is built in the same
-manner as e3d, so much of the background presented in this manual is identical to the e3d manual (**link**).
+manner as e3d, so much of the background presented in this manual is identical to the e3d manual.
 In order to decrease computational time and increase accuracy by mesh refinement in areas of
 interest, e3d models are discretized on an Octree mesh. 
 
@@ -57,7 +57,7 @@ The main executable programs within the E3DMT program library are:
     - **blk3cell:** Creates simple conductivity models on a core tensor mesh
     - **3DModel2Octree:** Converts 3D conductivity on core mesh to OcTree mesh
     - **e3dMTfwd:** Performs the forward simulation
-    - **e3dMTinv:** Inverts observed data in order to recover a conductivity model
+    - **e3dMTinv and e3dmtinv_iter:** Inverts observed data in order to recover a conductivity model
 
 Also included are the following Octree utility programs:
 
@@ -66,8 +66,6 @@ Also included are the following Octree utility programs:
       - octree cell centre
       - octreeTo3D
       - refine octree
-      - re-mesh octree model
-      - surface electrodes
 
 Licensing
 ---------
