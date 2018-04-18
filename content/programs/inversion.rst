@@ -116,11 +116,11 @@ The lines of input file (**e3dMT_octree_inv.inp**) are formatted as follows:
 
 .. _e3dmt_inv_ln11:
 
-    - **beta_max beta_min beta_factor:** Here, the user specifies protocols for the trade-off parameter (beta). *beta_max* is the initial value of beta, *beta_min* is the minimum allowable beta the program can use before quitting and *beta_factor* defines the factor by which beta is decreased at each iteration; example "1E4 10 5". The user may also enter "DEFAULT" if they wish to have beta calculated automatically.
+    - **beta_max beta_min beta_factor:** Here, the user specifies protocols for the trade-off parameter (beta). *beta_max* is the initial value of beta, *beta_min* is the minimum allowable beta the program can use before quitting and *beta_factor* defines the factor by which beta is decreased at each iteration; example "1E4 10 0.2". The user may also enter "DEFAULT" if they wish to have beta calculated automatically.
 
 .. _e3dmt_inv_ln12:
 
-    - **alpha_s alpha_x alpha_y alpha_z:** Alpha parameters (**LINK** section 2.5). Here, the user specifies the relative weighting between the smallness and smoothness component penalties on the recovered models.
+    - **alpha_s alpha_x alpha_y alpha_z:** `Alpha parameters <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Alphas.html>`__ . Here, the user specifies the relative weighting between the smallness and smoothness component penalties on the recovered models.
 
 .. _e3dmt_inv_ln13:
 
