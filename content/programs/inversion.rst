@@ -132,7 +132,7 @@ The lines of input file (**e3dMT_octree_inv.inp**) are formatted as follows:
 
 .. _e3dmt_inv_ln15:
 
-	- **tol_ipcg max_iter_ipcg:** Here, the user specifies solver parameters. *tol_ipcg* defines how well the iterative solver does when solving for :math:`\delta m` and *max_item_ipcg* is the maximum iterations of incomplete-preconditioned-conjugate gradient.
+	- **tol_ipcg max_iter_ipcg:** Here, the user specifies solver parameters. *tol_ipcg* defines how well the iterative solver does when solving for :math:`\delta m` and *max_iter_ipcg* is the maximum iterations of incomplete-preconditioned-conjugate gradient.
 
 .. _e3dmt_inv_ln16:
 
