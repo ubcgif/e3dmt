@@ -1,22 +1,25 @@
-.. _surveyFile:
+.. _indexFile:
 
-Survey and Locations File
-=========================
+Locations Index File
+====================
 
-.. important:: Only relevant to the E3DMT version 1 (2014 and 2015) code.
+.. important:: Only relevant to the E3DMT version 2 (2017) code.
 
-The survey and locations file is used to predict synthetic field data (forward modeling) using the E3DMT version 1 code. This file contains all necessary survey information including: the number of transmitters (groups of natural source data), data types, measurement frequencies and receiver locations. 
+Each row of the locations index file is used to index the electric dipole and inductive loop receivers corresponding to a specific set of impedance tensor or Z-axis tipper measurements. This file is required for both forward modeling and inversion. The indexes correspond to receivers defined within the :ref:`receiver file<receiverFile>`. Here, the used also defines the data type being modeled. 
 
 .. note::
     - Bolded entries are fixed flags recognized by the Fortran codes and blue hyperlinked entries are values/regular expressions specified by the user
     - Each unique data type, frequency and set of observation locations corresponds to a unique "transmitter"; e.g. 2 transmitters must be specified if the same data are collected at the same locations at 2 different frequencies.
     - Each block containing DATATYPE, FREQUENCY, N_RECV and the data array
 
-The lines of a locations file with one or more transmitters is formatted as follows:
+The lines of the locations index file depends on whether MT or ZTEM are being modeled.
 
-| **N_TRX** :math:`\;` :ref:`A<e3dmt_survey_ln1>`
+MT data (MTZ)
+-------------
+
+| **MTZ**
 |
-| **DATATYPE** :math:`\;` :ref:`B<e3dmt_survey_ln3>`
+| :ref:`freq_1<e3dmt_survey_ln1>` :math:`\;` :ref:`<e3dmt_survey_ln2>`
 | **FREQUENCY** :math:`\;` :ref:`C<e3dmt_survey_ln4>`
 | **N_RECV** :math:`\;` :ref:`D<e3dmt_survey_ln5>`
 | :ref:`Data Array<e3dmt_survey_ln6>`
@@ -36,11 +39,11 @@ The lines of a locations file with one or more transmitters is formatted as foll
 |
 
 
-.. figure:: images/files_data.png
-     :align: center
-     :width: 700
 
-     Example data file for MTZ data.
+MT data (MTZ)
+-------------
+
+
 
 
 

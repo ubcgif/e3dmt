@@ -3,7 +3,6 @@
 Cell and Face Weights File
 ==========================
 
-
 Cell Weights
 ------------
 
