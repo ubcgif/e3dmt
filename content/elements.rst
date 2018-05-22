@@ -8,7 +8,7 @@ This section provides a description of each program in the E3DMT libraries.
 Version 1 (2014 and 2015)
 -------------------------
 
-.. important:: Although described here, this generation of the code will not be supported by GIFtools in the future.
+.. important:: Although described here, this generation of the code may not be supported by GIFtools in the future.
 
 Version 1 of the E3DMT codes makes use of the following executables:
 

@@ -140,10 +140,12 @@ and similarly for :math:`y`.
 	- For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at different locations. Data and uncertainty values are required for all rows.
 
 
+.. _obsFile2:
+
 Version 2 (2017)
 ----------------
 
-.. important:: As of May 2018, the E3DMT version 2 code cannot simultaneously invert both MT and ZTEM data, just one or the other. However if a flag value of '-99' is entered as an uncertainty, the corresponding data is not used in the inversion.
+.. important:: As of May 2018, the E3DMT version 2 code cannot simultaneously invert both MT and ZTEM data, just one or the other. If a flag value of '-99' is entered as an uncertainty, the corresponding data value is not fit during the inversion.
 
 MT Data Format
 ^^^^^^^^^^^^^^

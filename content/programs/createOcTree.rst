@@ -3,10 +3,15 @@
 Create OcTree Mesh
 ==================
 
-:ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **MTcreate_octree_mesh_e3d.exe**. Parameters necessary for defining the OcTree mesh are set in the file **MTcreate_mesh.inp**.
+Both versions of the E3DMT code are capable of generating OcTree meshes from the survey file. However, separate executables were made because the survey file formats for each package differed.
+
+Version 1 (2014 and 2015)
+-------------------------
+
+In this case, :ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **MTcreate_octree_mesh_e3d.exe**. Parameters necessary for defining the OcTree mesh are set in the file **MTcreate_mesh.inp**.
 
 Running MTcreate_octree_mesh_e3d
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To generate an OcTree mesh, open a command window. Type the path to the code **MTcreate_octree_mesh_e3d.exe**, followed by a space, followed by the path to the input file.
 
@@ -17,7 +22,7 @@ To generate an OcTree mesh, open a command window. Type the path to the code **M
 .. _e3dmt_octree_input:
 
 Input File
-----------
+^^^^^^^^^^
 
 The lines of input file (**MTcreate_mesh.inp**) are formatted as follows:
 
@@ -99,7 +104,7 @@ Below, we see the difference between entering "APPROXTOPO" (top) and "GOODTOPO" 
 .. _e3dmt_octree_output:
 
 Output Files
-------------
+^^^^^^^^^^^^
 
 The program **MTcreate_octree_mesh_e3d.exe** creates 5 output files:
 
@@ -114,6 +119,133 @@ The program **MTcreate_octree_mesh_e3d.exe** creates 5 output files:
     - **create_mesh.log:** log file
 
 
+
+Version 2 (2017)
+----------------
+
+In this case, :ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **octree_mesh_mt.exe**. Parameters necessary for defining the OcTree mesh are set in the file **MTcreate_mesh.inp**.
+
+Running octree_mesh_mt
+^^^^^^^^^^^^^^^^^^^^^^
+
+To generate an OcTree mesh, open a command window. Type the path to the code **octree_mesh_mt.exe**, followed by a space, followed by the path to the input file.
+
+.. figure:: images/run_create_octree_mesh2.png
+     :align: center
+     :width: 700
+
+.. _e3dmt_octree2_input:
+
+Input File
+^^^^^^^^^^
+
+The lines of input file (**MTcreate_mesh.inp**) are formatted as follows:
+
+| :ref:`dx dy dz<e3dmt_octree2_ln1>`
+| :ref:`min_cell_fact<e3dmt_octree2_ln2a>` :math:`\;` :ref:`min_cell_size<e3dmt_octree2_ln2b>` :math:`\;` :ref:`max_topo_cell<e3dmt_octree2_ln2c>`
+| :ref:`x_pad y_pad down_pad up_pad<e3dmt_octree2_ln3>`
+| :ref:`dist_1 dist_2 dist_3<e3dmt_octree2_ln4>`
+| :ref:`n1 n2 n3<e3dmt_octree2_ln5>`
+| :ref:`dataFile<e3dmt_octree2_ln6>`
+| :ref:`receiverFile<e3dmt_octree2_ln7>`
+| :ref:`frequencyFile<e3dmt_octree2_ln8>`
+| :ref:`topoFile<e3dmt_octree2_ln9>`
+| :ref:`shift_data<e3dmt_octree2_ln10>`
+| :ref:`poly_opt<e3dmt_octree2_ln11>`
+| :ref:`lg_mesh_flag<e3dmt_octree2_ln12>`
+|
+|
+
+.. figure:: images/create_octree_input.png
+     :align: center
+     :width: 700
+
+     Example input file for creating octree mesh.
+
+
+**Line Descriptions:**
+
+
+.. _e3dmt_octree2_ln1:
+
+    - **dx dy dz:** Minimum cell widths in x, y and z for the base mesh.
+
+.. _e3dmt_octree2_ln2a:
+
+    - **min_cell_fact:**
+
+.. _e3dmt_octree2_ln2b:
+
+    - **min_cell_size:**
+
+.. _e3dmt_octree2_ln2c:
+
+    - **max_topo_cell:**
+
+.. _e3dmt_octree2_ln3:
+
+    - **x_pad y_pad down_pad up_pad:** Distance from the origin in the x, y, downward and upward directions, respectively, that the mesh extends.
+
+.. _e3dmt_octree2_ln4:
+
+    - **dist_1 dist_2 dist_3:** Sets the distance from surface topography and receivers in which the cells widths are increased by a factor of 2 in x, y and z. Up to a depth of *dist_1* from surface topography and within a horizontal distance of *dist_1* from any receiver, the smallest cell size is used (set by *dx, dy, dz*). For the following *dist_2* metres, the cell widths are doubled. For the following *dist_3* metres, the cell widths are doubled again. Outside a depth and horizontal distance of *h1+h2+h3*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
+
+.. _e3dmt_octree2_ln5:
+
+    - **n1 n2 n3:** This sets the thicknesses of layers of finest discretization near the receivers. **n1 = 4** means that around each receiver, there is a layer 4 cells thick that uses the finest discretization. This is followed by a layer which is **n2** cells thick, where the cell dimensions are increased by a factor of 2. Likewise for the 3rd layer.
+
+.. _e3dmt_octree2_ln6:
+
+    - **dataFile:** The file path to a :ref:`receiver index file <indexFile>` or :ref:`observed data file<obsFile2>`. 
+
+.. _e3dmt_octree2_ln7:
+
+    - **receiverFile:** The file path to a :ref:`receiver file <receiverFile>`. The receiver file contains the node locations defining each receiver.
+
+.. _e3dmt_octree2_ln8:
+
+    - **frequencyFile:** The file path to a :ref:`frequencies file<freqFile>`.
+
+.. _e3dmt_octree2_ln9:
+
+    - **topoFile:** If a topography file is available, the file path to the topography file is entered; see :ref:`topography file<topoFile>` for format. In the case of flat topography, the user instead enter "TOPO_CONST", followed by a space, then the elevation of the surface topography; for example "TOPO_CONST 125.5". The user may also use the flag "NO_TOPO" for a constant topography of 0 elevation.
+
+.. _e3dmt_octree2_ln10:
+
+    - **shift_data:** Set as either "NOT_SHIFT_DATA" or "SHIFT_DATA *filename*". **EXPLANATION REQUIRED**
+
+.. _e3dmt_octree2_ln11:
+
+    - **poly_opt:** 
+
+.. _e3dmt_octree2_ln12:
+
+    - **lg_mesh_flag:** 
+
+
+.. figure:: images/octree_example.png
+     :align: center
+     :width: 400
+
+     Octree mesh showing and surface topography. Cells below the surface topography are assigned a value of 1 in the active cells model.
+
+
+.. _e3dmt_octree2_output:
+
+Output Files
+^^^^^^^^^^^^
+
+The program **MTcreate_octree_mesh_e3d.exe** creates 5 output files:
+
+    - **3D_mesh.txt:** the underlying regular :ref:`tensor mesh<tensorFile>`. This mesh is comprised of the smallest cell size and is very large (>> 1M cells). As a result, it is unwise to plot this mesh.
+
+    - **3D_core_mesh.txt:** A 3D regular :ref:`tensor mesh<tensorFile>` defining the core region. 
+
+    - **octree_mesh.txt:** :ref:`OcTree mesh<octreeFile>` used in the forward modeling and inversion codes
+
+    - **active_cells.txt:** :ref:`active cells model<modelFile>` on the OcTree mesh. Cells are active if assigned a value of 1 and inactive if assigned a value of 0 
+
+    - **create_mesh.log:** log file
 
 
 
