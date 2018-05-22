@@ -10,30 +10,26 @@ Version 1 (2014 and 2015)
 
 .. important:: Although described here, this generation of the code will not be supported by GIFtools in the future.
 
-Version 1 of the E3DMT codes contains the following executables:
+Version 1 of the E3DMT codes makes use of the following executables:
 
-    - **MTcreate_octree_mesh_e3d:** creates an octree mesh around the receiver array
     - **e3dMTfwd:** Solves the forward problem. Computes the electric and magnetic response to a 3D conductivity model (fields, and impedance)
-    - **e3dMTinv:** Solves the inverse problem using a direct solver approach. Recovers a conductivity model by inverting MT or ZTEM data. All entries of the impedance tensor or transfer function are needed.
+    - **e3dMTinv:** Solves the inverse problem using a direct solver approach (MUMPS). Recovers a conductivity model by inverting MT or ZTEM data. All entries of the impedance tensor or transfer function are needed.
     - **e3dMTinv_iter:** Solves the inverse problem using an iterative solver approach. Recovers a conductivity model by inverting MT or ZTEM data. All entries of the impedance tensor or transfer function are needed.
-
+    - **MTcreate_octree_mesh_e3d:** Creates an octree mesh based on the :ref:`survey file<surveyFile>`
+    - **blk3cell:** Creates models from a set of blocks on a tensor mesh
+    - **3DModel2Octree:** Converts models from tensor to Octree meshes
+    - **interface_weights:** Creates interface weights
 
 Version 2 (2017)
 ----------------
 
 .. important:: This generation of the E3DMT code is meant to be maintained longterm.
 
-Version 2 of the E3DMT codes contains the following executables:
+Version 2 of the E3DMT code makes use of the following executables:
 
-
-Octree Utilities
-----------------
-
-The following Octree utility programs may be useful:
-
-    - **blk3cell:** Creates models from a set of blocks
-    - **3DModel2Octree:** Converts models from tensor to Octree meshes
-    - **interface_weights:** Creates interface weights
+    - **e3dMTinv_ver2:** An all in one executable that can forward model or invert MT or ZTEM data
+    - **octree_mesh_mt:** Creates an octree mesh based on the :ref:`receiver file<receiverFile>`
+    - **blk3cellOct:** Creates models from a set of blocks directly on the octree mesh
 
 General Files for E3DMT Executables
 -----------------------------------
@@ -45,7 +41,8 @@ Here, we describe the formats of supplementary files used to run E3DMT executabl
 
     Survey and Locations File <files/surveyFile>
     Receiver File <files/receiverFile>
-    Locations Index File <files/indexFile>
+    Survey Index File <files/indexFile>
+    Frequencies Files <files/freqFile>
     Predicted Data File <files/preFile>
     Observations File <files/obsFile>
     Topography File <files/topoFile>

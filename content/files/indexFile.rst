@@ -1,100 +1,106 @@
 .. _indexFile:
 
-Locations Index File
-====================
+Survey Index File
+=================
 
 .. important:: Only relevant to the E3DMT version 2 (2017) code.
 
-Each row of the locations index file is used to index the electric dipole and inductive loop receivers corresponding to a specific set of impedance tensor or Z-axis tipper measurements. This file is required for both forward modeling and inversion. The indexes correspond to receivers defined within the :ref:`receiver file<receiverFile>`. Here, the used also defines the data type being modeled. 
+This file is used to define the locations at which MT and ZTEM data are predicted. Each row of the survey index file is used to index the electric dipole and inductive loop receivers corresponding to a specific set of impedance tensor or Z-axis tipper measurements. This file is required for both forward modeling. The indicies correspond to receivers defined within the :ref:`receiver file<receiverFile>`. The user also defines the data type being modeled. The lines of the survey index file depend on whether MT or ZTEM are being modeled.
+
+Format
+------
 
 .. note::
     - Bolded entries are fixed flags recognized by the Fortran codes and blue hyperlinked entries are values/regular expressions specified by the user
-    - Each unique data type, frequency and set of observation locations corresponds to a unique "transmitter"; e.g. 2 transmitters must be specified if the same data are collected at the same locations at 2 different frequencies.
-    - Each block containing DATATYPE, FREQUENCY, N_RECV and the data array
 
-The lines of the locations index file depends on whether MT or ZTEM are being modeled.
 
-MT data (MTZ)
--------------
+MT Data
+^^^^^^^
 
-| **MTZ**
-|
-| :ref:`freq_1<e3dmt_survey_ln1>` :math:`\;` :ref:`<e3dmt_survey_ln2>`
-| **FREQUENCY** :math:`\;` :ref:`C<e3dmt_survey_ln4>`
-| **N_RECV** :math:`\;` :ref:`D<e3dmt_survey_ln5>`
-| :ref:`Data Array<e3dmt_survey_ln6>`
-|
-| **DATATYPE** :math:`\;` :ref:`B<e3dmt_survey_ln3>`
-| **FREQUENCY** :math:`\;` :ref:`C<e3dmt_survey_ln4>`
-| **N_RECV** :math:`\;` :ref:`D<e3dmt_survey_ln5>`
-| :ref:`Data Array<e3dmt_survey_ln6>`
-|
-| :math:`\;\;\;\;\;\;\;\; \vdots`
-|
-| **DATATYPE** :math:`\;` :ref:`B<e3dmt_survey_ln3>`
-| **FREQUENCY** :math:`\;` :ref:`C<e3dmt_survey_ln4>`
-| **N_RECV** :math:`\;` :ref:`D<e3dmt_survey_ln5>`
-| :ref:`Data Array<e3dmt_survey_ln6>`
+| **DATATYPE MT**
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
 |
 |
 
 
+Below we show an example of a survey index file for MT data. In this case, the impedance tensor data are modeled at 3 frequencies and a new set of receivers is used at each measurement site.
 
-MT data (MTZ)
--------------
+.. figure:: images/mtindex_file.png
+     :align: center
+     :width: 700
+
+     Survey index file for MT data.
 
 
+.. important::
 
+    - The frequency indicies in row 1 cannot decrease in value; e.g. you cannot have a row which starts with 3 followed by a row that starts with 2.
+    - The number of rows and receiver indicies for measurements at a given frequency do not need to match those for another frequency; e.g. you can have 50 stations taking measurements at 1 Hz and 65 completely different stations taking measurements at 10 Hz.
+
+ZTEM Data
+^^^^^^^^^
+
+| **DATATYPE ZTEM**
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+|
+|
+
+Below we show an example of a survey index file for ZTEM data. In this case, the tipper data are modeled at 3 frequencies and the same receiver is used to measure Hx and Hy at all measurement sites.
+
+
+.. figure:: images/ztemindex_file.png
+     :align: center
+     :width: 700
+
+     Survey index file for ZTEM data.
+
+
+.. important::
+
+    - The frequency indicies in row 1 cannot decrease in value; e.g. you cannot have a row which starts with 3 followed by a row that starts with 2.
+    - The number of rows and receiver indicies for measurements at a given frequency do not need to match those for another frequency; e.g. you can have 50 stations taking measurements at 1 Hz and 65 completely different stations taking measurements at 10 Hz.
 
 
 Parameter Descriptions
 ----------------------
 
 
-.. _e3dmt_survey_ln1:
+.. _e3dmt_ind_ln1:
 
-    - **(A) Number of transmitters:** In line 1, the number of transmitters/groups of natural source EM data is specified. Example: *N_TRX 3*
+    - **f_ind:** The index corresponding to the desired frequency within the :ref:`frequencies file<freqFile>`. 
 
-.. _e3dmt_survey_ln3:
+.. _e3dmt_ind_ln2:
 
-    - **(B) Data type:**. For the data corresponding to each transmitter, this line sets the type of data. Example: *DATATYPE MTZ*. There are 4 options for DATATYPE:
+    - **Ex_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Ex.
 
-        - "MTZ" - MT data (Both real and imaginary impedance tensor data)
-        - "MTE" - MT data with fixed reference station. Hx, Hy are calculated from the initial model for the reference station
-        - "MTT" - ZTEM data (Hx and Hy constant at first receiver location and first receiver station defines base station)
-        - "MTH" - ZTEM data (reference is at the data points)
-        
-.. _e3dmt_survey_ln4:
+.. _e3dmt_ind_ln3:
 
-    - **(C) Frequency:** Frequency at which the corresponding set of field observations are made. Example: *FREQUENCY 1.0000E+002*.
+    - **Ey_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Ey.
 
-.. _e3dmt_survey_ln5:
+.. _e3dmt_ind_ln4:
 
-    - **(D) Number of receivers:** Number of receivers collecting data at the aforementioned frequency for the aforementioned data type. Example: *N_RECV 900*.
+    - **Hx_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hx.
 
-.. _e3dmt_survey_ln6:
+.. _e3dmt_ind_ln5:
 
-    - **Data Array:** Contains the locations and field observations for the data specified by :ref:`data type<e3dmt_survey_ln3>`. The number of lines in this array is equal to the number of receivers. The number of columns depends on the type of data specified. The columns for defined for each array are show :ref:`below<surveyFile_data>`.
+    - **Hy_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hy.
 
+.. _e3dmt_ind_ln6:
 
+    - **Hz_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hz.
 
-.. _surveyFile_data:
+.. _e3dmt_ind_ln7:
 
-Data Array
-----------
+    - **1:** As of May 2018, a flag value of 1 is entered here. In future iterations of the code, this entry may be related to additional functionality.
 
-**MT data (DATATYPE = MTZ or MTE) or ZTEM data:**
-
-No matter what data type is being used (DATATYPE = MTZ, MTE, MTT or MTH), each row of the data array contains the x, y and z positions for readings at a particular location, i.e.:
-
-.. math::
-    | \; x \; | \; y \; | \; z \; |
-
-
-.. important::
-
-	- For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTT", the forward model will output :math:`N-1` predicted data.
-	- For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Thus if these are :math:`N` receiver locations specified for a given array with data type "MTH", the forward model will output :math:`N` predicted data.
 
 
 

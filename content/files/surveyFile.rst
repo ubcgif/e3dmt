@@ -36,11 +36,11 @@ The lines of a locations file with one or more transmitters is formatted as foll
 |
 
 
-.. figure:: images/files_data.png
+.. figure:: images/files_locations.png
      :align: center
      :width: 700
 
-     Example data file for MTZ data.
+     Example locations file for MTZ data.
 
 
 
@@ -90,8 +90,9 @@ No matter what data type is being used (DATATYPE = MTZ, MTE, MTT or MTH), each r
 
 .. important::
 
-	- For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTT", the forward model will output :math:`N-1` predicted data.
-	- For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Thus if these are :math:`N` receiver locations specified for a given array with data type "MTH", the forward model will output :math:`N` predicted data.
+    - The coordinates are right-handed with X (Easting), Y (Northing) and Z+ (Up).
+    - For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTT", the forward model will output :math:`N-1` predicted data.
+    - For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Thus if these are :math:`N` receiver locations specified for a given array with data type "MTH", the forward model will output :math:`N` predicted data.
 
 
 

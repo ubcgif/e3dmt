@@ -5,10 +5,18 @@ Observations File
 
 This file is input when inverting field-collected data. This file contains the survey information, field observations and data uncertainties. 
 
+Version 1 (2014 and 2015)
+-------------------------
+
+.. important:: As of May 2018, the user must invert all 4 components of the impedance tensor for MT data OR both components of the transfer function for ZTEM data. Also, flags cannot be used to omit data points.
+
+Format
+^^^^^^
+
 .. note::
     - Bolded entries are fixed flags recognized by the Fortran codes and blue hyperlinked entries are values/regular expressions specified by the user
     - Each unique data type, frequency and set of observation locations corresponds to a unique "transmitter"; e.g. 2 transmitters must be specified if the same data are collected at the same locations at 2 different frequencies.
-    - Each block containing DATATYPE, FREQUENCY, N_RECV and the data array
+    - Each block contains DATATYPE, FREQUENCY, N_RECV and the data array
 
 
 The lines of a data file with one or more transmitters are formatted as follows:
@@ -43,9 +51,8 @@ The lines of a data file with one or more transmitters are formatted as follows:
      Example data file for MTZ data.
 
 
-
 Parameter Descriptions
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. _e3dmt_obs_ln1:
@@ -81,7 +88,7 @@ Parameter Descriptions
 .. _obsFile_data:
 
 Data Arrays by Type
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 **MT data (DATATYPE = MTZ or MTE):**
 
@@ -130,10 +137,118 @@ and similarly for :math:`y`.
 .. important::
 
 	- For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Only the x,y and z locations are required. **However**, each remaining field must be given a flag value "i". *Example for first row:* :math:`350 \;\; 200 \;\; 0 \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i`
-	- For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Data and uncertainty values are required for all rows.
+	- For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at different locations. Data and uncertainty values are required for all rows.
+
+
+Version 2 (2017)
+----------------
+
+.. important:: As of May 2018, the E3DMT version 2 code cannot simultaneously invert both MT and ZTEM data, just one or the other. However if a flag value of '-99' is entered as an uncertainty, the corresponding data is not used in the inversion.
+
+MT Data Format
+^^^^^^^^^^^^^^
+
+.. note::
+    - Blue hyperlinked entries are values/regular expressions specified by the user
+
+The format of the observation file for MT data begins by defining the datatype flag on the first line. The frequency index, receiver indicies, observed data and uncertainties are then defined on each subsequent line.
+
+
+| **DATATYPE MT**
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{11} \; data] \; [Z_{12} \; data] \; [Z_{21} \; data] \; [Z_{22} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{11} \; data] \; [Z_{12} \; data] \; [Z_{21} \; data] \; [Z_{22} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{11} \; data] \; [Z_{12} \; data] \; [Z_{21} \; data] \; [Z_{22} \; data]`
+| :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{11} \; data] \; [Z_{12} \; data] \; [Z_{21} \; data] \; [Z_{22} \; data]`
+|
+|
+
+such that each :math:`[Z_{ij} \; data]` is comprised of 4 columns:
+
+.. math::
+
+    | \; Z^\prime_{ij} \; | \; U^\prime_{ij} \; | \; Z^{\prime \prime}_{ij} \; | \; U^{\prime \prime}_{ij} \; |
+
+where
+
+    - :math:`Z^\prime_{ij}` is the real component of entry i,j of the impedance tensor
+    - :math:`Z^{\prime\prime}_{ij}` is the imaginary component of entry i,j of the impedance tensor
+    - :math:`U^\prime_{ij}` is the uncertainty on :math:`Z^\prime_{ij}`
+    - :math:`U^{\prime\prime}_{ij}` is the uncertainty on :math:`Z^{\prime\prime}_{ij}`
 
 
 
+Below we show an example of a survey index file for MT data.
+
+.. figure:: images/dobs2.png
+     :align: center
+     :width: 700
+
+     Observed data file for MT data.
+
+ZTEM Data Format
+^^^^^^^^^^^^^^^^
+
+The format of the observation file for ZTEM data begins by defining the datatype flag on the first line. The frequency index, receiver indicies, observed data and uncertainties are then defined on each subsequent line.
+
+
+| **DATATYPE ZTEM**
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_x \; data] \; [T_y \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_x \; data] \; [T_y \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_x \; data] \; [T_y \; data]`
+| :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_x \; data] \; [T_y \; data]`
+|
+|
+
+
+such that each :math:`T_x \; data` is comprised of 4 columns:
+
+.. math::
+
+    | \; T^\prime_x \; | \; U^\prime_x \; | \; T^{\prime \prime}_x \; | \; U^{\prime \prime}_x \; |
+
+where
+
+    - :math:`T^\prime_x` is the real component of :math:`T_x`
+    - :math:`T^{\prime\prime}_x` is the imaginary component of :math:`T_x`
+    - :math:`U^\prime_x` is the uncertainty on :math:`T^\prime_x`
+    - :math:`U^{\prime\prime}_x` is the uncertainty on :math:`T^{\prime\prime}_x`
+
+and similarly for :math:`y`.
+
+
+Parameter Descriptions
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+.. _e3dmt_obs2_ln1:
+
+    - **f_ind:** The index corresponding to the desired frequency within the :ref:`frequencies file<freqFile>`. 
+
+.. _e3dmt_obs2_ln2:
+
+    - **Ex_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Ex.
+
+.. _e3dmt_obs2_ln3:
+
+    - **Ey_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Ey.
+
+.. _e3dmt_obs2_ln4:
+
+    - **Hx_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hx.
+
+.. _e3dmt_obs2_ln5:
+
+    - **Hy_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hy.
+
+.. _e3dmt_obs2_ln6:
+
+    - **Hz_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hz.
+
+.. _e3dmt_obs2_ln7:
+
+    - **1:** As of May 2018, a flag value of 1 is entered here. In future iterations of the code, this entry may be related to additional functionality.
 
 
 
