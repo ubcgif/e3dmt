@@ -132,7 +132,7 @@ To generate an OcTree mesh, open a command window. Type the path to the code **o
 
 .. figure:: images/run_create_octree_mesh2.png
      :align: center
-     :width: 700
+     :width: 500
 
 .. _e3dmt_octree2_input:
 
@@ -151,8 +151,8 @@ The lines of input file (**MTcreate_mesh.inp**) are formatted as follows:
 | :ref:`frequencyFile<e3dmt_octree2_ln8>`
 | :ref:`topoFile<e3dmt_octree2_ln9>`
 | :ref:`shift_data<e3dmt_octree2_ln10>`
-| :ref:`poly_opt<e3dmt_octree2_ln11>`
-| :ref:`lg_mesh_flag<e3dmt_octree2_ln12>`
+| **MAKE_POLYGON** :ref:`D<e3dmt_octree2_ln11>`
+| **CREATE_LARGE_MESH** :ref:`out_name<e3dmt_octree2_ln12>`
 |
 |
 
@@ -168,19 +168,19 @@ The lines of input file (**MTcreate_mesh.inp**) are formatted as follows:
 
 .. _e3dmt_octree2_ln1:
 
-    - **dx dy dz:** Minimum cell widths in x, y and z for the base mesh.
+    - **dx dy dz:** Minimum cell widths in x, y and z for the mesh.
 
 .. _e3dmt_octree2_ln2a:
 
-    - **min_cell_fact:**
+    - **min_cell_fact:** For relatively flat topography, this value has little bearing on the final mesh; leave as 1. **FURTHER EXPLANATION REQUIRED**
 
 .. _e3dmt_octree2_ln2b:
 
-    - **min_cell_size:**
+    - **min_cell_size:** For ground-based surveys, this value is redundant; leave as 1. For airborne ZTEM, we may want to specify the cell size between the surface topography and the fine cells around the receivers (:ref:`n1 n2 n3<e3dmt_octree2_ln5>`). Here, *min_cell_size* is a factor defining the size of these cells relative to the underlying mesh cell size (:ref:`dx dy dz<e3dmt_octree2_ln1>`). *max_topo_cell* is an integer value equal or greater than 1 and must be a power of 2.
 
 .. _e3dmt_octree2_ln2c:
 
-    - **max_topo_cell:**
+    - **max_topo_cell:** Far from the core region (padding cells), the user may want to prevent overly large cells from defining the topography. Here, *max_topo_cell* is a factor defining the maximum cell size relative to the underlying mesh cell size (:ref:`dx dy dz<e3dmt_octree2_ln1>`) that can be used along the surface topography. *max_topo_cell* is an integer value equal or greater than 1 and must be a power of 2.
 
 .. _e3dmt_octree2_ln3:
 
@@ -216,11 +216,11 @@ The lines of input file (**MTcreate_mesh.inp**) are formatted as follows:
 
 .. _e3dmt_octree2_ln11:
 
-    - **poly_opt:** 
+    - **D:** The horizontal area covered by the core region is determined by the locations of the receivers and the value of *D* in metres. Essentially, the code creates a convex hull from all the points defining the receivers. It then extends the convex hull by a distance *D*.
 
 .. _e3dmt_octree2_ln12:
 
-    - **lg_mesh_flag:** 
+    - **out_name:** Here the user specifies the output name for the octree mesh.
 
 
 .. figure:: images/octree_example.png
@@ -235,7 +235,7 @@ The lines of input file (**MTcreate_mesh.inp**) are formatted as follows:
 Output Files
 ^^^^^^^^^^^^
 
-The program **MTcreate_octree_mesh_e3d.exe** creates 5 output files:
+The program **octree_mesh_mt.exe** creates 5 output files:
 
     - **3D_mesh.txt:** the underlying regular :ref:`tensor mesh<tensorFile>`. This mesh is comprised of the smallest cell size and is very large (>> 1M cells). As a result, it is unwise to plot this mesh.
 
@@ -245,7 +245,7 @@ The program **MTcreate_octree_mesh_e3d.exe** creates 5 output files:
 
     - **active_cells.txt:** :ref:`active cells model<modelFile>` on the OcTree mesh. Cells are active if assigned a value of 1 and inactive if assigned a value of 0 
 
-    - **create_mesh.log:** log file
+    - **E3DMesh.log:** log file
 
 
 
