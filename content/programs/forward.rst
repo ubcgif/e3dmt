@@ -3,10 +3,13 @@
 Forward Modeling Program
 ========================
 
+Version 1 (2014 and 2015)
+-------------------------
+
 The forward problem is solved using the executable program **e3dMTfwd.exe**. Parameters necessary for running the forward modeling code are set in the file **e3dMT_octree_fwd.inp**.
 
 Running the Program
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 To run the forward modeling program, open a command line window. Type the path to the code **e3dMTfwd.exe**, followed by a space, followed by the path to the input file.
 
@@ -16,7 +19,7 @@ To run the forward modeling program, open a command line window. Type the path t
 
 
 Units:
-------
+^^^^^^
 
 **Input:**
 
@@ -30,7 +33,7 @@ Units:
 
 
 Input
------
+^^^^^
 
 
 The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
@@ -96,7 +99,7 @@ The lines of input file (**e3dMT_octree_fwd.inp**) are formatted as follows:
 .. _e3dmt_fwd_output:
 
 Output Files
-------------
+^^^^^^^^^^^^
 
 The program **e3dMTfwd.exe** creates 2 output files:
 
@@ -104,6 +107,11 @@ The program **e3dMTfwd.exe** creates 2 output files:
 
     - **ed3MT_octree_fwd.log:** log file
 
+
+Version 2 (2017)
+----------------
+
+Both the forward problem and inverse problem are solved using the executable program **e3dMTinv_ver2.exe**. As a result, the input file will be described within the :ref:`running the inversion<e3dmt_inv2>` section.
 
 
 

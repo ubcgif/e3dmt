@@ -145,13 +145,15 @@ and similarly for :math:`y`.
 Version 2 (2017)
 ----------------
 
-.. important:: As of May 2018, the E3DMT version 2 code cannot simultaneously invert both MT and ZTEM data, just one or the other. If a flag value of '-99' is entered as an uncertainty, the corresponding data value is not fit during the inversion.
+.. important::
+
+    - As of May 2018, the E3DMT version 2 code cannot simultaneously invert both MT and ZTEM data, just one or the other.
+    - If a flag value of '-99' is entered as an uncertainty, the corresponding data value is not fit during the inversion. Therefore, we can omit inverting the diagonal elements of the impedance tensor.
 
 MT Data Format
 ^^^^^^^^^^^^^^
 
-.. note::
-    - Blue hyperlinked entries are values/regular expressions specified by the user
+.. note:: Blue hyperlinked entries are values/regular expressions specified by the user
 
 The format of the observation file for MT data begins by defining the datatype flag on the first line. The frequency index, receiver indicies, observed data and uncertainties are then defined on each subsequent line.
 
