@@ -68,9 +68,13 @@ Parameter Descriptions
     - **(C) Data type:**. For the data corresponding to each transmitter, this line sets the type of data. Example: *DATATYPE MTZ*. There are 4 options for DATATYPE:
 
         - "MTZ" - MT data (Both real and imaginary impedance tensor data)
-        - "MTE" - MT data with fixed reference station. Hx, Hy are calculated from the initial model for the reference station
         - "MTT" - ZTEM data (Hx and Hy constant at first receiver location and first receiver station defines base station)
-        - "MTH" - ZTEM data (reference is at the data points)
+        - "MTE" - ZTEM data where Hx, Hy are calculated at the base station from the initial model
+        - "MTH" - ZTEM data (reference is at the data points - no base station)
+
+.. important::
+
+    - When modeling MT and ZTEM data simultaneously, you must choose either type MTZ and MTT or MT and MTE or MTZ and MTH; e.g. you cannot have MTT, MTE and MTH in the same observations file.
         
 .. _e3dmt_obs_ln4:
 
@@ -90,7 +94,7 @@ Parameter Descriptions
 Data Arrays by Type
 ^^^^^^^^^^^^^^^^^^^
 
-**MT data (DATATYPE = MTZ or MTE):**
+**MT data (DATATYPE = MTZ):**
 
 Each row in the array contains the elements of the impedance tensor at a particular location separated into real and imaginary components, along with the corresponding uncertainties. The units for MT data are (V/A). The columns for this data format are as follows:
 
@@ -111,7 +115,7 @@ where
     - :math:`U^{\prime\prime}_{ij}` is the uncertainty on :math:`Z^{\prime\prime}_{ij}`
 
 
-**ZTEM data (DATATYPE = MTT or MTH):**
+**ZTEM data (DATATYPE = MTT, MTE or MTH):**
 
 Each row in the array contains the elements of the transfer function at a particular location separated into real and imaginary components, along with the corresponding uncertainties. Data values and uncertainties are unitless with no normalization factor. The columns for this data format are as follows:
 
@@ -136,8 +140,11 @@ and similarly for :math:`y`.
 
 .. important::
 
-	- For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Only the x,y and z locations are required. **However**, each remaining field must be given a flag value "i". *Example for first row:* :math:`350 \;\; 200 \;\; 0 \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i`
-	- For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at different locations. Data and uncertainty values are required for all rows.
+    - If MT and/or ZTEM data are being modeled, the frequencies do not need to match nor do the locations for each frequency.
+    - For **MTT and MTE data (ZTEM)**, the first line in the array refers to the base/reference station location. Only the x,y and z locations are required. **However**, each remaining field must be given a flag value of "i". *Example for first row:* :math:`350 \;\; 200 \;\; 0 \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i`
+    - For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at different locations. Data and uncertainty values are required for all rows.
+    - For **MTT and MTE data (ZTEM)**, the first line in the array refers to the base/reference station location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTT", the inversion will output :math:`N-1` rows of predicted data in the predicted data files.
+    - For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTH", the inversion model will output :math:`N` rows of predicted data in the predicted data files.
 
 
 .. _obsFile2:

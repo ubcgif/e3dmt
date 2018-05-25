@@ -57,9 +57,14 @@ Parameter Descriptions
     - **(B) Data type:**. For the data corresponding to each transmitter, this line sets the type of data. Example: *DATATYPE MTZ*. There are 4 options for DATATYPE:
 
         - "MTZ" - MT data (Both real and imaginary impedance tensor data)
-        - "MTE" - MT data with fixed reference station. Hx, Hy are calculated from the initial model for the reference station
         - "MTT" - ZTEM data (Hx and Hy constant at first receiver location and first receiver station defines base station)
-        - "MTH" - ZTEM data (reference is at the data points)
+        - "MTE" - ZTEM data where Hx, Hy are calculated at the base station from the initial model
+        - "MTH" - ZTEM data (reference is at the data points - no base station)
+
+.. important::
+    
+    - Data type MTE cannot be used in forward modeling, as there is no initial model initial model in this case.
+    - When modeling MT and ZTEM data simultaneously, you must choose either type MTZ and MTT OR MTZ and MTH; e.g. you cannot have MTT and MTH in the same locations file.
         
 .. _e3dmt_survey_ln4:
 
@@ -91,8 +96,9 @@ No matter what data type is being used (DATATYPE = MTZ, MTE, MTT or MTH), each r
 .. important::
 
     - The coordinates are right-handed with X (Easting), Y (Northing) and Z+ (Up).
-    - For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTT", the forward model will output :math:`N-1` predicted data.
-    - For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Thus if these are :math:`N` receiver locations specified for a given array with data type "MTH", the forward model will output :math:`N` predicted data.
+    - If MT and/or ZTEM data are being modeled, the frequencies do not need to match nor do the locations for each frequency.
+    - For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTT", the forward model will output :math:`N-1` rows of predicted data.
+    - For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTH", the forward model will output :math:`N` rows of predicted data.
 
 
 

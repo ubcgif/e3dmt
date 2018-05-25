@@ -22,8 +22,8 @@ The predicted data file is output from **e3dMTfwd.exe** and contains the locatio
 
 
 
-MT data (DATATYPE = MTZ or MTE)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+MT data (DATATYPE = MTZ)
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Each row in the array contains the elements of the impedance tensor at a particular location separated into real and imaginary components. The units for predicted MT data are (V/A). The columns for this data format are as follows:
 
@@ -37,8 +37,8 @@ where
     - :math:`Z^{\prime\prime}_{ij}` is the imaginary component of entry i,j of the impedance tensor
 
 
-ZTEM data (DATATYPE = MTT or MTH)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ZTEM data (DATATYPE = MTT, MTE or MTH)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Each row in the array contains the elements of the transfer function at a particular location separated into real and imaginary components. Predicted ZTEM data are unitless with no normalization factor. The columns for this data format are as follows:
 
