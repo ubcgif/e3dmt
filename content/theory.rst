@@ -87,7 +87,7 @@ A 1D layered Earth model can be used to compute the source wave components by it
 Magnetotelluric (MT) Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For a 3-dimensional Earth, the magnetotelluric data are defined by the impedance tensor. The impedance tensor can be defined using the ratios of electric and magnetic field components in both the x and y directions for 2 orthogonal plane wave polarizations; one polarization with the electric field along the x axis and one polarization with the electric file along he y axis. Where the impedance tensor :math:`\mathbf{Z}` is a 2 by 2 matrix:
+For a 3-dimensional Earth, the magnetotelluric data are defined by the impedance tensor. The impedance tensor can be defined using the ratios of electric and magnetic field components in both the x and y directions for 2 orthogonal plane wave polarizations; one polarization with the electric field along the x axis and one polarization with the electric file along the y axis. Where the impedance tensor :math:`\mathbf{Z}` is a 2 by 2 matrix:
 
 .. math::
     \mathbf{Z} = \mathbf{E H}^{-1}
@@ -118,15 +118,20 @@ fields. This relation is given by:
     H_z(r) = T_{zx}(r,r_0)H_x(r_0) + T_{zy}(r,r_0)H_y(r_0)
     :label:
 
-where :math:`r` is the location of the vertical field and :math:`r_0` is the location of the ground base station. :math:`T_{zx}` and :math:`T_{zy}` are the vertical field transfer functions, from z to x and z to y respectively. The transfer functions are given by:
+where :math:`r` is the location of the vertical field and :math:`r_0` is the location of the ground base station. :math:`T_{zx}` and :math:`T_{zy}` are the vertical field transfer functions, from z to x and z to y respectively. For a 3-dimensional Earth, the transfer function can be defined using the magnetic field components for 2 orthogonal plane wave polarizations; one polarization with the electric field along the x axis and one polarization with the electric file along the y axis. In this case,
 
 .. math::
-    \begin{bmatrix} T_x \\ T_y \end{bmatrix} = \big ( H_x^{(1)} H_y^{(2)} - H_x^{(2)} H_y^{(1)} \big )^{-1}
-    \begin{bmatrix} - H_y^{(1)} H_z^{(2)} + H_y^{(2)} H_z^{(1)} \\ H_x^{(1)} H_z^{(2)} - H_x^{(2)} H_z^{(1)} \end{bmatrix}
+    \begin{bmatrix} H_z^{(1)} \\ H_z^{(2)} \end{bmatrix} =
+    \begin{bmatrix} H_x^{(1)} & H_y^{(1)} \\ H_x^{(2)} & H_y^{(2)} \end{bmatrix}
+    \begin{bmatrix} T_{zx} \\ T_{zy} \end{bmatrix}
     :label: transfer_fcn
 
+where 1 and 2 refer to fields associated with plane waves polarized along two perpendicular directions. Thus the transfer functions are given by:
 
-.. For -iwt formulation. Theory verified up to here.
+.. math::
+    \begin{bmatrix} T_{zx} \\ T_{zy} \end{bmatrix} = \big ( H_x^{(1)} H_y^{(2)} - H_x^{(2)} H_y^{(1)} \big )^{-1}
+    \begin{bmatrix} - H_y^{(1)} H_z^{(2)} + H_y^{(2)} H_z^{(1)} \\ H_x^{(1)} H_z^{(2)} - H_x^{(2)} H_z^{(1)} \end{bmatrix}
+    
 
 
 Octree Mesh
@@ -163,7 +168,7 @@ see :cite:`Haber2012` for a detailed description of the discretization process.
 Forward Problem
 ---------------
 
-To solve the forward problem, we must first discretize and solve for the fields in Eq. :eq:`NSEM_system`. Using finite volume discretization, the electric field on cell edges (:math:`\mathbf{u_e}`) are obtained by solving the following system at every frequency:
+To solve the forward problem, we must first discretize and solve for the fields in Eq. :eq:`NSEM_system`, where :math:`e^{-i\omega t}` is suppressed. Using finite volume discretization, the electric fields on cell edges (:math:`\mathbf{u_e}`) are obtained by solving the following system at every frequency:
 
 .. math::
     \big [ \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma} \big ] \, \mathbf{u_e} = \mathbf{s}
@@ -177,19 +182,19 @@ where :math:`\mathbf{C}` is the curl operator and:
     \mathbf{M_\sigma} &= diag \big ( \mathbf{A^T_{e2c} V} \, \boldsymbol{\sigma} \big ) \\
     \end{align}
 
-where :math:`\mathbf{V}` is a diagonal matrix containing  all cell volumes, :math:`\mathbf{A_{f2c}}` interpolates from faces to cell centres and :math:`\mathbf{A_{e2c}}` interpolates from edges to cell centres. The magnetic permeabilities and conductivities for each cell are contained within vectors :math:`\boldsymbol{\mu}` and :math:`\boldsymbol{\sigma}`, respectively.
+where :math:`\mathbf{V}` is a diagonal matrix containing  all cell volumes, :math:`\mathbf{A_{f2c}}` averages from faces to cell centres and :math:`\mathbf{A_{e2c}}` averages from edges to cell centres. The magnetic permeabilities and conductivities for each cell are contained within vectors :math:`\boldsymbol{\mu}` and :math:`\boldsymbol{\sigma}`, respectively.
 
-The right-hand side :math:`\mathbf{s}` has values :math:`\mathbf{E_0}` on the boundary and 0 at inner edges. Values for :math:`\mathbf{E_0}` are obtained by solving a set of 1D problems with :math:`E` = 1 on the top-boundary. For explanation of the 1D solution, see Ward and Hohmann.
+The right-hand side :math:`\mathbf{s}` has values :math:`\mathbf{E_0}` on the boundary and 0 at inner edges. Values for :math:`\mathbf{E_0}` are obtained by solving a set of 1D problems for a given planewave polarization; either :math:`\mathbf{E_0} = E_x \, \hat{x}` or :math:`\mathbf{E_0} = E_y \, \hat{y}`. For explanation of the 1D solution, see Ward and Hohmann.
 
-To predict the electric (:math:`\mathbf{E}`) and magnetic fields (:math:`\mathbf{H}`) at receiver locations, we can perform the following linear operations:
+Once the electric field on cell edges has been computed, the electric (:math:`\mathbf{E}`) and magnetic (:math:`\mathbf{H}`) fields at observation locations can be obtain via the following:
 
 .. math::
     \begin{align}
     \mathbf{E} &= \mathbf{Q_e \, u_e} = \mathbf{Q_c \, A_{e2c} \, u_e} \\
-    \mathbf{H} &= \mathbf{Q_h \, u_e} = \frac{1}{i \omega} \mathbf{Q_c} \, diag(\boldsymbol{\mu}^{-1}) \, \mathbf{A_{f2c} \, C}
+    \mathbf{H} &= \mathbf{Q_h \, u_e} = \frac{1}{i \omega} \mathbf{Q_c} \, diag(\boldsymbol{\mu}^{-1}) \, \mathbf{A_{f2c} C \, u_e}
     \end{align}
 
-where :math:`\mathbf{Q_c}` is a projection from cell centers to a particular receiver (Ex, Ey, Hx, Hy or Hz).
+where :math:`\mathbf{Q_c}` represents the appropriate projection matrix from cell centers to a particular receiver (Ex, Ey, Hx, Hy or Hz).
 
 To obtain impedance tensor (MT) or ZTEM data, we need the electric and/or magnetic fields for two orthogonal source polarizations; generally one in the x direction and one in the y direction. Let :math:`\mathbf{s}^{(1)}` and :math:`\mathbf{s}^{(2)}` denote the right-hand sides for source fields generated for each polarization. And let :math:`\mathbf{u_e}^{(1)}` and :math:`\mathbf{u_e}^{(2)}` denote the corresponding solutions for the electric fields on the edges. Then the electric fields (Ex or Ey) and magnetic fields (Hx, Hy or Hz) at some observation location can be expressed as:
 
@@ -205,22 +210,120 @@ where the matrix
 .. math::
     \mathbf{A}(\sigma) = \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma}
 
-If the fields at each observation location are know, MT data can be obtained using Eq. :eq:`impedance_tensor` and ZTEM data can be obtained using Eq. :eq:`transfer_fcn`.
+depends on the Earth's conductivity. If the fields at each observation location are known, MT data can be obtained using Eq. :eq:`impedance_tensor` and ZTEM data can be obtained using Eq. :eq:`transfer_fcn`.
+
+
+.. Boundary Conditions
+.. ^^^^^^^^^^^^^^^^^^^
+
+
+.. Iterative Solver
+.. ^^^^^^^^^^^^^^^^
+
+.. For higher frequencies, the numerical solution to Eq. :eq:`discrete_e_sys` is fairly stable; as a large diagonal term results in a favourable conditioning number. However, MT and ZTEM sensors frequently measure low frequencies to image deeper targets. In this case, we must ensure the numerical solution to Eq. :eq:`discrete_e_sys` is stable. For this we use the following iterative solver approach.
 
 
 Sensitivity
 -----------
 
-Fields
-^^^^^^
+For use in the inversion, we require the sensitivity of the fields to the conductivities. Differentiating Eq. :eq:`discrete_e_sys` with respect to the conductivity model (:math:`\boldsymbol{\sigma}`), we obtain:
+
+.. math::
+    \frac{\partial \mathbf{A}}{\partial \boldsymbol{\sigma}} \mathbf{u_e} + \mathbf{A} \frac{\partial \mathbf{u_e}}{\partial \boldsymbol{\sigma}} = \mathbf{0}
+
+
+where
+
+.. math::
+    \frac{\partial \mathbf{A}}{\partial \boldsymbol{\sigma}} = i \omega \, diag(\mathbf{u_e}) \, \mathbf{A_{e2c}^T V }
+
+
+Thus the sensitivity of the fields to the conductivities is given by:
+
+.. math::
+    \frac{\partial \mathbf{u_e}}{\partial \boldsymbol{\sigma}} = - i\omega \mathbf{A}^{-1} diag(\mathbf{u_e}) \, \mathbf{A_{e2c}^T V }
 
 
 
+.. _theory_inv:
+
+Inverse Problem
+---------------
+
+To solve the inverse problem, we minimize the following global objective function:
+
+
+.. math::
+    \phi = \phi_d + \beta \phi_m
+    :label:
+
+
+where :math:`\phi_d` is the data misfit and :math:`\phi_m` is the model objective function. The data misfit 
+
+
+where :math:`\Sigma` is a matrix of the inverse standard deviation for each measured data point :math:`\mathbf{d^{obs}}`. Due to the ill-posedness of the problem, there are no stable solutions and a regularization is needed. The regularization used penalizes for both smoothness, and likeness to a reference model :math:`\mathbf{m_{ref}}` supplied by the user.
+
+.. math::
+    \Phi_{reg} (\mathbf{m-m_{ref}}) = \frac{1}{2} \big \| \nabla (\mathbf{m - m_{ref}}) \big \|^2_2
+    :label:
+
+An important consideration comes when discretizing the regularization. The gradient operates on
+cell centered variables in this instance. Applying a short distance approximation is second order
+accurate on a domain with uniform cells, but only :math:`\mathcal{O}(1)` on areas where cells are non-uniform. To
+rectify this a higher order approximation is used (:cite:`Haber2012`). The discrete regularization
+operator can then be expressed as
+
+.. math::
+    \begin{align}
+    \Phi_{reg}(\mathbf{m}) &= \frac{1}{2} \int_\Omega \big | \nabla m \big |^2 dV \\
+    & \approx \frac{1}{2}  \beta \mathbf{ m^T G_c^T} \textrm{diag} (\mathbf{A_f^T v}) \mathbf{G_c m}
+    \end{align}
+    :label:
+
+where :math:`\mathbf{A_f}` is an averaging matrix from faces to cell centres, :math:`\mathbf{G}` is the cell centre to cell face gradient operator, and v is the cell volume For the benefit of the user, let :math:`\mathbf{WTW}` be the weighting matrix given by
+
+.. math::
+    \mathbf{WTW} = \beta \mathbf{ G_c^T} \textrm{diag}(\mathbf{A_f^T v}) \mathbf{G_c m} =
+    \begin{bmatrix} \mathbf{\alpha_x} & & \\ & \mathbf{\alpha_y} & \\ & & \mathbf{\alpha_z} \end{bmatrix} \big ( \mathbf{G_x^T \; G_y^T \; G_z^T} \big ) \textrm{diag} (\mathbf{v_f}) \begin{bmatrix} \mathbf{G_x} \\ \mathbf{G_y} \\ \mathbf{G_z} \end{bmatrix}
+    :label:
+
+where :math:`\alpha_i` for :math:`i=x,y,z` are diagonal matricies. In the code the WTW matrix is stored as a separate matrix so that individual model norm components can be calculated. Now, if a cell weighting is used it is applied to the entire norm, that is, there is a w for each cell.
+
+.. math::
+    \mathbf{WTW} = \textrm{diag} (w) \mathbf{WTW} \textrm{diag} (w)
+    :label:
+
+There is also the option of choosing a cell interface weighting. This allows for a weight on each cell FACE. The user must supply the weights (:math:`w_x, w_y, w_z` ) for each weighted cell. When the interface
+weighting option is chosen and the value is less than 1, a sharp discontinuity will be created. When
+the value is greater than 1, there will be a smooth transition. To prevent the inversion from putting
+"junk" on the surface, the top X and Y face weights should have a large value.
+
+.. math::
+    \mathbf{WTW} = \mathbf{\alpha_x G_x^T} \textrm{diag} (w_x v_f) \mathbf{G_x} + \mathbf{\alpha_y G_y^T} \textrm{diag} (w_y v_f) \mathbf{G_y} + \mathbf{\alpha_z G_z^T} \textrm{diag} (w_z v_f) \mathbf{G_z}
+    :label:
+
+The resulting optimization problem is therefore:
+
+.. math::
+    \begin{align}
+    &\min_m \;\; \Phi_{mis} (\mathbf{m}) + \beta \Phi_{reg}(\mathbf{m - m_{ref}}) \\
+    &\; \textrm{s.t.} \;\; \mathbf{m_L \leq m \leq m_H}
+    \end{align}
+    :label:
+
+where :math:`\beta` is a regularization parameter, and :math:`\mathbf{m_L}` and :math:`\mathbf{m_H}` are upper and lower bounds provided by some a prior geological information.
+A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
+information refer again to :cite:`Haber2012` and references therein.
+
+
+
+Data Misfit
+-----------
 
 MT data
 ^^^^^^^
 
-From Eq. :eq:`impedance_tensor`, at a single observation location:
+Here, we define a data misfit for MT data and express its derivative with respect to the model. From Eq. :eq:`impedance_tensor`, at a single observation location:
 
 .. math::
     \mathbf{ZH - E} = 
@@ -235,7 +338,7 @@ For *N* observation stations, we can set up a sparse system:
     :label: Z_sys
 
 
-Where :math:`\mathbf{Z_j}` is impedance tensor for station *j*:
+Where :math:`\mathbf{Z_j}` is the impedance tensor for station *j*,
 
 .. math::
     \mathbf{\tilde{Z}} =
@@ -254,14 +357,36 @@ is a block diagonal matrix and the fields are stored in vectors:
 Using Eq. :eq:`fields_at_loc`, we can re-express Eq. :eq:`Z_sys` as:
 
 .. math::
-     \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_h u_e \!}^{(2)} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_e u_e \!}^{(2)} \end{bmatrix}
-     = \Bigg ( \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h} & \\ & \mathbf{\tilde{Q}_h} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e} & \\ & \mathbf{\tilde{Q}_e} \end{bmatrix} \Bigg )
-     \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
-     = \mathbf{\tilde{Q}} \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
+    \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_h u_e \!}^{(2)} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_e u_e \!}^{(2)} \end{bmatrix}
+    = \Bigg ( \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h} & \\ & \mathbf{\tilde{Q}_h} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e} & \\ & \mathbf{\tilde{Q}_e} \end{bmatrix} \Bigg )
+    \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
+    = \mathbf{\tilde{Q}} \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
+    :label: mt_Q
+
+
+Separating Eq. :eq:`mt_Q` into its real and imaginary components we obtain
+
 
 
 ZTEM data
 ^^^^^^^^^
+
+From Eq. :eq:`transfer_fcn`, at a single observation location:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -321,74 +446,6 @@ ZTEM data
 ..     :label:
 
 .. The matrix :math:`Q_c` is an interpolation matrix from cell centers to receiver locations, :math:`A_{f2c}` averages from faces to cell centers, and :math:`A_{e2c}` averages from edges to cell centers.
-
-.. _theory_inv:
-
-Inverse Problem
----------------
-
-Solving the non-linear EM inverse problem for electric conductivity is akin to minimizing the
-following objective function:
-
-
-.. math::
-    \Phi_{mis} (\mathbf{m}) = \frac{1}{2} \bigg \| \Sigma \odot \big ( \mathbf{D}(\sigma) - \mathbf{d^{obs}} \big ) \big \|^2_2
-    :label:
-
-
-where :math:`\Sigma` is a matrix of the inverse standard deviation for each measured data point :math:`\mathbf{d^{obs}}`. Due to the ill-posedness of the problem, there are no stable solutions and a regularization is needed. The regularization used penalizes for both smoothness, and likeness to a reference model :math:`\mathbf{m_{ref}}` supplied by the user.
-
-.. math::
-    \Phi_{reg} (\mathbf{m-m_{ref}}) = \frac{1}{2} \big \| \nabla (\mathbf{m - m_{ref}}) \big \|^2_2
-    :label:
-
-An important consideration comes when discretizing the regularization. The gradient operates on
-cell centered variables in this instance. Applying a short distance approximation is second order
-accurate on a domain with uniform cells, but only :math:`\mathcal{O}(1)` on areas where cells are non-uniform. To
-rectify this a higher order approximation is used (:cite:`Haber2012`). The discrete regularization
-operator can then be expressed as
-
-.. math::
-    \begin{align}
-    \Phi_{reg}(\mathbf{m}) &= \frac{1}{2} \int_\Omega \big | \nabla m \big |^2 dV \\
-    & \approx \frac{1}{2}  \beta \mathbf{ m^T G_c^T} \textrm{diag} (\mathbf{A_f^T v}) \mathbf{G_c m}
-    \end{align}
-    :label:
-
-where :math:`\mathbf{A_f}` is an averaging matrix from faces to cell centres, :math:`\mathbf{G}` is the cell centre to cell face gradient operator, and v is the cell volume For the benefit of the user, let :math:`\mathbf{WTW}` be the weighting matrix given by
-
-.. math::
-    \mathbf{WTW} = \beta \mathbf{ G_c^T} \textrm{diag}(\mathbf{A_f^T v}) \mathbf{G_c m} =
-    \begin{bmatrix} \mathbf{\alpha_x} & & \\ & \mathbf{\alpha_y} & \\ & & \mathbf{\alpha_z} \end{bmatrix} \big ( \mathbf{G_x^T \; G_y^T \; G_z^T} \big ) \textrm{diag} (\mathbf{v_f}) \begin{bmatrix} \mathbf{G_x} \\ \mathbf{G_y} \\ \mathbf{G_z} \end{bmatrix}
-    :label:
-
-where :math:`\alpha_i` for :math:`i=x,y,z` are diagonal matricies. In the code the WTW matrix is stored as a separate matrix so that individual model norm components can be calculated. Now, if a cell weighting is used it is applied to the entire norm, that is, there is a w for each cell.
-
-.. math::
-    \mathbf{WTW} = \textrm{diag} (w) \mathbf{WTW} \textrm{diag} (w)
-    :label:
-
-There is also the option of choosing a cell interface weighting. This allows for a weight on each cell FACE. The user must supply the weights (:math:`w_x, w_y, w_z` ) for each weighted cell. When the interface
-weighting option is chosen and the value is less than 1, a sharp discontinuity will be created. When
-the value is greater than 1, there will be a smooth transition. To prevent the inversion from putting
-"junk" on the surface, the top X and Y face weights should have a large value.
-
-.. math::
-    \mathbf{WTW} = \mathbf{\alpha_x G_x^T} \textrm{diag} (w_x v_f) \mathbf{G_x} + \mathbf{\alpha_y G_y^T} \textrm{diag} (w_y v_f) \mathbf{G_y} + \mathbf{\alpha_z G_z^T} \textrm{diag} (w_z v_f) \mathbf{G_z}
-    :label:
-
-The resulting optimization problem is therefore:
-
-.. math::
-    \begin{align}
-    &\min_m \;\; \Phi_{mis} (\mathbf{m}) + \beta \Phi_{reg}(\mathbf{m - m_{ref}}) \\
-    &\; \textrm{s.t.} \;\; \mathbf{m_L \leq m \leq m_H}
-    \end{align}
-    :label:
-
-where :math:`\beta` is a regularization parameter, and :math:`\mathbf{m_L}` and :math:`\mathbf{m_H}` are upper and lower bounds provided by some a prior geological information.
-A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
-information refer again to :cite:`Haber2012` and references therein.
 
 
 
