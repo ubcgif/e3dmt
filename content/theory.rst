@@ -317,61 +317,61 @@ information refer again to :cite:`Haber2012` and references therein.
 
 
 
-Data Misfit
------------
+.. Data Misfit
+.. -----------
 
-MT data
-^^^^^^^
+.. MT data
+.. ^^^^^^^
 
-Here, we define a data misfit for MT data and express its derivative with respect to the model. From Eq. :eq:`impedance_tensor`, at a single observation location:
+.. Here, we define a data misfit for MT data and express its derivative with respect to the model. From Eq. :eq:`impedance_tensor`, at a single observation location:
 
-.. math::
-    \mathbf{ZH - E} = 
-    \begin{bmatrix} Z_{xx} H_x^{(1)} + Z_{xy} H_y^{(1)} - E_x^{(1)} \; & \; Z_{xx} H_x^{(2)} + Z_{xy} H_y^{(2)} - E_x^{(2)} \\
-    Z_{yx} H_x^{(1)} + Z_{yy} H_y^{(1)} - E_x^{(1)} \; & \; Z_{yx} H_x^{(2)} + Z_{yy} H_y^{(2)} - E_x^{(2)} \end{bmatrix} =
-    \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
+.. .. math::
+..     \mathbf{ZH - E} = 
+..     \begin{bmatrix} Z_{xx} H_x^{(1)} + Z_{xy} H_y^{(1)} - E_x^{(1)} \; & \; Z_{xx} H_x^{(2)} + Z_{xy} H_y^{(2)} - E_x^{(2)} \\
+..     Z_{yx} H_x^{(1)} + Z_{yy} H_y^{(1)} - E_x^{(1)} \; & \; Z_{yx} H_x^{(2)} + Z_{yy} H_y^{(2)} - E_x^{(2)} \end{bmatrix} =
+..     \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
 
-For *N* observation stations, we can set up a sparse system:
+.. For *N* observation stations, we can set up a sparse system:
 
-.. math::
-    \mathbf{\tilde{Z}} \mathbf{\tilde{H}} - \mathbf{\tilde{E}} = \mathbf{0}
-    :label: Z_sys
-
-
-Where :math:`\mathbf{Z_j}` is the impedance tensor for station *j*,
-
-.. math::
-    \mathbf{\tilde{Z}} =
-    \begin{bmatrix} \mathbf{Z_1} & & & & & \\ & \ddots & & & & \\ & & \mathbf{Z_N} & & & \\ & & & \mathbf{Z_1} & & \\ & & & & \ddots & \\ & & & & & \mathbf{Z_N} \end{bmatrix} 
-
-is a block diagonal matrix and the fields are stored in vectors:
-
-.. math::
-    \mathbf{\tilde{H}} =
-    \begin{bmatrix} H_{x_1}^{(1)} \\ H_{y_1}^{(1)} \\ \vdots \\ H_{x_N}^{(1)} \\ H_{y_N}^{(1)} \\ H_{x_1}^{(2)} \\ H_{y_1}^{(2)} \\ \vdots \\ H_{x_N}^{(2)} \\ H_{y_N}^{(2)} \end{bmatrix}
-    \;\;\; \textrm{and} \;\;\;
-    \mathbf{\tilde{E}} =
-    \begin{bmatrix} E_{x_1}^{(1)} \\ E_{y_1}^{(1)} \\ \vdots \\ E_{x_N}^{(1)} \\ E_{y_N}^{(1)} \\ E_{x_1}^{(2)} \\ E_{y_1}^{(2)} \\ \vdots \\ E_{x_N}^{(2)} \\ E_{y_N}^{(2)} \end{bmatrix}
+.. .. math::
+..     \mathbf{\tilde{Z}} \mathbf{\tilde{H}} - \mathbf{\tilde{E}} = \mathbf{0}
+..     :label: Z_sys
 
 
-Using Eq. :eq:`fields_at_loc`, we can re-express Eq. :eq:`Z_sys` as:
+.. Where :math:`\mathbf{Z_j}` is the impedance tensor for station *j*,
 
-.. math::
-    \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_h u_e \!}^{(2)} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_e u_e \!}^{(2)} \end{bmatrix}
-    = \Bigg ( \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h} & \\ & \mathbf{\tilde{Q}_h} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e} & \\ & \mathbf{\tilde{Q}_e} \end{bmatrix} \Bigg )
-    \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
-    = \mathbf{\tilde{Q}} \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
-    :label: mt_Q
+.. .. math::
+..     \mathbf{\tilde{Z}} =
+..     \begin{bmatrix} \mathbf{Z_1} & & & & & \\ & \ddots & & & & \\ & & \mathbf{Z_N} & & & \\ & & & \mathbf{Z_1} & & \\ & & & & \ddots & \\ & & & & & \mathbf{Z_N} \end{bmatrix} 
+
+.. is a block diagonal matrix and the fields are stored in vectors:
+
+.. .. math::
+..     \mathbf{\tilde{H}} =
+..     \begin{bmatrix} H_{x_1}^{(1)} \\ H_{y_1}^{(1)} \\ \vdots \\ H_{x_N}^{(1)} \\ H_{y_N}^{(1)} \\ H_{x_1}^{(2)} \\ H_{y_1}^{(2)} \\ \vdots \\ H_{x_N}^{(2)} \\ H_{y_N}^{(2)} \end{bmatrix}
+..     \;\;\; \textrm{and} \;\;\;
+..     \mathbf{\tilde{E}} =
+..     \begin{bmatrix} E_{x_1}^{(1)} \\ E_{y_1}^{(1)} \\ \vdots \\ E_{x_N}^{(1)} \\ E_{y_N}^{(1)} \\ E_{x_1}^{(2)} \\ E_{y_1}^{(2)} \\ \vdots \\ E_{x_N}^{(2)} \\ E_{y_N}^{(2)} \end{bmatrix}
 
 
-Separating Eq. :eq:`mt_Q` into its real and imaginary components we obtain
+.. Using Eq. :eq:`fields_at_loc`, we can re-express Eq. :eq:`Z_sys` as:
+
+.. .. math::
+..     \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_h u_e \!}^{(2)} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_e u_e \!}^{(2)} \end{bmatrix}
+..     = \Bigg ( \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h} & \\ & \mathbf{\tilde{Q}_h} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e} & \\ & \mathbf{\tilde{Q}_e} \end{bmatrix} \Bigg )
+..     \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
+..     = \mathbf{\tilde{Q}} \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
+..     :label: mt_Q
+
+
+.. Separating Eq. :eq:`mt_Q` into its real and imaginary components we obtain
 
 
 
-ZTEM data
-^^^^^^^^^
+.. ZTEM data
+.. ^^^^^^^^^
 
-From Eq. :eq:`transfer_fcn`, at a single observation location:
+.. From Eq. :eq:`transfer_fcn`, at a single observation location:
 
 
 
