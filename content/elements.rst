@@ -3,7 +3,7 @@
 Elements of the Program E3DMT
 =============================
 
-This section provides a description of each program in the E3DMT libraries.
+This section provides a brief description of each program in the E3DMT version 1 and version 2 libraries. In addition, we describe the file formats for all input and supporting files used by these coding libraries.
 
 Version 1 (2014 and 2015)
 -------------------------
@@ -31,10 +31,25 @@ Version 2 of the E3DMT code makes use of the following executables:
     - **octree_mesh_mt:** Creates an octree mesh based on the :ref:`receiver file<receiverFile>`
     - **blk3cellOct:** Creates models from a set of blocks directly on the octree mesh
 
-General Files for E3DMT Executables
------------------------------------
+Main Input Files
+----------------
 
-Here, we describe the formats of supplementary files used to run E3DMT executable files. The input files for each executable program are described in the :ref:`running the programs<running>` section.
+Here, we describe the main input files for executables contained with the E3DMT version 1 and version 2 coding packages.
+
+.. toctree::
+    :maxdepth: 2
+
+    Create octree mesh <inputfiles/createOcTree>
+    Create octree model <inputfiles/createModel>
+    Forward modeling <inputfiles/forward>
+    Create face weights <inputfiles/weightsFiles>
+    Inversion <inputfiles/inversion>
+
+
+Supporting Files
+----------------
+
+Here, we describe the formats of supporting files used to run E3DMT executable files. The input files for each executable program are described in the :ref:`running the programs<running>` section.
 
 .. toctree::
     :maxdepth: 1
