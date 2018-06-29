@@ -31,11 +31,11 @@ The forward problem is solved using the executable program **e3dMTfwd.exe**. Par
 
 
 
-.. figure:: images/e3dmt_fwd_input.png
+.. figure:: images/create_fwd_input.png
      :align: center
      :width: 700
 
-     Example input file for forward modeling program.
+     Example input file for forward modeling program (**download**).
 
 
 Line Descriptions

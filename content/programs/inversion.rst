@@ -41,13 +41,6 @@ Units
     - **Conductivity model:** S/m
 
 
-.. figure:: images/inv_results.png
-     :align: center
-     :width: 700
-
-     Recovered model (left) and true model (right).
-
-
 Output Files
 ^^^^^^^^^^^^
 

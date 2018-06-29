@@ -32,16 +32,6 @@ Units:
     - **ZTEM data:** Real and imaginary components of transfer function entries (unitless)
 
 
-
-
-
-.. figure:: images/fwd_results.png
-     :align: center
-     :width: 700
-
-     In-phase (left) and quadrature (right) components of impedance tensor element :math:`Z_{xy}` over the L-shaped conductor.
-
-
 .. _e3dmt_fwd_output:
 
 Output Files

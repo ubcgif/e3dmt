@@ -36,9 +36,11 @@ The input file defines the properties of the model (conductivity/susceptibility/
 where superscript :math:`(i)` for :math:`i=1,2,...,N` refers to a particular block. :math:`x_1,x_2,y_1,y_2,z_1` and :math:`z_2` define the nodes of each block and :math:`m` defines conductivity/susceptibility value. An example is shown below.
 
 
-.. figure:: images/e3dmt_blk3cell_input.png
+.. figure:: images/create_blk3cell_input.png
      :align: center
      :width: 700
+
+     Example input file for blk3cell (**download**)
 
 
 .. _e3dmt_3Dmodel2octree_input:
@@ -77,11 +79,11 @@ The file **Model2Octree.inp** contains the paths to the tensor mesh (**3D_mesh.t
 
 An example input file and the resulting conductivity model on the octree mesh are shown below
 
-.. figure:: images/e3dmt_3DtoOctree_input.png
+.. figure:: images/create_3DtoOctree_input.png
      :align: center
      :width: 700
 
-     Example input file for 3DModel2Octree.exe.
+     Example input file for 3DModel2Octree.exe (**download**)
 
 
 Version 2 (2017)

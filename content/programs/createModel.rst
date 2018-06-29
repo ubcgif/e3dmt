@@ -25,14 +25,6 @@ To generate the tensor model on the core tensor mesh, open a command window. In 
      :align: center
      :width: 700
 
-Below we show the example of an input file used to create the model on the base tensor mesh.
-
-
-.. figure:: images/e3dmt_blk3cell_input.png
-     :align: center
-     :width: 700
-
-
 **blk3cell.exe** outputs a :ref:`model<modelFile>` (**3Dmodel.con**) which contains a single value for each cell in the tensor mesh **3D_mesh.txt**.
 
 .. warning:: It is not advisable to image models on the base tensor mesh as they can be prohibitively large (>> 1M cells).
@@ -47,20 +39,6 @@ To interpolate the model from a :ref:`tensor mesh<tensorFile>` to an :ref:`Octre
 .. figure:: images/run_3Dmodel2octree.png
      :align: center
      :width: 700
-
-An example input file and the resulting conductivity model on the octree mesh are shown below
-
-.. figure:: images/e3dmt_3DtoOctree_input.png
-     :align: center
-     :width: 700
-
-     Example input file for 3DModel2Octree.exe.
-
-.. figure:: images/model_example.png
-     :align: center
-     :width: 400
-
-     Octree conductivity model (cut-off :math:`\sigma < 1`) and surface topography for reference. All other cells below surface topography correspond to a background conductivity of :math:`\sigma=0.01` S/m.
 
 
 **3Dmodel2Octree.exe** outputs a :ref:`model file<modelFile>` (**Output model name**) which has been interpolated from the base :ref:`tensor mesh<tensorFile>` to the :ref:`Octree mesh<octreeFile>`.

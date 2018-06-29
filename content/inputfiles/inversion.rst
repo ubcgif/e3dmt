@@ -54,11 +54,11 @@ Both **e3dMTinv.exe** and **e3dMTinv_iter.exe** use the same input file. The lin
 
 
 
-.. figure:: images/e3dmt_inv_input.png
+.. figure:: images/create_inv_input.png
      :align: center
      :width: 700
 
-     Example input file for the inversion program.
+     Example input file for the inversion program (**download**).
 
 
 Line Descriptions
@@ -141,15 +141,6 @@ Line Descriptions
     - **BICG Parameters (omit line if using direct solver):** In order, the user specifies values for *tol_bicg*, *tol_ipcg_bicg*, *max_it_bicg* and *freq_Aphi*. For the practice example, the following was used: *1E-10 1E-5 100 -1*.
 
 
-.. figure:: images/inv_results.png
-     :align: center
-     :width: 700
-
-     Recovered model (left) and true model (right).
-
-
-
-
 .. _e3dmt_input_inv2:
 
 Version 2 (2017)
@@ -211,11 +202,11 @@ Both the forward and inverse problems are solved using the **e3dMTinv_ver2** exe
 
 
 
-.. figure:: images/e3dmt_inv_input2.png
-     :align: center
-     :width: 700
+.. .. figure:: images/e3dmt_inv_input2.png
+..      :align: center
+..      :width: 700
 
-     Example input file for the inversion program.
+..      Example input file for the inversion program.
 
 
 Line Descriptions

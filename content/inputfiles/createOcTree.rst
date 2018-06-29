@@ -36,12 +36,11 @@ In this case, :ref:`OcTree meshes<octreeFile>` used in the E3DMT code are create
 +--------+----------------------------------------------------------+-----------------------------------------------------------------+
 
 
-
 .. figure:: images/create_octree_input.png
      :align: center
      :width: 700
 
-     Example input file for creating octree mesh.
+     Example input file for creating octree mesh (**download**)
 
 
 Line Descriptions
@@ -85,11 +84,11 @@ Line Descriptions
     - **start_point:** Set as either "START_LARGE_CELLS" or "START_SMALL_CELLS". This line sets the starting point for the mesh generation. Starting the mesh population from large cells greatly reduces initial memory required and is therefore suggested. Large cells are divided in this algorithm to produce the OcTree mesh.
 
 
-.. figure:: images/octree_example.png
-     :align: center
-     :width: 400
+.. .. figure:: images/octree_example.png
+..      :align: center
+..      :width: 400
 
-     Octree mesh showing and surface topography. Cells below the surface topography are assigned a value of 1 in the active cells model.
+..      Octree mesh showing and surface topography. Cells below the surface topography are assigned a value of 1 in the active cells model.
 
 Approximate versus Good Topography
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
