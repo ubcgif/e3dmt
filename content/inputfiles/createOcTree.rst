@@ -40,7 +40,7 @@ In this case, :ref:`OcTree meshes<octreeFile>` used in the E3DMT code are create
      :align: center
      :width: 700
 
-     Example input file for creating octree mesh (**download**)
+     Example input file for creating octree mesh (`Download <https://github.com/ubcgif/e3dmt/raw/master/assets/input_files1/MTcreate_mesh.inp>`__ )
 
 
 Line Descriptions

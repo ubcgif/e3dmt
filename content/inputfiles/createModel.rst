@@ -40,7 +40,7 @@ where superscript :math:`(i)` for :math:`i=1,2,...,N` refers to a particular blo
      :align: center
      :width: 700
 
-     Example input file for blk3cell (**download**)
+     Example input file for blk3cell (`Download <https://github.com/ubcgif/e3dmt/raw/master/assets/input_files1/blk3cell.inp>`__ )
 
 
 .. _e3dmt_3Dmodel2octree_input:
@@ -83,7 +83,7 @@ An example input file and the resulting conductivity model on the octree mesh ar
      :align: center
      :width: 700
 
-     Example input file for 3DModel2Octree.exe (**download**)
+     Example input file for 3DModel2Octree.exe (`Download <https://github.com/ubcgif/e3dmt/raw/master/assets/input_files1/3Dmodel2octree.inp>`__ )
 
 
 Version 2 (2017)

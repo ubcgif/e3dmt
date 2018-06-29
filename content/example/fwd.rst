@@ -19,10 +19,17 @@ To forward model the data, the following input file was used:
      :width: 700
 
 
-Predicted data are shown below:
+Predicted data are shown below.
 
+.. figure:: images/fwd1.png
+     :align: center
+     :width: 700
 
 
 
 Version 2 (2017)
 ----------------
+
+
+.. raw:: html
+    :file: ../../underconstruction.html
