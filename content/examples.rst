@@ -26,24 +26,6 @@ The full examples are parse into 4 sections:
     Inversion <example/inv>
 
 
-
-
-
-
-
-
-Creating an Octree mesh
------------------------
-
-Using the input file and supporting files founding in the "octree_mesh" sub-folder, we were able to create the following mesh. :ref:`Link to instructions for creating Octree meshes <e3dmt_octree>`.
-
-.. .. figure:: programs/images/octree_example.png
-..      :align: center
-..      :width: 400
-
-..      Octree mesh showing and surface topography. Cells below the surface topography are assigned a value of 1 in the active cells model.
-
-
 Creating a Model
 ----------------
 

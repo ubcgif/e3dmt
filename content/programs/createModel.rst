@@ -16,6 +16,8 @@ Next, **3Dmodel2octree.exe** is used to interpolate the tensor model onto an :re
 .. note:: This workflow can also be used to create a :ref:`model weights<weightsFile>` file.
 
 
+.. _e3dmt_model_blk3cell:
+
 Running blk3cell
 ^^^^^^^^^^^^^^^^
 
@@ -29,6 +31,8 @@ To generate the tensor model on the core tensor mesh, open a command window. In 
 
 .. warning:: It is not advisable to image models on the base tensor mesh as they can be prohibitively large (>> 1M cells).
 
+
+.. _e3dmt_model_3DtoOctree:
 
 Running 3Dmodel2Octree
 ^^^^^^^^^^^^^^^^^^^^^^
