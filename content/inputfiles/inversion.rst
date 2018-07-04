@@ -74,7 +74,14 @@ Line Descriptions
 
 .. _e3dmt_input_inv_ln3:
 
-    - **1D Background Conductivity:** The user may supply the file path to a `1D background conductivity model <http://em1dfm.readthedocs.io/en/latest/content/files/supporting.html#files-for-reference-and-starting-models>`__ . If a homogeneous background conductivity is being used, the user enters "VALUE" followed by a space and a numerical value; example "VALUE 0.01"
+    - **1D Background Conductivity:** The user may supply the file path to a `1D background conductivity model <http://em1dfm.readthedocs.io/en/latest/content/files/supporting.html#files-for-reference-and-starting-models>`__ , or if a homogeneous background conductivity is being used, the user may enter "VALUE" followed by a space and a numerical value (example "VALUE 0.01"). The way the 1D model is used to determine the boundary conditions for solving the full 3D problem depends on the active topography cells options on :ref:`line 7<e3dmt_input_inv_ln7>`. Before continuing, the user is urged to read the section on :ref:`boundary conditions <e3dmt_input_inv_bc>`.
+
+
+.. important::
+
+    - The number of layers in the 1D model for E3DMT must equal the number of underlying mesh cells in the vertical direction. Thus if underlying mesh for the OcTree mesh is 1028 by 1028 by 512, the 1D model must have 512 layer conductivities.
+    - The boundary conditions computed using 1D models is only accurate when surface topography is minimal. In the case where surface topography is significant, it is suggested the user used E3DMT version 2.
+ 
 
 .. _e3dmt_input_inv_ln4:
 
@@ -139,6 +146,22 @@ Line Descriptions
 .. _e3dmt_input_inv_ln19:
 
     - **BICG Parameters (omit line if using direct solver):** In order, the user specifies values for *tol_bicg*, *tol_ipcg_bicg*, *max_it_bicg* and *freq_Aphi*. For the practice example, the following was used: *1E-10 1E-5 100 -1*.
+
+.. _e3dmt_input_inv_bc:
+
+Details regarding boundary conditions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The way the 1D model is used to determine the boundary conditions for the full 3D problem depends on :ref:`background conductivity (line 3)<e3dmt_input_inv_ln3>` and the :ref:`active topography cells (line 7) <e3dmt_input_inv_ln7>`. This can be explained as follows:
+
+        - Assume *VALUE* is used to define the 1D background model (line 3) and the flag *ALL_ACTIVE* is used to define active topography cells (line 7). Then the boundary conditions are obtained by solving the fields for a whole space. This approach is strongly discouraged!
+
+        - Assume *VALUE* is used to define the 1D background model (line 3) and an *active cells model* is used to define the active topography cells (line 7). Then the highest surface elevation in the active cells model is used as the surface elevation for the 1D model. Below this surface, the background conductivity is equal to the specified value. Above this surface, the background conductivity is set to air.
+
+        - Assume a *1D model* defines the background conductivity (line 3) and the flag *ALL_ACTIVE* is used to define active topography cells (line 7). The top of the 1D model corresponds to the top of the OcTree mesh when solving the 1D problem. As a result, it is important to include air cells in the 1D model.
+
+        - Assume a *1D model* defines the background conductivity (line 3) and an *active cells model* is used to define the active topography cells (line 7). Then the highest surface elevation in the active cells model is used as the surface elevation for the 1D model. The 1D problem is still solved and the top of the 1D model still corresponds to the top of the OcTree mesh. However, all layers above the surface are set to air regardless of the values specified in the 1D model.
+
 
 
 .. _e3dmt_input_inv2:
@@ -230,11 +253,14 @@ Line Descriptions
 
 .. _e3dmt_input_inv2_ln3:
 
-    - **Background Conductivity:** Here the user specifies a background conductivity model. This is used to create the boundary conditions for the discretized Maxwell's equations. There are 3 options:
+    - **Background Conductivity:** On this line, the user first specifies a flag for the background conductivity model ('1DBACKGROUND' or '3DBACKGROUND'). Next, the user may supply the file path to the corresponding conductivity model (ex: *1DBACKGROUND model1d.con*), or if a homogeneous background conductivity is being used, the user may enter "VALUE" followed by a space and a numerical value (ex: *3DBACKGROUND VALUE 0.01*). The way the background model is used to determine the boundary conditions for solving NSEM problem depends on the active topography cells options on :ref:`line 9<e3dmt_input_inv2_ln7>`. Before continuing, the user is urged to read the section on :ref:`boundary conditions <e3dmt_input_inv2_bc>`.
 
-        - If a homogeneous background conductivity is being used, the user enters "VALUE" followed by a space and a numerical value; example "VALUE 0.01".
-        - If the surface topography is fairly flat, the user enters the flag '1DBACKGROUND' followed by the file path to a `1D background conductivity model <http://em1dfm.readthedocs.io/en/latest/content/files/supporting.html#files-for-reference-and-starting-models>`__ . 
-        - If the surface topography is no flat, the user enters the flag '3DBACKGROUND' followed by the file path to an :ref:`octree model file<modelFile>`.
+
+.. important::
+
+    - The number of layers in the 1D model for E3DMT ver 2 must equal the number of underlying mesh cells in the vertical direction. Thus if underlying mesh for the OcTree mesh is 1028 by 1028 by 512, the 1D model must have 512 layer conductivities.
+    - The boundary conditions computed using 1D models is only accurate when surface topography is minimal. In the case where surface topography is significant, 3D background models are suggested.
+
 
 .. _e3dmt_input_inv2_ln4:
 
@@ -330,5 +356,30 @@ Line Descriptions
 
 
 
+.. _e3dmt_input_inv2_bc:
+
+Details regarding boundary conditions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The way background models are used to determine the boundary conditions for the problem depends on :ref:`background conductivity (line 5)<e3dmt_input_inv2_ln3>` and the :ref:`active topography cells (line 9) <e3dmt_input_inv_ln7>`. This can be explained as follows:
+
+**1DBACKGROUND:**
+
+        - Assume *VALUE* is used to define the 1D background model (line 5) and the flag *ALL_ACTIVE* is used to define active topography cells (line 9). Then the boundary conditions are obtained by solving the fields for a whole space. This approach is strongly discouraged!
+
+        - Assume *VALUE* is used to define the 1D background model (line 5) and an *active cells model* is used to define the active topography cells (line 9). Then the highest surface elevation in the active cells model is used as the surface elevation for the 1D model. Below this surface, the background conductivity is equal to the specified value. Above this surface, the background conductivity is set to air.
+
+        - Assume a *1D model* defines the background conductivity (line 5) and the flag *ALL_ACTIVE* is used to define active topography cells (line 9). The top of the 1D model corresponds to the top of the OcTree mesh when solving the 1D problem. As a result, it is important to include air cells in the 1D model.
+
+        - Assume a *1D model* defines the background conductivity (line 5) and an *active cells model* is used to define the active topography cells (line 9). Then the highest surface elevation in the active cells model is used as the surface elevation for the 1D model. The 1D problem is still solved and the top of the 1D model still corresponds to the top of the OcTree mesh. However, all layers above the surface are set to air regardless of the values specified in the 1D model.
 
 
+**3DBACKGROUND:**
+
+        - Assume *VALUE* is used to define the 3D background model (line 5) and the flag *ALL_ACTIVE* is used to define active topography cells (line 9). Then the boundary conditions are obtained by solving the fields for a whole space. This approach is strongly discouraged!
+
+        - Assume *VALUE* is used to define the 3D background model (line 5) and an *active cells model* is used to define the active topography cells (line 9). A 3D problem is solved where all cells below the surface are set to the specified value and all the cells above the surface are set to air.
+
+        - Assume a *3D model* defines the background conductivity (line 5) and the flag *ALL_ACTIVE* is used to define active topography cells (line 9). A 3D problem is solved for the specified background model.
+
+        - Assume a *1D model* defines the background conductivity (line 5) and an *active cells model* is used to define the active topography cells (line 9). A 3D problem is solved where all cells above the surface are set to air, regardless of the values specified in the model.
