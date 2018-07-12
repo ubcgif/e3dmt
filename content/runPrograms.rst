@@ -3,7 +3,7 @@
 Running the programs
 ====================
 
-This section provides describes how to run all executables pertaining to the E3DMT version 1 (2014 and 2015) package and the E3DMT version 2 (2017) package.
+This section provides describes how to run all executables pertaining to the E3DMT version 1 (2014) package and the E3DMT version 2 (2017) package.
 
 .. note::
 
@@ -15,8 +15,8 @@ This section provides describes how to run all executables pertaining to the E3D
 
     Executable files should **not** be renamed. However, input file names can be specified by the user if desired.
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 .. important:: Although described here, this generation of the code may not be supported by GIFtools in the future.
 

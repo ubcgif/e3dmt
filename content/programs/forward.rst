@@ -3,8 +3,8 @@
 Forward Modeling Program
 ========================
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 The forward problem is solved using the executable program **e3dMTfwd.exe**. Parameters necessary for running the forward modeling code are set in the :ref:`input file<e3dmt_input_fwd>`; denoted here as **e3dMT_octree_fwd.inp**.
 

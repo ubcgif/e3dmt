@@ -3,13 +3,13 @@
 Inversion Program
 =================
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 There are two options for inversion executables, both of which require parameters set through an :ref:`input file<e3dmt_input_inv>`; denoted here as **e3dMT_octree_inv.inp**. The two executable files are:
 
-    - **e3dMTinv.exe:** Uses the MUMPS direct solver (2014). Faster but larger memory requirements
-    - **e3dMTinv_iter.exe:** Uses an iterative solver (2015). Slower run-time but less memory requirements
+    - **e3dMTinv.exe:** Uses the MUMPS direct solver. Faster but larger memory requirements
+    - **e3dMTinv_iter.exe:** Uses an iterative solver. Slower run-time but less memory requirements
 
 Running the Program
 ^^^^^^^^^^^^^^^^^^^

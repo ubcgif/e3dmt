@@ -4,8 +4,8 @@ Predicted Data File
 ===================
 
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 The predicted data file is output from **e3dMTfwd.exe** and contains the locations and predicted data. The order of the data point is in the same order as the :ref:`survey and locations file <surveyFile>`. Each block, separated by a blank line, are the data for a particular transmitter and frequency. Thus predicted data files take the format:
 

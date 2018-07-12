@@ -3,8 +3,8 @@
 Create Model
 ============
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 Here, the code **blk3cell.exe** and the input file **blk3cell.inp** (:ref:`see format <e3dmt_blk3cell_input>`) are used to create a conductivity model on the underlying tensor mesh. Then, the code **3DModel2Octree.exe** and the input file **3Dmodel2octree.inp** (:ref:`see format <e3dmt_3Dmodel2octree_input>`) are used to interpolate the tensor mesh onto the OcTree mesh. For this example, we use the mesh that was created in the example ":ref:`create OcTree mesh<example_octree>`". Files relevant to this part of the example are in the sub-folder *octree_model*. Before running this example, you may want to do the following:
 

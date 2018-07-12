@@ -3,8 +3,8 @@
 Create OcTree Mesh
 ==================
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 Here, the code **MTcreate_octree_mesh_e3d.exe** and the input file **MTcreate_mesh.inp** (:ref:`see format <e3dmt_input_octree>`) are used to create an OcTree mesh based on the set of observation location and surface topography. Files relevant to this part of the example are in the sub-folder *octree_mesh*. Before running this example, you may want to do the following:
 

@@ -3,8 +3,8 @@
 Inversion Input File
 ====================
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 Both **e3dMTinv.exe** and **e3dMTinv_iter.exe** use the same input file. The lines of input file are as follows:
 

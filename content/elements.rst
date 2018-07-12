@@ -5,8 +5,8 @@ Elements of the Program E3DMT
 
 This section provides a brief description of each program in the E3DMT version 1 and version 2 libraries. In addition, we describe the file formats for all input and supporting files used by these coding libraries.
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 .. important:: Although described here, this generation of the code may not be supported by GIFtools in the future.
 

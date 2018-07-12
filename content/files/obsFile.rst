@@ -5,8 +5,8 @@ Observations File
 
 This file is input when inverting field-collected data. This file contains the survey information, field observations and data uncertainties. 
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 .. important:: As of May 2018, the user must invert all 4 components of the impedance tensor for MT data OR both components of the transfer function for ZTEM data. Also, flags cannot be used to omit data points.
 

@@ -5,8 +5,8 @@ Create Model Input File
 
 .. note:: Although separate executables were designed for each version of the code, the input and output file formats are the same. As a result, the approach for creating models using either package is acceptable.
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 .. _e3dmt_blk3cell_input:
 

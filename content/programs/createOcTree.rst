@@ -5,8 +5,8 @@ Create OcTree Mesh
 
 Both versions of the E3DMT code are capable of generating OcTree meshes from the survey file. However, separate executables were made because the survey file formats for each package are different.
 
-Version 1 (2014 and 2015)
--------------------------
+Version 1 (2014)
+----------------
 
 :ref:`OcTree meshes<octreeFile>` used in the E3DMT version 1 code are created using the program **MTcreate_octree_mesh_e3d.exe**. Parameters necessary for defining the OcTree mesh are set in the :ref:`input file<e3dmt_input_octree>`; referred to here as **MTcreate_mesh.inp**.
 
