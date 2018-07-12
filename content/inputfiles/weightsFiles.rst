@@ -15,7 +15,7 @@ The parameters used to create the interface weights are defined in the input fil
 +--------+----------------------------------------------------+--------------------------------------------------------------------------------------+
 | 2      | :ref:`Active Cells<e3dmt_weight_ln2>`              | path to active cells model                                                           |
 +--------+----------------------------------------------------+--------------------------------------------------------------------------------------+
-| 3      | :ref:`Weight Model<e3dmt_weight_ln3>`              | path to cell weights model                                                           |
+| 3      | :ref:`Conductivity Model<e3dmt_weight_ln3>`        | path to conductivity model                                                           |
 +--------+----------------------------------------------------+--------------------------------------------------------------------------------------+
 | 4      | :ref:`Mapping Type<e3dmt_weight_ln4>`              | set as log or linear mapping                                                         |
 +--------+----------------------------------------------------+--------------------------------------------------------------------------------------+
@@ -50,7 +50,7 @@ Line Descriptions
 
 .. _e3dmt_weight_ln3:
 
-    - **Weight Model:** Here, the user provides reference model containing the conductivity structures they would like to preserve. The flag "NO_MODEL" may be used if only surface weighting is applied.
+    - **Conductivity Model:** Here, the user provides reference model containing the conductivity structures they would like to preserve. The flag "NO_MODEL" may be used if only surface weighting is applied.
 
 .. _e3dmt_weight_ln4:
 
