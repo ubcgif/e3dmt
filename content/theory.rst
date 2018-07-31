@@ -33,7 +33,7 @@ solving the system;
 Natural Sources: MT and ZTEM
 ----------------------------
 
-The sources in the magnetotelluric (MT) and Z-axis tipper elecromagnetic (ZTEM) methods are modeled as plain waves originating
+The sources in the magnetotelluric (MT) and Z-axis tipper elecromagnetic (ZTEM) methods are modeled as plane waves originating
 from natural phenomenon. These waves can be of very low frequency (< 1 Hz) and very high
 energy, making it possible to image very deep targets. This also implies that the source term is
 zero inside the domain of interest, and therefore the source term on the boundaries becomes very
@@ -171,7 +171,7 @@ Forward Problem
 To solve the forward problem, we must first discretize and solve for the fields in Eq. :eq:`NSEM_system`, where :math:`e^{-i\omega t}` is suppressed. Using finite volume discretization, the electric fields on cell edges (:math:`\mathbf{u_e}`) are obtained by solving the following system at every frequency:
 
 .. math::
-    \big [ \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma} \big ] \, \mathbf{u_e} = \mathbf{s}
+    \big [ \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma} \big ] \, \mathbf{u_e} = - i \omega \mathbf{s}
     :label: discrete_e_sys
 
 where :math:`\mathbf{C}` is the curl operator and:
@@ -200,8 +200,8 @@ To obtain impedance tensor (MT) or ZTEM data, we need the electric and/or magnet
 
 .. math::
     \begin{align}
-    E^{(j)} &= \mathbf{Q_e \, u_e}^{(j)} = \mathbf{Q_e \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2 \\
-    H^{(j)} &= \mathbf{Q_h \, u_e}^{(j)} = \mathbf{Q_h \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2
+    E^{(j)} &= \mathbf{Q_e \, u_e}^{(j)} = -i\omega \mathbf{Q_e \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2 \\
+    H^{(j)} &= \mathbf{Q_h \, u_e}^{(j)} = -i\omega \mathbf{Q_h \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2
     \end{align}
     :label: fields_at_loc
 
@@ -209,12 +209,62 @@ where the matrix
 
 .. math::
     \mathbf{A}(\sigma) = \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma}
+    :label: A_operator
 
 depends on the Earth's conductivity. If the fields at each observation location are known, MT data can be obtained using Eq. :eq:`impedance_tensor` and ZTEM data can be obtained using Eq. :eq:`transfer_fcn`.
 
 
-.. Boundary Conditions
-.. ^^^^^^^^^^^^^^^^^^^
+Boundary Conditions
+^^^^^^^^^^^^^^^^^^^
+
+1D Boundary Conditions
+~~~~~~~~~~~~~~~~~~~~~~
+
+For this approach, we solve a 1D wave equation of the following form:
+
+.. math::
+    \mathbf{\tilde{A} \tilde{u}_e} = \mathbf{\tilde{q}}
+    :label: wave_eq_1d
+
+
+where :math:`\mathbf{\tilde{u}_e}` is the electric field for the 1D solution polarized along the x or y directions. :math:`\mathbf{\tilde{A}}` is an operator of the form:
+
+.. math::
+    \mathbf{\tilde{A}} = \mathbf{L} + i \omega \mu_0 \tilde{\sigma}
+
+
+such that :math:`\mathbf{L}` is the Laplacian operator, :math:`\mu_0` is the permeability of free-space and :math:`\tilde{\sigma}` is a 1D conductivity model. The right-hand side :math:`\mathbf{\tilde{q}}` is a vector of zeros except for :math:`\tilde{q}_1`. A Dirichlet condition is imposed by setting :math:`A_{11} = 1` and :math:`\tilde{q}_1 = i\omega \mu_0 h^{-1}`; where :math:`h` is the layer thickness. Once Eq. :eq:`wave_eq_1d` is solved for a particular frequency, the solution is transferred to the edges of an OcTree mesh. If the electric field is polarized along the x direction, there are no electric fields along y or z; similarly for a solution polarized along the y direction. 
+
+Let :math:`\mathbf{u_s}` and :math:`\sigma_s` be the electric fields and 1D conductivity model transferred to the edges of the OcTree mesh, respectively. Then the source term in Eq. :eq:`discrete_e_sys` is computed for a given frequency and polarization using:
+
+.. math::
+    \frac{1}{i\omega} \mathbf{A u_s} = \mathbf{s}
+
+
+where :math:`\mathbf{A}` is similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the transferred conductivity :math:`\sigma_s`.
+
+
+3D Boundary Conditions (Version 2 only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let :math:`\sigma_b` be the 3D background conductivity model. And let :math:`\mathbf{A}` be an operator similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the background conductivity. If :math:`j` denotes the indicies for all internal edges and :math:`k` denotes the indicies for all top edges, then for each polarization we solve a smaller system:
+
+.. math::
+    \mathbf{A_{j,j} u_j} = - \mathbf{A_{j,k} b}
+
+
+where :math:`\mathbf{b}` is a vector with length equal to the number of top edges and :math:`\mathbf{u_j}` is the background electric field on internal edges. From this we form a vector :math:`\mathbf{u_b}` where:
+
+    - :math:`\mathbf{u_b}` = 1 on the top edges
+    - :math:`\mathbf{u_b} = \mathbf{u_j}` on internal edges
+    - :math:`\mathbf{u_b}` = 0 otherwise
+
+Once this is done, the source term in Eq. :eq:`discrete_e_sys` is computed for a given frequency and polarization using:
+
+.. math::
+    \frac{1}{i\omega} \mathbf{A u_s} = \mathbf{s}
+
+
 
 
 .. Iterative Solver

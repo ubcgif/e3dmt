@@ -315,7 +315,7 @@ Line Descriptions
 
 .. _e3dmt_input_inv2_ln12:
 
-    - **beta_max beta_min beta_factor:** Here, the user specifies protocols for the trade-off parameter (beta). *beta_max* is the initial value of beta, *beta_min* is the minimum allowable beta the program can use before quitting and *beta_factor* defines the factor by which beta is decreased at each iteration; example "1E4 10 0.2". The user may also enter "DEFAULT" if they wish to have beta calculated automatically.
+    - **beta_max beta_min beta_factor:** Here, the user specifies protocols for the trade-off parameter (beta). *beta_max* is the initial value of beta. *beta_min* is generally used to denote the minimum allowable trade-off parameter the program can use before quitting. For this code however, the minimum beta is determined through the *nBeta* parameter on :ref:`line 15 <e3dmt_input_inv2_ln15>` and the *beta_min* parameter has no function. *beta_factor* defines the factor by which beta is decreased at each iteration; example "1E4 10 0.2". The user may also enter "DEFAULT" if they wish to have beta calculated automatically.
 
 .. _e3dmt_input_inv2_ln13:
 
@@ -327,7 +327,7 @@ Line Descriptions
 
 .. _e3dmt_input_inv2_ln15:
 
-    - **iter_per_beta nBetas:** Here, *iter_per_beta* is the number of iterations per beta value. **define nBetas**
+    - **iter_per_beta nBetas:** Here, *iter_per_beta* is the number of iterations per beta value. *nBetas* is the number of times the inverse problem is solved for smaller and smaller trade-off parameters until it quits.
 
 .. _e3dmt_input_inv2_ln16:
 
