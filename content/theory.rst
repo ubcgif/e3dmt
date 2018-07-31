@@ -193,6 +193,7 @@ Once the electric field on cell edges has been computed, the electric (:math:`\m
     \mathbf{E} &= \mathbf{Q_e \, u_e} = \mathbf{Q_c \, A_{e2c} \, u_e} \\
     \mathbf{H} &= \mathbf{Q_h \, u_e} = \frac{1}{i \omega} \mathbf{Q_c} \, diag(\boldsymbol{\mu}^{-1}) \, \mathbf{A_{f2c} C \, u_e}
     \end{align}
+    :label: fields_projected
 
 where :math:`\mathbf{Q_c}` represents the appropriate projection matrix from cell centers to a particular receiver (Ex, Ey, Hx, Hy or Hz).
 
@@ -211,14 +212,14 @@ where the matrix
     \mathbf{A}(\sigma) = \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma}
     :label: A_operator
 
-depends on the Earth's conductivity. If the fields at each observation location are known, MT data can be obtained using Eq. :eq:`impedance_tensor` and ZTEM data can be obtained using Eq. :eq:`transfer_fcn`.
+depends on the Earth's conductivity. If the fields at each observation location are known, MT data can be obtained using Eq. :eq:`impedance_tensor` and ZTEM data can be obtained using Eq. :eq:`transfer_fcn`. The only thing that is needed is the source term for Eq. :eq:`discrete_e_sys`.
 
 
-Boundary Conditions
-^^^^^^^^^^^^^^^^^^^
+Source Term
+^^^^^^^^^^^
 
-1D Boundary Conditions
-~~~~~~~~~~~~~~~~~~~~~~
+1D Approach
+~~~~~~~~~~~
 
 For this approach, we solve a 1D wave equation of the following form:
 
@@ -244,20 +245,20 @@ Let :math:`\mathbf{u_s}` and :math:`\sigma_s` be the electric fields and 1D cond
 where :math:`\mathbf{A}` is similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the transferred conductivity :math:`\sigma_s`.
 
 
-3D Boundary Conditions (Version 2 only)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3D Approach (Version 2 only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let :math:`\sigma_b` be the 3D background conductivity model. And let :math:`\mathbf{A}` be an operator similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the background conductivity. If :math:`j` denotes the indicies for all internal edges and :math:`k` denotes the indicies for all top edges, then for each polarization we solve a smaller system:
+Let :math:`\sigma_b` be the 3D background conductivity model. And let :math:`\mathbf{A}` be an operator similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the background conductivity. If :math:`j=1,...,J` denotes the indicies for all internal edges and :math:`k=1,...,K` denotes the indicies for all top edges, then for each polarization we solve a smaller system:
 
 .. math::
     \mathbf{A_{j,j} u_j} = - \mathbf{A_{j,k} b}
 
 
-where :math:`\mathbf{b}` is a vector with length equal to the number of top edges and :math:`\mathbf{u_j}` is the background electric field on internal edges. From this we form a vector :math:`\mathbf{u_b}` where:
+where :math:`\mathbf{b}` is a vector of ones with length :math:`K` and :math:`\mathbf{u_j}` is the background electric field on internal edges. From this we form a vector :math:`\mathbf{u_b}` where:
 
-    - :math:`\mathbf{u_b}` = 1 on the top edges
+    - :math:`\mathbf{u_b} = 1` on the top edges
     - :math:`\mathbf{u_b} = \mathbf{u_j}` on internal edges
-    - :math:`\mathbf{u_b}` = 0 otherwise
+    - :math:`\mathbf{u_b} = 0` otherwise
 
 Once this is done, the source term in Eq. :eq:`discrete_e_sys` is computed for a given frequency and polarization using:
 
@@ -276,22 +277,74 @@ Once this is done, the source term in Eq. :eq:`discrete_e_sys` is computed for a
 Sensitivity
 -----------
 
-For use in the inversion, we require the sensitivity of the fields to the conductivities. Differentiating Eq. :eq:`discrete_e_sys` with respect to the conductivity model (:math:`\boldsymbol{\sigma}`), we obtain:
+MT Data
+^^^^^^^
+
+Impedance tensor data are split into their real and imaginary components. Thus the data at a particular frequency for a particular reading is organized in a vector of the form:
 
 .. math::
-    \frac{\partial \mathbf{A}}{\partial \boldsymbol{\sigma}} \mathbf{u_e} + \mathbf{A} \frac{\partial \mathbf{u_e}}{\partial \boldsymbol{\sigma}} = \mathbf{0}
+    \mathbf{Z} = [Z^\prime_{xx}, Z^{\prime \prime}_{xx}, Z^\prime_{xy}, Z^{\prime \prime}_{xy}, Z^\prime_{yx}, Z^{\prime \prime}_{yx}, Z^\prime_{yy}, Z^{\prime \prime}_{yy}]^T
+    :label: Z_vector
 
 
-where
+where :math:`\prime` denotes real components and :math:`\prime\prime` denotes imaginary components. To determine the sensitivity of the data (i.e. :eq:`Z_vector`) with respect to the model (:math:`\boldsymbol{\sigma}`), we must compute:
 
 .. math::
-    \frac{\partial \mathbf{A}}{\partial \boldsymbol{\sigma}} = i \omega \, diag(\mathbf{u_e}) \, \mathbf{A_{e2c}^T V }
+    \frac{\partial \mathbf{Z}}{\partial \boldsymbol{\sigma}} = \Bigg [ \dfrac{\partial Z_{xx}^\prime}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial Z_{xx}^{\prime\prime}}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial Z_{xy}^\prime}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial Z_{xy}^{\prime\prime}}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial Z_{yx}^\prime}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial Z_{yx}^{\prime\prime}}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial Z_{yy}^\prime}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial Z_{yy}^{\prime\prime}}{\partial \boldsymbol{\sigma}} \Bigg ]^T
 
 
-Thus the sensitivity of the fields to the conductivities is given by:
+where the conductivity model :math:`\boldsymbol{\sigma}` is real-valued and
+
+.. math::
+    Z_{xx}^\prime = \textrm{Re} \Bigg [\frac{E_{xx} H_{yy} - E_{xy} H_{yx}}{H_{xx}H_{yy} - H_{xy}H_{yx}} \Bigg ]
+    :label: Zxx_prime
+
+
+which can be expanded and expressed explicitly in terms of the real and imaginary components of :math:`E_{ij}` and :math:`H_{ij}`. Similar expressions result for the other elements of :eq:`Z_vector`.
+
+To differentiate :eq:`Zxx_prime` (or any other element and component of the impedance tensor) with respect to the model, we replace :math:`E_{ij}` and :math:`H_{ij}` according to Eq. :eq:`fields_at_loc` and use the chain rule. The final expression contains the derivative of the electric fields on the edges (:math:`\mathbf{u_e}`) with respect to the model. This is given by:
 
 .. math::
     \frac{\partial \mathbf{u_e}}{\partial \boldsymbol{\sigma}} = - i\omega \mathbf{A}^{-1} diag(\mathbf{u_e}) \, \mathbf{A_{e2c}^T V }
+    :label: sensitivity_fields
+
+
+ZTEM Data
+^^^^^^^^^
+
+ZTEM data are also split into their real and imaginary components. Thus the data at a particular frequency for a particular reading is organized in a vector of the form:
+
+.. math::
+    \mathbf{T} = [T^\prime_{zx}, T^{\prime \prime}_{zx}, T^\prime_{zy}, T^{\prime \prime}_{zy}]^T
+    :label: T_vector
+
+
+where :math:`\prime` denotes real components and :math:`\prime\prime` denotes imaginary components. To determine the sensitivity of the data (i.e. :eq:`T_vector`) with respect to the model (:math:`\boldsymbol{\sigma}`), we must compute:
+
+.. math::
+    \frac{\partial \mathbf{T}}{\partial \boldsymbol{\sigma}} = \Bigg [ \dfrac{\partial T_{zx}^\prime}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial T_{zx}^{\prime\prime}}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial T_{zy}^\prime}{\partial \boldsymbol{\sigma}} ,
+    \dfrac{\partial T_{zy}^{\prime\prime}}{\partial \boldsymbol{\sigma}} \Bigg ]^T
+
+
+where the conductivity model :math:`\boldsymbol{\sigma}` is real-valued and
+
+.. math::
+    T_{zx}^\prime = \textrm{Re} \Bigg [ \frac{-H_y^{(1)} H_z^{(2)} + H_y^{(2)} H_z^{(1)}}{ H_x^{(1)} H_y^{(2)} - H_x^{(2)} H_y^{(1)}} \Bigg ]
+    :label: Tzx_prime
+
+
+which can be expanded and expressed explicitly in terms of the real and imaginary components of :math:`H_j^{(i)}`. Similar expressions result for the other elements of :eq:`T_vector`.
+
+To differentiate :eq:`Tzx_prime` (or any other element and component) with respect to the model, we replace :math:`H_j^{(i)}` according to Eq. :eq:`fields_at_loc` and use the chain rule. The final expression contains the derivative of the electric fields on the edges (:math:`\mathbf{u_e}`) with respect to the model with is given by Eq. :eq:`sensitivity_fields`.
 
 
 
@@ -308,10 +361,56 @@ To solve the inverse problem, we minimize the following global objective functio
     :label:
 
 
-where :math:`\phi_d` is the data misfit and :math:`\phi_m` is the model objective function. The data misfit 
+where :math:`\phi_d` is the data misfit and :math:`\phi_m` is the model objective function. The data misfit ensures the recovered model adequately explains the set of field observations. The model objective function adds geological constraints to the recovered model.
+
+Data Misfit
+^^^^^^^^^^^
+
+E3DMT Version 1
+~~~~~~~~~~~~~~~
+
+This code uses a measure of data misfit which is uncommon in GIF codes. To understand this data misfit, we will consider the inversion of MT data. From Eq. :eq:`impedance_tensor`, we see that if the magnetic fields are known at observation locations, the electric fields can be computed according to:
+
+.. math::
+    \mathbf{E} = \mathbf{Z H}
+
+It is assumed that the magnetic fields vary minimally in comparison to the electric fields for natural source problems. Therefore, we compute the magnetic fields for the background model (:math:`\mathbf{\tilde{H}}`) and use them to approximate the electric fields at the receiver locations (:math:`\mathbf{\tilde{E}}` ). And thus:
+
+.. math::
+    \mathbf{\tilde{E}} \approx \mathbf{Z \tilde{H}}
 
 
-where :math:`\Sigma` is a matrix of the inverse standard deviation for each measured data point :math:`\mathbf{d^{obs}}`. Due to the ill-posedness of the problem, there are no stable solutions and a regularization is needed. The regularization used penalizes for both smoothness, and likeness to a reference model :math:`\mathbf{m_{ref}}` supplied by the user.
+Our measure of data misfit for the problem is the L2-norm of a weighted residual between :math:`\mathbf{\tilde{E}}` and the electric fields predicted for a given conductivity model :math:`\boldsymbol{\sigma}`, i.e.
+
+.. math::
+    \phi_d = \big \| \mathbf{\Sigma} \big ( \mathbf{Z \tilde{H}} - \mathbf{E_{pre}} \big ) \big \|^2
+
+
+where
+
+.. math::
+    \Sigma = \mathbf{\tilde{H}} \boldsymbol{\varepsilon}
+
+
+
+
+E3DMT Version 2
+~~~~~~~~~~~~~~~
+
+Here, the data misfit is represented as the L2-norm of a weighted residual between the observed data (:math:`d_{obs}`) and the predicted data for a given conductivity model :math:`\boldsymbol{\sigma}`, i.e.:
+
+.. math::
+    \phi_d = \big \| \mathbf{W_d} \big ( \mathbf{d_{obs}} - \mathbb{F}[\boldsymbol{\sigma}] \big ) \big \|^2
+
+
+where :math:`W_d` is a diagonal matrix containing the reciprocals of the uncertainties for each measured data point. 
+
+
+
+Model Objective Function
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Due to the ill-posedness of the problem, there are no stable solutions obtain by freely minimizing the data misfit, and thus regularization is needed. The regularization used penalties for both smoothness, and likeness to a reference model :math:`\mathbf{m_{ref}}` supplied by the user.
 
 .. math::
     \Phi_{reg} (\mathbf{m-m_{ref}}) = \frac{1}{2} \big \| \nabla (\mathbf{m - m_{ref}}) \big \|^2_2
