@@ -18,11 +18,11 @@ equations are:
 .. math::
     \begin{align}
         \nabla \times &\mathbf{E} - i\omega\mu \mathbf{H} = 0 \\
-        \nabla \times &\mathbf{H} - \sigma \mathbf{E} = \mathbf{S} 
+        \nabla \times &\mathbf{H} - \sigma \mathbf{E} = \mathbf{s} 
     \end{align}
     :label:
 
-where :math:`\mathbf{E}` and :math:`\mathbf{H}` are the electric and magnetic fields, :math:`\mathbf{S}` is some external source and :math:`e^{-i\omega t}` is suppressed. Symbols :math:`\mu`, :math:`\sigma` and :math:`\omega` are the magnetic permeability, conductivity, and angular frequency, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
+where :math:`\mathbf{E}` and :math:`\mathbf{H}` are the electric and magnetic fields, :math:`\mathbf{s}` is some external source and :math:`e^{-i\omega t}` is suppressed. Symbols :math:`\mu`, :math:`\sigma` and :math:`\omega` are the magnetic permeability, conductivity, and angular frequency, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
 solving the system;
 
     - the curl operator has a non-trivial null space making the resulting linear system highly ill-conditioned
@@ -369,29 +369,54 @@ Data Misfit
 E3DMT Version 1
 ~~~~~~~~~~~~~~~
 
-This code uses a measure of data misfit which is uncommon in GIF codes. To understand this data misfit, we will consider the inversion of MT data. From Eq. :eq:`impedance_tensor`, we see that if the magnetic fields are known at observation locations, the electric fields can be computed according to:
+This code uses a measure of data misfit which is uncommon in GIF codes. To understand this data misfit, we will consider the inversion of MT data. From Eq. :eq:`impedance_tensor`, we see that the magnetic and electric fields at observation locations are related by:
 
 .. math::
-    \mathbf{E} = \mathbf{Z H}
-
-It is assumed that the magnetic fields vary minimally in comparison to the electric fields for natural source problems. Therefore, we compute the magnetic fields for the background model (:math:`\mathbf{\tilde{H}}`) and use them to approximate the electric fields at the receiver locations (:math:`\mathbf{\tilde{E}}` ). And thus:
-
-.. math::
-    \mathbf{\tilde{E}} \approx \mathbf{Z \tilde{H}}
+    \mathbf{Z H} - \mathbf{E} = \mathbf{0}
 
 
-Our measure of data misfit for the problem is the L2-norm of a weighted residual between :math:`\mathbf{\tilde{E}}` and the electric fields predicted for a given conductivity model :math:`\boldsymbol{\sigma}`, i.e.
+where according to Eq. :eq:`fields_projected`:
 
 .. math::
-    \phi_d = \big \| \mathbf{\Sigma} \big ( \mathbf{Z \tilde{H}} - \mathbf{E_{pre}} \big ) \big \|^2
+    \mathbf{E} = \mathbf{Q_e u_e}
 
-
-where
+and
 
 .. math::
-    \Sigma = \mathbf{\tilde{H}} \boldsymbol{\varepsilon}
+    \mathbf{H} = \mathbf{Q_h u_e}
 
 
+such that :math:`\mathbf{Q_e}` and :math:`\mathbf{Q_h}` map the electric fields on the edges :math:`\mathbf{u_e}` for a particular polarization to the receiver locations.
+For polarizations 1 and 2, we can construct the following:
+
+.. math::
+    \begin{bmatrix} \mathbf{Z} & \\ & \mathbf{Z} \end{bmatrix} \! \begin{bmatrix} \mathbf{Q_h u_e}^{(1)} \\ \mathbf{Q_h u_e}^{(2)} \end{bmatrix} \! - \!
+    \begin{bmatrix} \mathbf{Q_e u_e}^{(1)} \\ \mathbf{Q_e u_e}^{(2)} \end{bmatrix} \! = \!
+    \Bigg ( \! \begin{bmatrix} \mathbf{Z} & \\ & \mathbf{Z} \end{bmatrix} \! \begin{bmatrix} \mathbf{Q_h} \! & \\ & \mathbf{Q_h} \! \end{bmatrix}
+    - \begin{bmatrix} \mathbf{Q_e} \! & \\ & \mathbf{Q_e} \! \end{bmatrix} \! \Bigg ) \!
+    \begin{bmatrix} \mathbf{u_e}^{(1)} \\ \mathbf{u_e}^{(2)} \end{bmatrix} \! = \!
+    \mathbf{\tilde{Q} \tilde{u}_e}
+    :label: misfit_ver1_1
+
+where :math:`\mathbf{\tilde{Q}}` is a linear operator that depends on the observed impedance tensor elements :math:`\mathbf{Z}` and :math:`\mathbf{\tilde{u}_e}` contains the predicted electric fields on cell edges for a particular conductivity model :math:`\boldsymbol{\sigma}`. Eq. :eq:`misfit_ver1_1` can be augmented for multiple receivers and frequencies but its general form remains the same.
+
+If we have a conductivity model which explains the data perfectly, we expect Eq. :eq:`misfit_ver1_1` to equate to a vector zeros. As a result, a reasonable measure of data misfit for this code can be given by:
+
+.. math::
+    \phi_d = \big \| \mathbf{W_d} \big ( \mathbf{\tilde{Q} \tilde{u}_e} \big ) \big \|^2
+
+
+where :math:`\mathbf{W_d}` is a diagonal matrix that weights the residual of :math:`\mathbf{\tilde{Q} \tilde{u}_e}`. To construct :math:`\mathbf{W_d}`, we take the uncertainties applied to impedance tensor elements :math:`\boldsymbol{\varepsilon}`, scale them by the magnetic field obtained using the reference conductivity model :math:`\mathbf{H_{ref}}`, and take the reciprocal:
+
+.. math::
+    \mathbf{W_d} = \textrm{diag} \big [ ( \mathbf{H_{ref}} \boldsymbol{\varepsilon} )^{-1} \big ]
+    :label: data_weight_1
+
+
+A similar approach is done for measuring the data misfit of the ZTEM problem, except the entries of the matrix :math:`\mathbf{\tilde{Q}}` are different.
+
+
+.. important:: Because the data misfit for E3DMT version 1 is different than the one `typically used by GIF codes <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Uncertainties.html>`__, determining an appropriate stopping criteria for the inversion is less straightforward. It should also be noted from Eq. :eq:`data_weight_1` that the data weighting matrix :math:`\mathbf{W_d}` also depends on the user's choice in reference model. Until the user is confident in their stopping criteria, it is suggested the user set a low chi factor and continue to run the inversion until it is obvious recovered models are over-fitting the data.
 
 
 E3DMT Version 2
@@ -403,8 +428,13 @@ Here, the data misfit is represented as the L2-norm of a weighted residual betwe
     \phi_d = \big \| \mathbf{W_d} \big ( \mathbf{d_{obs}} - \mathbb{F}[\boldsymbol{\sigma}] \big ) \big \|^2
 
 
-where :math:`W_d` is a diagonal matrix containing the reciprocals of the uncertainties for each measured data point. 
+where :math:`W_d` is a diagonal matrix containing the reciprocals of the uncertainties :math:`\boldsymbol{\varepsilon}` for each measured data point, i.e.:
 
+.. math::
+    \mathbf{W_d} = \textrm{diag} \big [ \boldsymbol{\varepsilon}^{-1} \big ] 
+
+
+.. important:: For a better understanding of the data misfit, see the `GIFtools cookbook <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Uncertainties.html>`__ .
 
 
 Model Objective Function
@@ -429,17 +459,17 @@ operator can then be expressed as
     \end{align}
     :label:
 
-where :math:`\mathbf{A_f}` is an averaging matrix from faces to cell centres, :math:`\mathbf{G}` is the cell centre to cell face gradient operator, and v is the cell volume For the benefit of the user, let :math:`\mathbf{WTW}` be the weighting matrix given by
+where :math:`\mathbf{A_f}` is an averaging matrix from faces to cell centres, :math:`\mathbf{G}` is the cell centre to cell face gradient operator, and v is the cell volume For the benefit of the user, let :math:`\mathbf{W^T W}` be the weighting matrix given by:
 
 .. math::
-    \mathbf{WTW} = \beta \mathbf{ G_c^T} \textrm{diag}(\mathbf{A_f^T v}) \mathbf{G_c m} =
+    \mathbf{W^T W} = \beta \mathbf{ G_c^T} \textrm{diag}(\mathbf{A_f^T v}) \mathbf{G_c m} =
     \begin{bmatrix} \mathbf{\alpha_x} & & \\ & \mathbf{\alpha_y} & \\ & & \mathbf{\alpha_z} \end{bmatrix} \big ( \mathbf{G_x^T \; G_y^T \; G_z^T} \big ) \textrm{diag} (\mathbf{v_f}) \begin{bmatrix} \mathbf{G_x} \\ \mathbf{G_y} \\ \mathbf{G_z} \end{bmatrix}
     :label:
 
-where :math:`\alpha_i` for :math:`i=x,y,z` are diagonal matricies. In the code the WTW matrix is stored as a separate matrix so that individual model norm components can be calculated. Now, if a cell weighting is used it is applied to the entire norm, that is, there is a w for each cell.
+where :math:`\alpha_i` for :math:`i=x,y,z` are diagonal matricies. In the code the :math:`\mathbf{W^T W}` matrix is stored as a separate matrix so that individual model norm components can be calculated. Now, if a cell weighting is used it is applied to the entire norm, that is, there is a w for each cell.
 
 .. math::
-    \mathbf{WTW} = \textrm{diag} (w) \mathbf{WTW} \textrm{diag} (w)
+    \mathbf{W^T W} = \textrm{diag} (w) \mathbf{W^T W} \textrm{diag} (w)
     :label:
 
 There is also the option of choosing a cell interface weighting. This allows for a weight on each cell FACE. The user must supply the weights (:math:`w_x, w_y, w_z` ) for each weighted cell. When the interface
@@ -448,7 +478,7 @@ the value is greater than 1, there will be a smooth transition. To prevent the i
 "junk" on the surface, the top X and Y face weights should have a large value.
 
 .. math::
-    \mathbf{WTW} = \mathbf{\alpha_x G_x^T} \textrm{diag} (w_x v_f) \mathbf{G_x} + \mathbf{\alpha_y G_y^T} \textrm{diag} (w_y v_f) \mathbf{G_y} + \mathbf{\alpha_z G_z^T} \textrm{diag} (w_z v_f) \mathbf{G_z}
+    \mathbf{W^T W} = \mathbf{\alpha_x G_x^T} \textrm{diag} (w_x v_f) \mathbf{G_x} + \mathbf{\alpha_y G_y^T} \textrm{diag} (w_y v_f) \mathbf{G_y} + \mathbf{\alpha_z G_z^T} \textrm{diag} (w_z v_f) \mathbf{G_z}
     :label:
 
 The resulting optimization problem is therefore:
@@ -466,135 +496,18 @@ information refer again to :cite:`Haber2012` and references therein.
 
 
 
-.. Data Misfit
-.. -----------
 
-.. MT data
-.. ^^^^^^^
 
-.. Here, we define a data misfit for MT data and express its derivative with respect to the model. From Eq. :eq:`impedance_tensor`, at a single observation location:
 
-.. .. math::
-..     \mathbf{ZH - E} = 
-..     \begin{bmatrix} Z_{xx} H_x^{(1)} + Z_{xy} H_y^{(1)} - E_x^{(1)} \; & \; Z_{xx} H_x^{(2)} + Z_{xy} H_y^{(2)} - E_x^{(2)} \\
-..     Z_{yx} H_x^{(1)} + Z_{yy} H_y^{(1)} - E_x^{(1)} \; & \; Z_{yx} H_x^{(2)} + Z_{yy} H_y^{(2)} - E_x^{(2)} \end{bmatrix} =
-..     \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}
 
-.. For *N* observation stations, we can set up a sparse system:
 
-.. .. math::
-..     \mathbf{\tilde{Z}} \mathbf{\tilde{H}} - \mathbf{\tilde{E}} = \mathbf{0}
-..     :label: Z_sys
 
 
-.. Where :math:`\mathbf{Z_j}` is the impedance tensor for station *j*,
 
-.. .. math::
-..     \mathbf{\tilde{Z}} =
-..     \begin{bmatrix} \mathbf{Z_1} & & & & & \\ & \ddots & & & & \\ & & \mathbf{Z_N} & & & \\ & & & \mathbf{Z_1} & & \\ & & & & \ddots & \\ & & & & & \mathbf{Z_N} \end{bmatrix} 
 
-.. is a block diagonal matrix and the fields are stored in vectors:
 
-.. .. math::
-..     \mathbf{\tilde{H}} =
-..     \begin{bmatrix} H_{x_1}^{(1)} \\ H_{y_1}^{(1)} \\ \vdots \\ H_{x_N}^{(1)} \\ H_{y_N}^{(1)} \\ H_{x_1}^{(2)} \\ H_{y_1}^{(2)} \\ \vdots \\ H_{x_N}^{(2)} \\ H_{y_N}^{(2)} \end{bmatrix}
-..     \;\;\; \textrm{and} \;\;\;
-..     \mathbf{\tilde{E}} =
-..     \begin{bmatrix} E_{x_1}^{(1)} \\ E_{y_1}^{(1)} \\ \vdots \\ E_{x_N}^{(1)} \\ E_{y_N}^{(1)} \\ E_{x_1}^{(2)} \\ E_{y_1}^{(2)} \\ \vdots \\ E_{x_N}^{(2)} \\ E_{y_N}^{(2)} \end{bmatrix}
 
 
-.. Using Eq. :eq:`fields_at_loc`, we can re-express Eq. :eq:`Z_sys` as:
-
-.. .. math::
-..     \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_h u_e \!}^{(2)} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e u_e \!}^{(1)} \\ \mathbf{\tilde{Q}_e u_e \!}^{(2)} \end{bmatrix}
-..     = \Bigg ( \mathbf{\tilde{Z}} \begin{bmatrix} \mathbf{\tilde{Q}_h} & \\ & \mathbf{\tilde{Q}_h} \end{bmatrix} - \begin{bmatrix} \mathbf{\tilde{Q}_e} & \\ & \mathbf{\tilde{Q}_e} \end{bmatrix} \Bigg )
-..     \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
-..     = \mathbf{\tilde{Q}} \begin{bmatrix} \mathbf{u_e \!}^{(1)} \\ \mathbf{u_e \!}^{(2)} \end{bmatrix}
-..     :label: mt_Q
-
-
-.. Separating Eq. :eq:`mt_Q` into its real and imaginary components we obtain
-
-
-
-.. ZTEM data
-.. ^^^^^^^^^
-
-.. From Eq. :eq:`transfer_fcn`, at a single observation location:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.. OLD WAY DISCUSSED IN MANUAL I THINK WAS TRANSFERRED BLINDLY FROM MTZ3D. THE CODE ACUTALLY USES AN E-H FORMULATION
-
-.. The solutions for the :math:`\mathbf{H}` and :math:`\mathbf{E}` fields are computed iteratively using the stabilized conjugate gradient method (BiCGstab). Because of the null space of the curl operator a discrete Helmholtz decomposition is used to write the electric field as
-
-.. .. math::
-..     \mathbf{E} = \mathbf{A} + \nabla \phi
-..     :label:
-
-.. where :math:`\mathbf{A}` is a vector potential and :math:`\phi` is a scalar potential. For MT or ZTEM data, :eq:`NSEM_system` is solved by eliminating the curl operator and solving for :math:`\mathbf{A}` and :math:`\phi`.
-
-.. The forward problem of simulating data can now be written in the following form. Let :math:`\mathbf{D(m)}` be the discrete linear system obtained by the discretization of Maxwell's equations, where :math:`\mathbf{m} = log(\mathbf{\sigma})`.
-.. The electric fields :math:`U` on the edges everywhere in the mesh are then:
-
-.. .. math::
-..     U(\sigma) = \mathbf{D(m)^{-1} S}
-..     :label:
-
-.. where :math:`\mathbf{S} = (s_1,s_2)` is the source for 2 polarizations and is approximated from a 1D MT solution and
-.. interpolated to the entire mesh. The fields at the receivers locations are then
-
-.. .. math::
-..     \begin{align}
-..     \mathbf{H} = Q_h u \\
-..     \mathbf{E} = Q_e u
-..     \end{align}
-
-.. where
-
-.. .. math::
-..     Q_h = \dfrac{1}{i\omega\mu_0} Q_c A_{f2c} CURL
-..     :label:
-
-.. and
-
-.. .. math::
-..     Q_e = Q_c A_{e2c}
-..     :label:
-
-.. The matrix :math:`Q_c` is an interpolation matrix from cell centers to receiver locations, :math:`A_{f2c}` averages from faces to cell centers, and :math:`A_{e2c}` averages from edges to cell centers.
 
 
 
