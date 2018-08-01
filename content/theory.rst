@@ -274,6 +274,8 @@ Once this is done, the source term in Eq. :eq:`discrete_e_sys` is computed for a
 .. For higher frequencies, the numerical solution to Eq. :eq:`discrete_e_sys` is fairly stable; as a large diagonal term results in a favourable conditioning number. However, MT and ZTEM sensors frequently measure low frequencies to image deeper targets. In this case, we must ensure the numerical solution to Eq. :eq:`discrete_e_sys` is stable. For this we use the following iterative solver approach.
 
 
+.. _theory_sensitivity:
+
 Sensitivity
 -----------
 
@@ -358,7 +360,7 @@ To solve the inverse problem, we minimize the following global objective functio
 
 .. math::
     \phi = \phi_d + \beta \phi_m
-    :label:
+    :label: global_objective
 
 
 where :math:`\phi_d` is the data misfit and :math:`\phi_m` is the model objective function. The data misfit ensures the recovered model adequately explains the set of field observations. The model objective function adds geological constraints to the recovered model.
@@ -426,6 +428,7 @@ Here, the data misfit is represented as the L2-norm of a weighted residual betwe
 
 .. math::
     \phi_d = \big \| \mathbf{W_d} \big ( \mathbf{d_{obs}} - \mathbb{F}[\boldsymbol{\sigma}] \big ) \big \|^2
+    :label: data_misfit_2
 
 
 where :math:`W_d` is a diagonal matrix containing the reciprocals of the uncertainties :math:`\boldsymbol{\varepsilon}` for each measured data point, i.e.:
@@ -443,7 +446,7 @@ Model Objective Function
 Due to the ill-posedness of the problem, there are no stable solutions obtain by freely minimizing the data misfit, and thus regularization is needed. The regularization used penalties for both smoothness, and likeness to a reference model :math:`\mathbf{m_{ref}}` supplied by the user.
 
 .. math::
-    \Phi_{reg} (\mathbf{m-m_{ref}}) = \frac{1}{2} \big \| \nabla (\mathbf{m - m_{ref}}) \big \|^2_2
+    \phi_m (\mathbf{m-m_{ref}}) = \frac{1}{2} \big \| \nabla (\mathbf{m - m_{ref}}) \big \|^2_2
     :label:
 
 An important consideration comes when discretizing the regularization. The gradient operates on
@@ -454,7 +457,7 @@ operator can then be expressed as
 
 .. math::
     \begin{align}
-    \Phi_{reg}(\mathbf{m}) &= \frac{1}{2} \int_\Omega \big | \nabla m \big |^2 dV \\
+    \phi_m(\mathbf{m}) &= \frac{1}{2} \int_\Omega \big | \nabla m \big |^2 dV \\
     & \approx \frac{1}{2}  \beta \mathbf{ m^T G_c^T} \textrm{diag} (\mathbf{A_f^T v}) \mathbf{G_c m}
     \end{align}
     :label:
@@ -479,23 +482,108 @@ the value is greater than 1, there will be a smooth transition. To prevent the i
 
 .. math::
     \mathbf{W^T W} = \mathbf{\alpha_x G_x^T} \textrm{diag} (w_x v_f) \mathbf{G_x} + \mathbf{\alpha_y G_y^T} \textrm{diag} (w_y v_f) \mathbf{G_y} + \mathbf{\alpha_z G_z^T} \textrm{diag} (w_z v_f) \mathbf{G_z}
-    :label:
+    :label: MOF
 
 The resulting optimization problem is therefore:
 
 .. math::
     \begin{align}
-    &\min_m \;\; \Phi_{mis} (\mathbf{m}) + \beta \Phi_{reg}(\mathbf{m - m_{ref}}) \\
+    &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m - m_{ref}}) \\
     &\; \textrm{s.t.} \;\; \mathbf{m_L \leq m \leq m_H}
     \end{align}
-    :label:
+    :label: inverse_problem
 
 where :math:`\beta` is a regularization parameter, and :math:`\mathbf{m_L}` and :math:`\mathbf{m_H}` are upper and lower bounds provided by some a prior geological information.
 A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
 information refer again to :cite:`Haber2012` and references therein.
 
 
+Inversion Parameters and Tolerances
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. _theory_cooling:
+
+Cooling Schedule
+~~~~~~~~~~~~~~~~
+
+Our goal is to solve Eq. :eq:`inverse_problem`, i.e.:
+
+.. math::
+    \begin{align}
+    &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m - m_{ref}}) \\
+    &\; \textrm{s.t.} \;\; \mathbf{m_L \leq m \leq m_H}
+    \end{align}
+
+but how do we choose an acceptable trade-off parameter :math:`\beta`? For this, we use a cooling schedule. This is described in the `GIFtools cookbook <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Beta.html>`__ . The cooling schedule can be defined using the following parameters:
+
+    - **beta_max:** The initial value for :math:`\beta`
+    - **beta_factor:** The factor at which :math:`\beta` is decrease to a subsequent solution of Eq. :eq:`inverse_problem`
+    - **beta_min:** The minimum :math:`\beta` for which Eq. :eq:`inverse_problem` is solved before the inversion will quit (E3DMT version 1 only)
+    - **nBetas:** The number of times the inversion code will decrease :math:`\beta` and solve Eq. :eq:`inverse_problem` before it quits (E3DMT version 2 only)
+    - **Chi Factor:** The inversion program stops when the data misfit :math:`\phi_d = N \times Chi \; Factor`, where :math:`N` is the number of data observations
+
+.. _theory_GN:
+
+Gauss-Newton Update
+~~~~~~~~~~~~~~~~~~~
+
+For a given trade-off parameter (:math:`\beta`), the model :math:`\mathbf{m}` is updated using the Gauss-Newton approach. Because the problem is non-linear, several model updates may need to be completed for each :math:`\beta`. Where :math:`k` denotes the Gauss-Newton iteration, we solve:
+
+.. math::
+    \mathbf{H}_k \, \mathbf{\delta m}_k = - \nabla \phi_k
+    :label: GN_gen
+
+
+using the current model :math:`\mathbf{m}_k` and update the model according to:
+
+.. math::
+    \mathbf{m}_{k+1} = \mathbf{m}_{k} + \alpha \mathbf{\delta m}_k
+    :label: GN_update
+
+
+where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` is the gradient of the global objective function, :math:`\mathbf{H}_k` is an approximation of the Hessian and :math:`\alpha` is a scaling constant. This process is repeated until any of the following occurs:
+
+    1. The gradient is sufficiently small, i.e.:
+
+        .. math::
+            \| \nabla \phi_k \|^2 < \textrm{tol_nl}
+
+    2. The smallest component of the model perturbation its small in absolute value, i.e.:
+
+        .. math::
+            \textrm{max} ( |\mathbf{\delta m}_k | ) < mindm
+
+    3. A max number of GN iterations have been performed, i.e.
+
+        .. math::
+            k = \textrm{iter_per_beta} 
+
+
+.. _theory_IPCG:
+
+Gauss-Newton Solve
+~~~~~~~~~~~~~~~~~~
+
+Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-Newton iteration :math:`k`. Using the data misfit from Eq. :eq:`data_misfit_2` and the model objective function from Eq. :eq:`MOF`, we must solve:
+
+.. math::
+    \Big [ \mathbf{J^T W_d^T W_d J + \beta \mathbf{W^T W}} \Big ] \mathbf{\delta m}_k =
+    - \Big [ \mathbf{J^T W_d^T W_d } \big ( \mathbf{d_{obs}} - \mathbb{F}[\mathbf{m}_k] \big ) + \beta \mathbf{W^T W m}_k \Big ]
+    :label: GN_expanded
+
+
+where :math:`\mathbf{J}` is the sensitivity of the data (:math:`\mathbf{Z}` or :math:`\mathbf{T}`) to the current model :math:`\mathbf{m}_k`; see :ref:`sensitivity section <theory_sensitivity>` to learn how sensitivities are computed. The system is solved for :math:`\mathbf{\delta m}_k` using the incomplete-preconditioned-conjugate gradient (IPCG) method. This method is iterative and exits with an approximation for :math:`\mathbf{\delta m}_k`. Let :math:`i` denote an IPCG iteration and let :math:`\mathbf{\delta m}_k^{(i)}` be the solution to :eq:`GN_expanded` at the :math:`i^{th}` IPCG iteration, then the algorithm quits when:
+
+    1. the system is solved to within some tolerance and additional iterations do not result in significant increases in solution accuracy, i.e.:
+
+        .. math::
+            \| \mathbf{\delta m}_k^{(i-1)} - \mathbf{\delta m}_k^{(i)} \|^2 / \| \mathbf{\delta m}_k^{(i-1)} \|^2 < \textrm{tol_ipcg}
+
+
+    2. a maximum allowable number of IPCG iterations has been completed, i.e.:
+
+        .. math::
+            i = \textrm{max_iter_ipcg}
 
 
 
