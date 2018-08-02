@@ -6,9 +6,9 @@ E3DMT package overview
 Description
 -----------
 
-This manual provides instructions and background information for two E3DMT program libraries, version 1 (2014) and version 2 (2017).
-Both libraries are capable of forward modeling and inverting magnetotelluric and ZTEM data. The E3DMT libraries are built in the same
-manner as E3D and AEM, so much of the background presented in this manual is identical to the E3D and AEM manuals.
+This manual provides instructions and background information for the E3DMT version 2 program library (2017).
+The library is capable of forward modeling and inverting magnetotelluric and ZTEM data. E3DMT version is is built in the same
+manner as AEM, so much of the background presented in this manual is identical to the AEM manual.
 In order to decrease computational time and increase accuracy by mesh refinement in areas of
 interest, conductivity models are discretized on an Octree mesh. 
 
@@ -20,7 +20,7 @@ interest, conductivity models are discretized on an Octree mesh.
      2D (QuadTree) mesh discretization about a ring (left). Cell refinement for OcTree mesh (right).
 
 
-Each program library (version 1 and version 2) has utilities for generating OcTree meshes and conductivity models.
+The E3DMT version 2 program library has utilities for generating OcTree meshes and conductivity models.
 From the users point of view the software operates in much the same way as previous GIF codes. Both codes can be run from the command line or through the GIFtools GUI.
 
 Both program libraries provide codes to do the following:
@@ -39,33 +39,28 @@ Both program libraries provide codes to do the following:
       - The regularization parameter (controlling relative importance of objective function and misfit terms).
 
 
-The initial research underlying the E3DMT version 1 (2014) library was funded principally by the mineral industry consortium \Joint and Cooperative Inversion of Geophysical and Geological Data" (1991 -
-1997) which was sponsored by NSERC and the following 11 companies: BHP Minerals, CRA Exploration, Cominco Exploration, Falconbridge, Hudson Bay Exploration and Development, INCO
-Exploration & Technical Services, Kennecott Exploration Company, Newmont Gold Company,
-Noranda Exploration, Placer Dome, and WMC.
-
 The E3DMT version 2 (2017) program library was developed under the IRC consortium.
 
 Since then, improvements have been implemented as time and resources permit.
 
-E3DMT version 1 (2014) Program Library Content
-----------------------------------------------
+.. E3DMT version 1 (2014) Program Library Content
+.. ----------------------------------------------
 
-The main executable programs within the E3DMT version 1 (2014) program library are:
+.. The main executable programs within the E3DMT version 1 (2014) program library are:
 
-    - **MTcreate_octree_mesh_e3d:** Creates the OcTree used in forward simulations and inversions from survey data.
-    - **blk3cell:** Creates simple conductivity models on a core tensor mesh
-    - **3DModel2Octree:** Converts 3D conductivity on core mesh to OcTree mesh
-    - **e3dMTfwd:** Performs the forward simulation
-    - **e3dMTinv and e3dmtinv_iter:** Inverts observed data in order to recover a conductivity model
+..     - **MTcreate_octree_mesh_e3d:** Creates the OcTree used in forward simulations and inversions from survey data.
+..     - **blk3cell:** Creates simple conductivity models on a core tensor mesh
+..     - **3DModel2Octree:** Converts 3D conductivity on core mesh to OcTree mesh
+..     - **e3dMTfwd:** Performs the forward simulation
+..     - **e3dMTinv and e3dmtinv_iter:** Inverts observed data in order to recover a conductivity model
 
-Also included are the following Octree utility programs:
+.. Also included are the following Octree utility programs:
 
-      - create weight file
-      - face weights
-      - octree cell centre
-      - octreeTo3D
-      - refine octree
+..       - create weight file
+..       - face weights
+..       - octree cell centre
+..       - octreeTo3D
+..       - refine octree
 
 
 E3DMT version 2 (2017) Program Library Content
