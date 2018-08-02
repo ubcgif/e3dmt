@@ -3,7 +3,6 @@
 Survey Index File
 =================
 
-.. important:: Only relevant to the E3DMT version 2 (2017) code.
 
 This file is used to define the locations at which MT and ZTEM data are predicted. Each row of the survey index file is used to index the electric dipole and inductive loop receivers corresponding to a specific set of impedance tensor or Z-axis tipper measurements. This file is required for both forward modeling. The indicies correspond to receivers defined within the :ref:`receiver file<receiverFile>`. The user also defines the data type being modeled. The lines of the survey index file depend on whether MT or ZTEM are being modeled.
 

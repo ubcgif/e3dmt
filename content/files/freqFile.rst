@@ -3,8 +3,6 @@
 Frequencies File
 ================
 
-.. important:: Only relevant to the E3DMT version 2 (2017) code.
-
 
 The format of the frequencies file is as follows:
 

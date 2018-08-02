@@ -3,8 +3,6 @@
 Receiver File
 =============
 
-.. important:: Only relevant to the E3DMT version 2 (2017) code.
-
 The exact dimensions of the receivers used to measure electric and magnetic fields for the E3DMT version 2 code (2017) are defined within the receiver file. This file is required for both forward modeling and inversion. Electric dipole and inductive loop receivers do not need to be defined in any particular order, however they must be reference properly within the :ref:`survey index file<indexFile>`.
 
 .. note::
