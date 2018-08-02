@@ -3,12 +3,7 @@
 Create OcTree Mesh Input File
 =============================
 
-Both versions of the E3DMT code are capable of generating OcTree meshes from the survey file. However, separate executables and input files were made because the survey file formats for each package are different.
-
-Version 1 (2014)
-----------------
-
-In this case, :ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **MTcreate_octree_mesh_e3d.exe**. Parameters necessary for defining the OcTree mesh are set in the input file. The lines within the input file are as follows:
+:ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **MTcreate_octree_mesh_e3d.exe**. Parameters necessary for defining the OcTree mesh are set in the input file. The lines within the input file are as follows:
 
 
 .. tabularcolumns:: |C|C|C|
@@ -100,105 +95,105 @@ Below, we see the difference between entering "APPROXTOPO" (top) and "GOODTOPO" 
      :align: center
      :width: 500
 
-.. _e3dmt_input_octree2:
+.. .. _e3dmt_input_octree2:
 
-Version 2 (2017)
-----------------
+.. Version 2 (2017)
+.. ----------------
 
-In this case, :ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **octree_mesh_mt.exe**. Parameters necessary for defining the OcTree mesh are set in the input file. The lines of input file are as follows:
+.. In this case, :ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **octree_mesh_mt.exe**. Parameters necessary for defining the OcTree mesh are set in the input file. The lines of input file are as follows:
 
-.. tabularcolumns:: |C|C|C|
+.. .. tabularcolumns:: |C|C|C|
 
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| Line # | Parameter                                                                                                                                                     | Description                                                               |
-+========+===============================================================================================================================================================+===========================================================================+
-| 1      |:ref:`dx dy dz<e3dmt_input_octree2ln1>`                                                                                                                        | minimum cell widths in x, y and z for the mesh                            |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 2      |:ref:`min_cell_fact<e3dmt_input_octree2ln2a>` :math:`\;` :ref:`min_cell_size<e3dmt_input_octree2ln2b>` :math:`\;` :ref:`max_topo_cell<e3dmt_input_octree2ln2c>`| controls discretization based on padding, topography and receivers        |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 3      |:ref:`x_pad y_pad down_pad up_pad<e3dmt_input_octree2ln3>`                                                                                                     | sets extent of mesh in x, y and z                                         |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 4      |:ref:`dist_1 dist_2 dist_3<e3dmt_input_octree2ln4>`                                                                                                            | sets discretization in core region                                        |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 5      |:ref:`n1 n2 n3<e3dmt_input_octree2ln5>`                                                                                                                        | sets the thicknesses of layers of finest discretization near the receivers|
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 6      |:ref:`dataFile<e3dmt_input_octree2ln6>`                                                                                                                        | path to observations file                                                 |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 7      |:ref:`receiverFile<e3dmt_input_octree2ln7>`                                                                                                                    | path to receivers file                                                    |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 8      |:ref:`frequencyFile<e3dmt_input_octree2ln8>`                                                                                                                   | path to frequencies file                                                  |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 9      |:ref:`topoFile<e3dmt_input_octree2ln9>`                                                                                                                        | sets topography                                                           |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 10     |:ref:`shift_data<e3dmt_input_octree2ln10>`                                                                                                                     | *description needed. leave as NOT_SHIFT_DATA*                             |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 11     |    :ref:`MAKE_POLYGON D<e3dmt_input_octree2ln11>`                                                                                                             | sets lateral extent of core region                                        |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-| 12     |    :ref:`CREATE_LARGE_MESH out_name<e3dmt_input_octree2ln12>`                                                                                                 | name of output mesh                                                       |
-+--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
-
-
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | Line # | Parameter                                                                                                                                                     | Description                                                               |
+.. +========+===============================================================================================================================================================+===========================================================================+
+.. | 1      |:ref:`dx dy dz<e3dmt_input_octree2ln1>`                                                                                                                        | minimum cell widths in x, y and z for the mesh                            |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 2      |:ref:`min_cell_fact<e3dmt_input_octree2ln2a>` :math:`\;` :ref:`min_cell_size<e3dmt_input_octree2ln2b>` :math:`\;` :ref:`max_topo_cell<e3dmt_input_octree2ln2c>`| controls discretization based on padding, topography and receivers        |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 3      |:ref:`x_pad y_pad down_pad up_pad<e3dmt_input_octree2ln3>`                                                                                                     | sets extent of mesh in x, y and z                                         |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 4      |:ref:`dist_1 dist_2 dist_3<e3dmt_input_octree2ln4>`                                                                                                            | sets discretization in core region                                        |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 5      |:ref:`n1 n2 n3<e3dmt_input_octree2ln5>`                                                                                                                        | sets the thicknesses of layers of finest discretization near the receivers|
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 6      |:ref:`dataFile<e3dmt_input_octree2ln6>`                                                                                                                        | path to observations file                                                 |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 7      |:ref:`receiverFile<e3dmt_input_octree2ln7>`                                                                                                                    | path to receivers file                                                    |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 8      |:ref:`frequencyFile<e3dmt_input_octree2ln8>`                                                                                                                   | path to frequencies file                                                  |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 9      |:ref:`topoFile<e3dmt_input_octree2ln9>`                                                                                                                        | sets topography                                                           |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 10     |:ref:`shift_data<e3dmt_input_octree2ln10>`                                                                                                                     | *description needed. leave as NOT_SHIFT_DATA*                             |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 11     |    :ref:`MAKE_POLYGON D<e3dmt_input_octree2ln11>`                                                                                                             | sets lateral extent of core region                                        |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
+.. | 12     |    :ref:`CREATE_LARGE_MESH out_name<e3dmt_input_octree2ln12>`                                                                                                 | name of output mesh                                                       |
+.. +--------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------+
 
 
-Line Descriptions
-^^^^^^^^^^^^^^^^^
 
 
-.. _e3dmt_input_octree2ln1:
+.. Line Descriptions
+.. ^^^^^^^^^^^^^^^^^
 
-    - **dx dy dz:** Minimum cell widths in x, y and z for the mesh.
 
-.. _e3dmt_input_octree2ln2a:
+.. .. _e3dmt_input_octree2ln1:
 
-    - **min_cell_fact:** For relatively flat topography, this value has little bearing on the final mesh; leave as 1. **FURTHER EXPLANATION REQUIRED**
+..     - **dx dy dz:** Minimum cell widths in x, y and z for the mesh.
 
-.. _e3dmt_input_octree2ln2b:
+.. .. _e3dmt_input_octree2ln2a:
 
-    - **min_cell_size:** For ground-based surveys, this value is redundant; leave as 1. For airborne ZTEM, we may want to specify the cell size between the surface topography and the fine cells around the receivers (:ref:`n1 n2 n3<e3dmt_input_octree2ln5>`). Here, *min_cell_size* is a factor defining the size of these cells relative to the underlying mesh cell size (:ref:`dx dy dz<e3dmt_input_octree2ln1>`). *max_topo_cell* is an integer value equal or greater than 1 and must be a power of 2.
+..     - **min_cell_fact:** For relatively flat topography, this value has little bearing on the final mesh; leave as 1. **FURTHER EXPLANATION REQUIRED**
 
-.. _e3dmt_input_octree2ln2c:
+.. .. _e3dmt_input_octree2ln2b:
 
-    - **max_topo_cell:** Far from the core region (padding cells), the user may want to prevent overly large cells from defining the topography. Here, *max_topo_cell* is a factor defining the maximum cell size relative to the underlying mesh cell size (:ref:`dx dy dz<e3dmt_input_octree2ln1>`) that can be used along the surface topography. *max_topo_cell* is an integer value equal or greater than 1 and must be a power of 2.
+..     - **min_cell_size:** For ground-based surveys, this value is redundant; leave as 1. For airborne ZTEM, we may want to specify the cell size between the surface topography and the fine cells around the receivers (:ref:`n1 n2 n3<e3dmt_input_octree2ln5>`). Here, *min_cell_size* is a factor defining the size of these cells relative to the underlying mesh cell size (:ref:`dx dy dz<e3dmt_input_octree2ln1>`). *max_topo_cell* is an integer value equal or greater than 1 and must be a power of 2.
 
-.. _e3dmt_input_octree2ln3:
+.. .. _e3dmt_input_octree2ln2c:
 
-    - **x_pad y_pad down_pad up_pad:** Distance from the origin in the x, y, downward and upward directions, respectively, that the mesh extends.
+..     - **max_topo_cell:** Far from the core region (padding cells), the user may want to prevent overly large cells from defining the topography. Here, *max_topo_cell* is a factor defining the maximum cell size relative to the underlying mesh cell size (:ref:`dx dy dz<e3dmt_input_octree2ln1>`) that can be used along the surface topography. *max_topo_cell* is an integer value equal or greater than 1 and must be a power of 2.
 
-.. _e3dmt_input_octree2ln4:
+.. .. _e3dmt_input_octree2ln3:
 
-    - **dist_1 dist_2 dist_3:** Sets the distance from surface topography and receivers in which the cells widths are increased by a factor of 2 in x, y and z. Up to a depth of *dist_1* from surface topography and within a horizontal distance of *dist_1* from any receiver, the smallest cell size is used (set by *dx, dy, dz*). For the following *dist_2* metres, the cell widths are doubled. For the following *dist_3* metres, the cell widths are doubled again. Outside a depth and horizontal distance of *h1+h2+h3*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
+..     - **x_pad y_pad down_pad up_pad:** Distance from the origin in the x, y, downward and upward directions, respectively, that the mesh extends.
 
-.. _e3dmt_input_octree2ln5:
+.. .. _e3dmt_input_octree2ln4:
 
-    - **n1 n2 n3:** This sets the thicknesses of layers of finest discretization near the receivers. **n1 = 4** means that around each receiver, there is a layer 4 cells thick that uses the finest discretization. This is followed by a layer which is **n2** cells thick, where the cell dimensions are increased by a factor of 2. Likewise for the 3rd layer.
+..     - **dist_1 dist_2 dist_3:** Sets the distance from surface topography and receivers in which the cells widths are increased by a factor of 2 in x, y and z. Up to a depth of *dist_1* from surface topography and within a horizontal distance of *dist_1* from any receiver, the smallest cell size is used (set by *dx, dy, dz*). For the following *dist_2* metres, the cell widths are doubled. For the following *dist_3* metres, the cell widths are doubled again. Outside a depth and horizontal distance of *h1+h2+h3*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
 
-.. _e3dmt_input_octree2ln6:
+.. .. _e3dmt_input_octree2ln5:
 
-    - **dataFile:** The file path to a :ref:`receiver index file <indexFile>` or :ref:`observed data file<obsFile2>`. 
+..     - **n1 n2 n3:** This sets the thicknesses of layers of finest discretization near the receivers. **n1 = 4** means that around each receiver, there is a layer 4 cells thick that uses the finest discretization. This is followed by a layer which is **n2** cells thick, where the cell dimensions are increased by a factor of 2. Likewise for the 3rd layer.
 
-.. _e3dmt_input_octree2ln7:
+.. .. _e3dmt_input_octree2ln6:
 
-    - **receiverFile:** The file path to a :ref:`receiver file <receiverFile>`. The receiver file contains the node locations defining each receiver.
+..     - **dataFile:** The file path to a :ref:`receiver index file <indexFile>` or :ref:`observed data file<obsFile2>`. 
 
-.. _e3dmt_input_octree2ln8:
+.. .. _e3dmt_input_octree2ln7:
 
-    - **frequencyFile:** The file path to a :ref:`frequencies file<freqFile>`.
+..     - **receiverFile:** The file path to a :ref:`receiver file <receiverFile>`. The receiver file contains the node locations defining each receiver.
 
-.. _e3dmt_input_octree2ln9:
+.. .. _e3dmt_input_octree2ln8:
 
-    - **topoFile:** If a topography file is available, the file path to the topography file is entered; see :ref:`topography file<topoFile>` for format. In the case of flat topography, the user instead enter "TOPO_CONST", followed by a space, then the elevation of the surface topography; for example "TOPO_CONST 125.5". The user may also use the flag "NO_TOPO" for a constant topography of 0 elevation.
+..     - **frequencyFile:** The file path to a :ref:`frequencies file<freqFile>`.
 
-.. _e3dmt_input_octree2ln10:
+.. .. _e3dmt_input_octree2ln9:
 
-    - **shift_data:** Set as either "NOT_SHIFT_DATA" or "SHIFT_DATA *filename*". **EXPLANATION REQUIRED**
+..     - **topoFile:** If a topography file is available, the file path to the topography file is entered; see :ref:`topography file<topoFile>` for format. In the case of flat topography, the user instead enter "TOPO_CONST", followed by a space, then the elevation of the surface topography; for example "TOPO_CONST 125.5". The user may also use the flag "NO_TOPO" for a constant topography of 0 elevation.
 
-.. _e3dmt_input_octree2ln11:
+.. .. _e3dmt_input_octree2ln10:
 
-    - **MAKE_POLYGON D:** The horizontal area covered by the core region is determined by the locations of the receivers and the value of *D* in metres. Essentially, the code creates a convex hull from all the points defining the receivers. It then extends the convex hull by a distance *D*. On this line, the user enters *MAKE_POLYGON* followed by the value *D*.
+..     - **shift_data:** Set as either "NOT_SHIFT_DATA" or "SHIFT_DATA *filename*". **EXPLANATION REQUIRED**
 
-.. _e3dmt_input_octree2ln12:
+.. .. _e3dmt_input_octree2ln11:
 
-    - **CREATE_LARGE_MESH out_name:** Here the user enters the flag *CREATE_LARGE_MESH* followed by the output name for the octree mesh.
+..     - **MAKE_POLYGON D:** The horizontal area covered by the core region is determined by the locations of the receivers and the value of *D* in metres. Essentially, the code creates a convex hull from all the points defining the receivers. It then extends the convex hull by a distance *D*. On this line, the user enters *MAKE_POLYGON* followed by the value *D*.
+
+.. .. _e3dmt_input_octree2ln12:
+
+..     - **CREATE_LARGE_MESH out_name:** Here the user enters the flag *CREATE_LARGE_MESH* followed by the output name for the octree mesh.
 
 
 

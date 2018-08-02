@@ -3,8 +3,6 @@
 Forward Modeling Input File
 ===========================
 
-Version 1 (2014)
-----------------
 
 The forward problem is solved using the executable program **e3dMTfwd.exe**. Parameters necessary for running the forward modeling code are set in the input file. The lines of input file are as follows:
 
@@ -69,11 +67,6 @@ Line Descriptions
 
     - **Topography:** The user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
 
-
-Version 2 (2017)
-----------------
-
-Both the forward problem and inverse problem are solved using the executable program **e3dMTinv_ver2.exe**. As a result, the :ref:`input file<e3dmt_input_inv2>` will be described within the :ref:`running the inversion<e3dmt_inv2>` section.
 
 
 
