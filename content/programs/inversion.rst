@@ -3,8 +3,8 @@
 Inversion Program
 =================
 
-Version 1 (2014)
-----------------
+.. Version 1 (2014)
+.. ----------------
 
 There are two options for inversion executables, both of which require parameters set through an :ref:`input file<e3dmt_input_inv>`; denoted here as **e3dMT_octree_inv.inp**. The two executable files are:
 
@@ -55,55 +55,55 @@ The program **e3dMTinv.exe** creates the following output files:
     - **e3dMT_octree_inv.out:**
 
 
-.. _e3dmt_inv2:
+.. .. _e3dmt_inv2:
 
-Version 2 (2017)
-----------------
+.. Version 2 (2017)
+.. ----------------
 
-Both the forward and inverse problems are solved using the **e3dMTinv_ver2** executable program. In each case, format of the :ref:`input file<e3dmt_input_inv2>` (denoted here as **e3dMTver2.inp**) is the same. In the case of forward modeling however, some lines in the input file are omitted.
+.. Both the forward and inverse problems are solved using the **e3dMTinv_ver2** executable program. In each case, format of the :ref:`input file<e3dmt_input_inv2>` (denoted here as **e3dMTver2.inp**) is the same. In the case of forward modeling however, some lines in the input file are omitted.
 
-Running the Program
-^^^^^^^^^^^^^^^^^^^
+.. Running the Program
+.. ^^^^^^^^^^^^^^^^^^^
 
-To run the inversion, open a command line window and type the following:
+.. To run the inversion, open a command line window and type the following:
 
-.. figure:: images/run_e3dmt_inv2.png
-     :align: center
-     :width: 700
+.. .. figure:: images/run_e3dmt_inv2.png
+..      :align: center
+..      :width: 700
 
-The *mpiexec* call is used for parallelization. This is followed by the flag *-n*, then the number of frequencies (*"nFreq"*). This is followed by the inversion executable and the corresponding input file.
+.. The *mpiexec* call is used for parallelization. This is followed by the flag *-n*, then the number of frequencies (*"nFreq"*). This is followed by the inversion executable and the corresponding input file.
 
-Units
-^^^^^
+.. Units
+.. ^^^^^
 
-**Input and outputs:**
+.. **Input and outputs:**
 
-    - **MT data:** Real and imaginary components of impedance tensor entries (V/A)
-    - **ZTEM data:** Real and imaginary components of transfer function entries (unitless)
-    - **Conductivity model:** S/m
-    - **Reference/starting conductivity model:** S/m 
-    - **Background susceptibility model:** SI
-    - **Model/interface weights:** unitless
-
-
-.. important::
-
-    - The current version of the code cannot forward model or invert both MT and ZTEM data, just one or the other.
-    - If a flag value of -99 is used as the uncertainty for a particular datum, the inversion will omit that datum. Using this, we are not required to invert all entries of the impedance tensor or transfer function.
+..     - **MT data:** Real and imaginary components of impedance tensor entries (V/A)
+..     - **ZTEM data:** Real and imaginary components of transfer function entries (unitless)
+..     - **Conductivity model:** S/m
+..     - **Reference/starting conductivity model:** S/m 
+..     - **Background susceptibility model:** SI
+..     - **Model/interface weights:** unitless
 
 
-Output Files
-^^^^^^^^^^^^
+.. .. important::
 
-The program **e3dMTinv_ver2.exe** creates the following output files:
+..     - The current version of the code cannot forward model or invert both MT and ZTEM data, just one or the other.
+..     - If a flag value of -99 is used as the uncertainty for a particular datum, the inversion will omit that datum. Using this, we are not required to invert all entries of the impedance tensor or transfer function.
 
-    - **inv.con:** recovered conductivity models
 
-    - **dpred.txt** predicted data for each recovered conductivity model
+.. Output Files
+.. ^^^^^^^^^^^^
 
-    - **e3dMTinv.log:** log file for the inversion
+.. The program **e3dMTinv_ver2.exe** creates the following output files:
 
-    - **e3dMTinv.out:**
+..     - **inv.con:** recovered conductivity models
+
+..     - **dpred.txt** predicted data for each recovered conductivity model
+
+..     - **e3dMTinv.log:** log file for the inversion
+
+..     - **e3dMTinv.out:**
 
 
 
