@@ -3,7 +3,7 @@
 Running the programs
 ====================
 
-This section provides describes how to run all executables pertaining to the E3DMT version 1 (2014) package and the E3DMT version 2 (2017) package.
+This section provides describes how to run all executables pertaining to the E3DMT version 1 (2014) package.
 
 .. note::
 
@@ -15,8 +15,8 @@ This section provides describes how to run all executables pertaining to the E3D
 
     Executable files should **not** be renamed. However, input file names can be specified by the user if desired.
 
-Version 1 (2014)
-----------------
+Executables
+-----------
 
 .. important:: Although described here, this generation of the code may not be supported by GIFtools in the future.
 
@@ -31,14 +31,14 @@ Version 1 of the E3DMT codes make use of the following Fortran executables:
     - **interface_weights:** Creates interface weights
 
 
-Version 2 (2017)
-----------------
+.. Version 2 (2017)
+.. ----------------
 
-Version 2 of the E3DMT code makes use of the following executables:
+.. Version 2 of the E3DMT code makes use of the following executables:
 
-    - **e3dMTinv_ver2:** An all in one executable that can forward model or invert MT or ZTEM data
-    - **octree_mesh_mt:** Creates an octree mesh based on the :ref:`receiver file<receiverFile>`
-    - **blk3cellOct:** Creates models from a set of blocks directly on the octree mesh
+..     - **e3dMTinv_ver2:** An all in one executable that can forward model or invert MT or ZTEM data
+..     - **octree_mesh_mt:** Creates an octree mesh based on the :ref:`receiver file<receiverFile>`
+..     - **blk3cellOct:** Creates models from a set of blocks directly on the octree mesh
 
 
 Contents

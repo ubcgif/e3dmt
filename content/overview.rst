@@ -6,9 +6,9 @@ E3DMT package overview
 Description
 -----------
 
-This manual provides instructions and background information for two E3DMT program libraries, version 1 (2014) and version 2 (2017).
-Both libraries are capable of forward modeling and inverting magnetotelluric and ZTEM data. The E3DMT libraries are built in the same
-manner as E3D and AEM, so much of the background presented in this manual is identical to the E3D and AEM manuals.
+This manual provides instructions and background information for the E3DMT version 1 program library.
+This library is capable of forward modeling and inverting magnetotelluric and ZTEM data. E3DMT is built in the same
+manner as E3D, so much of the background presented in this manual is identical to the E3D manual.
 In order to decrease computational time and increase accuracy by mesh refinement in areas of
 interest, conductivity models are discretized on an Octree mesh. 
 
@@ -20,7 +20,7 @@ interest, conductivity models are discretized on an Octree mesh.
      2D (QuadTree) mesh discretization about a ring (left). Cell refinement for OcTree mesh (right).
 
 
-Each program library (version 1 and version 2) has utilities for generating OcTree meshes and conductivity models.
+The program library has utilities for generating OcTree meshes and conductivity models.
 From the users point of view the software operates in much the same way as previous GIF codes. Both codes can be run from the command line or through the GIFtools GUI.
 
 Both program libraries provide codes to do the following:
@@ -44,8 +44,6 @@ The initial research underlying the E3DMT version 1 (2014) library was funded pr
 Exploration & Technical Services, Kennecott Exploration Company, Newmont Gold Company,
 Noranda Exploration, Placer Dome, and WMC.
 
-The E3DMT version 2 (2017) program library was developed under the IRC consortium.
-
 Since then, improvements have been implemented as time and resources permit.
 
 E3DMT version 1 (2014) Program Library Content
@@ -68,14 +66,14 @@ Also included are the following Octree utility programs:
       - refine octree
 
 
-E3DMT version 2 (2017) Program Library Content
-----------------------------------------------
+.. E3DMT version 2 (2017) Program Library Content
+.. ----------------------------------------------
 
-The main executable programs within the E3DMT version 2 (2017) program library are:
+.. The main executable programs within the E3DMT version 2 (2017) program library are:
 
-    - **octree_mesh_mt:** Creates the OcTree used in forward simulations and inversions from survey data
-    - **blk3cellOct:** Creates simple block conductivity models on the OcTree mesh
-    - **e3dMTinv_ver2:** Is used for both forward modeling and inverting natural source electromagnetic data
+..     - **octree_mesh_mt:** Creates the OcTree used in forward simulations and inversions from survey data
+..     - **blk3cellOct:** Creates simple block conductivity models on the OcTree mesh
+..     - **e3dMTinv_ver2:** Is used for both forward modeling and inverting natural source electromagnetic data
 
 
 
