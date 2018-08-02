@@ -3,9 +3,6 @@
 Create Model
 ============
 
-Version 1 (2014)
-----------------
-
 Here, the code **blk3cell.exe** and the input file **blk3cell.inp** (:ref:`see format <e3dmt_blk3cell_input>`) are used to create a conductivity model on the underlying tensor mesh. Then, the code **3DModel2Octree.exe** and the input file **3Dmodel2octree.inp** (:ref:`see format <e3dmt_3Dmodel2octree_input>`) are used to interpolate the tensor mesh onto the OcTree mesh. For this example, we use the mesh that was created in the example ":ref:`create OcTree mesh<example_octree>`". Files relevant to this part of the example are in the sub-folder *octree_model*. Before running this example, you may want to do the following:
 
 	- `Download and open the zip folder containing the entire E3DMT version 1 example <https://github.com/ubcgif/e3dmt/raw/master/assets/e3dmt_ver1_example.zip>`__ (if not done already)
@@ -38,14 +35,3 @@ The resulting Octree model shows an L-shaped conductor (:math:`\sigma` = 1 S/m) 
      :align: center
      :width: 500
 
-
-
-
-.. _example_model2:
-
-Version 2 (2017)
-----------------
-
-
-.. raw:: html
-    :file: ../../underconstruction.html

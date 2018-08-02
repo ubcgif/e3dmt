@@ -3,7 +3,7 @@
 Elements of the Program E3DMT
 =============================
 
-This section provides a brief description of each program in the E3DMT version 1 and version 2 libraries. In addition, we describe the file formats for all input and supporting files used by these coding libraries.
+This section provides a brief description of each program in the E3DMT version 1 library. In addition, we describe the file formats for all input and supporting files used by the coding library.
 
 Executables
 -----------
@@ -34,7 +34,7 @@ Version 1 of the E3DMT codes makes use of the following executables:
 Main Input Files
 ----------------
 
-Here, we describe the main input files for executables contained with the E3DMT version 1 and version 2 coding packages.
+Here, we describe the main input files for executables contained with the E3DMT version 1 coding package.
 
 .. toctree::
     :maxdepth: 2
