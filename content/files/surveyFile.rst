@@ -3,8 +3,6 @@
 Survey and Locations File
 =========================
 
-.. important:: Only relevant to the E3DMT version 1 (2014) code.
-
 The survey and locations file is used to predict synthetic field data (forward modeling) using the E3DMT version 1 code. This file contains all necessary survey information including: the number of transmitters (groups of natural source data), data types, measurement frequencies and receiver locations. 
 
 .. note::
