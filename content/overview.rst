@@ -1,7 +1,7 @@
 .. _overview:
 
-E3DMT package overview
-======================
+E3DMT version 1 package overview
+================================
 
 Description
 -----------
@@ -46,8 +46,8 @@ Noranda Exploration, Placer Dome, and WMC.
 
 Since then, improvements have been implemented as time and resources permit.
 
-E3DMT version 1 (2014) Program Library Content
-----------------------------------------------
+Program Library Content
+-----------------------
 
 The main executable programs within the E3DMT version 1 (2014) program library are:
 
@@ -87,7 +87,7 @@ Licensing for commercial use is managed by distributors, not by the UBC-GIF rese
 Installing E3DMT
 ----------------
 
-There is no automatic installer currently available for the e3dMT. Please follow the following steps in order to use the software:
+There is no automatic installer currently available for E3DMT version 1. Please follow the following steps in order to use the software:
 
    1. Extract all files provided from the given zip-based archive and place them all together in a new folder.
    2. Add this directory as new path to your environment variables.

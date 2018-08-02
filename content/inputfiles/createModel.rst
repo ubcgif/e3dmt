@@ -5,8 +5,8 @@ Create Model Input File
 
 .. _e3dmt_blk3cell_input:
 
-Input File for blk3cell
-^^^^^^^^^^^^^^^^^^^^^^^
+Input File and Line Descriptions for blk3cell
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The input file defines the properties of the model (conductivity/susceptibility/active) created using **blk3cell.exe**. The user specifies the locations, dimensions and values for a set of blocks. All undefined cells within the mesh are set to the background value. The format for this file is as follows:
 
@@ -40,8 +40,8 @@ where superscript :math:`(i)` for :math:`i=1,2,...,N` refers to a particular blo
 
 .. _e3dmt_3Dmodel2octree_input:
 
-Input File for Model2Octree
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Input File and Line Descriptions for Model2Octree
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The file **Model2Octree.inp** contains the paths to the tensor mesh (**3D_mesh.txt**), tensor model (**3Dmodel.con**) and octree mesh (**octree_mesh.txt**) as well as other necessary parameters. The format of the input file is as follows:
 

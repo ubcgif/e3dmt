@@ -10,7 +10,7 @@ Executables
 
 .. important:: Although described here, this generation of the code may not be supported by GIFtools in the future.
 
-Version 1 of the E3DMT codes makes use of the following executables:
+E3DMT version 1 makes use of the following executables:
 
     - **e3dMTfwd:** Solves the forward problem. Computes the electric and magnetic response to a 3D conductivity model (fields, and impedance)
     - **e3dMTinv:** Solves the inverse problem using a direct solver approach (MUMPS). Recovers a conductivity model by inverting MT or ZTEM data. All entries of the impedance tensor or transfer function are needed.
