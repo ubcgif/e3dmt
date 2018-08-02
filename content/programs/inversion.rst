@@ -3,56 +3,56 @@
 Inversion Program
 =================
 
-Version 1 (2014)
-----------------
+.. Version 1 (2014)
+.. ----------------
 
-There are two options for inversion executables, both of which require parameters set through an :ref:`input file<e3dmt_input_inv>`; denoted here as **e3dMT_octree_inv.inp**. The two executable files are:
+.. There are two options for inversion executables, both of which require parameters set through an :ref:`input file<e3dmt_input_inv>`; denoted here as **e3dMT_octree_inv.inp**. The two executable files are:
 
-    - **e3dMTinv.exe:** Uses the MUMPS direct solver. Faster but larger memory requirements
-    - **e3dMTinv_iter.exe:** Uses an iterative solver. Slower run-time but less memory requirements
+..     - **e3dMTinv.exe:** Uses the MUMPS direct solver. Faster but larger memory requirements
+..     - **e3dMTinv_iter.exe:** Uses an iterative solver. Slower run-time but less memory requirements
 
-Running the Program
-^^^^^^^^^^^^^^^^^^^
+.. Running the Program
+.. ^^^^^^^^^^^^^^^^^^^
 
-To run the inversion, open a command line window and type the following:
+.. To run the inversion, open a command line window and type the following:
 
-.. figure:: images/run_e3dmt_inv_iter.png
-     :align: center
-     :width: 700
+.. .. figure:: images/run_e3dmt_inv_iter.png
+..      :align: center
+..      :width: 700
 
-The *mpiexec* call is used for parallelization. This is followed by the flag *-n*, then the number of frequencies (*"nFreq"*). This is followed by the inversion executable and the corresponding input file.
+.. The *mpiexec* call is used for parallelization. This is followed by the flag *-n*, then the number of frequencies (*"nFreq"*). This is followed by the inversion executable and the corresponding input file.
 
-Units
-^^^^^
+.. Units
+.. ^^^^^
 
-**Inputs:**
+.. **Inputs:**
 
-    - **MT data:** Real and imaginary components of impedance tensor entries (V/A)
-    - **ZTEM data:** Real and imaginary components of transfer function entries (unitless)
-    - **Reference/starting conductivity model:** S/m 
-    - **Background susceptibility model:** SI
-    - **Model/interface weights:** unitless
-
-
-.. important:: The current version of the code requires both components for all entries within the impedance tensor. For example, the user cannot invert only the off-diagonal impedance tensor data. Instead the user must supply large uncertainties for the diagonal data.
-
-**Outputs:**
-
-    - **Conductivity model:** S/m
+..     - **MT data:** Real and imaginary components of impedance tensor entries (V/A)
+..     - **ZTEM data:** Real and imaginary components of transfer function entries (unitless)
+..     - **Reference/starting conductivity model:** S/m 
+..     - **Background susceptibility model:** SI
+..     - **Model/interface weights:** unitless
 
 
-Output Files
-^^^^^^^^^^^^
+.. .. important:: The current version of the code requires both components for all entries within the impedance tensor. For example, the user cannot invert only the off-diagonal impedance tensor data. Instead the user must supply large uncertainties for the diagonal data.
 
-The program **e3dMTinv.exe** creates the following output files:
+.. **Outputs:**
 
-    - **inv.con:** recovered conductivity models
+..     - **Conductivity model:** S/m
 
-    - **dpred.txt** predicted data for each recovered conductivity model
 
-    - **e3dMT_octree_inv.log:** log file for the inversion
+.. Output Files
+.. ^^^^^^^^^^^^
 
-    - **e3dMT_octree_inv.out:**
+.. The program **e3dMTinv.exe** creates the following output files:
+
+..     - **inv.con:** recovered conductivity models
+
+..     - **dpred.txt** predicted data for each recovered conductivity model
+
+..     - **e3dMT_octree_inv.log:** log file for the inversion
+
+..     - **e3dMT_octree_inv.out:**
 
 
 .. _e3dmt_inv2:
