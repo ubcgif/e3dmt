@@ -359,7 +359,7 @@ Line Descriptions
 Details regarding boundary conditions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The way background models are used to determine the boundary conditions for the problem depends on :ref:`background conductivity (line 5)<e3dmt_input_inv2_ln3>` and the :ref:`active topography cells (line 9) <e3dmt_input_inv_ln7>`. This can be explained as follows:
+The way background models are used to determine the boundary conditions for the problem depends on :ref:`background conductivity (line 5)<e3dmt_input_inv2_ln3>` and the :ref:`active topography cells (line 9) <e3dmt_input_inv2_ln7>`. This can be explained as follows:
 
 **1DBACKGROUND:**
 

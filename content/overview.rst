@@ -1,7 +1,7 @@
 .. _overview:
 
-E3DMT package overview
-======================
+E3DMT version 2 package overview
+================================
 
 Description
 -----------
@@ -81,10 +81,10 @@ Licensing
 Licensing for commercial use is managed by distributors, not by the UBC-GIF research group.
 
 
-Installing E3DMT
-----------------
+Installing E3DMT version 2
+--------------------------
 
-There is no automatic installer currently available for the e3dMT. Please follow the following steps in order to use the software:
+There is no automatic installer currently available for E3DMT version 2. Please follow the following steps in order to use the software:
 
    1. Extract all files provided from the given zip-based archive and place them all together in a new folder.
    2. Add this directory as new path to your environment variables.

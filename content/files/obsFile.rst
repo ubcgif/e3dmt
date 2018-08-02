@@ -3,6 +3,8 @@
 Observations File
 =================
 
+.. _obsFile2:
+
 This file is input when inverting field-collected data. This file contains the survey information, field observations and data uncertainties. 
 
 .. Version 1 (2014)

@@ -53,9 +53,9 @@ To generate an OcTree mesh, open a command window. Type the path to the code **o
 
 The program **octree_mesh_mt.exe** creates 5 output files:
 
-    - **3D_mesh.txt:** the underlying regular :ref:`tensor mesh<tensorFile>`. This mesh is comprised of the smallest cell size and is very large (>> 1M cells). As a result, it is unwise to plot this mesh.
+    - **3D_mesh.txt:** the underlying regular tensor mesh. This mesh is comprised of the smallest cell size and is very large (>> 1M cells). As a result, it is unwise to plot this mesh.
 
-    - **3D_core_mesh.txt:** A 3D regular :ref:`tensor mesh<tensorFile>` defining the core region. 
+    - **3D_core_mesh.txt:** A 3D regular tensor defining the core region. 
 
     - **octree_mesh.txt:** :ref:`OcTree mesh<octreeFile>` used in the forward modeling and inversion codes
 
