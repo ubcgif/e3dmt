@@ -59,6 +59,13 @@ Line Descriptions
 
     - **1D Background Conductivity:** The user may supply the file path to a `1D background conductivity model <http://em1dfm.readthedocs.io/en/latest/content/files/supporting.html#files-for-reference-and-starting-models>`__ . If a homogeneous background conductivity is being used, the user enters "VALUE" followed by a space and a numerical value; example "VALUE 0.01"
 
+
+.. important::
+
+    - The number of layers in the 1D model for E3DMT must equal the number of underlying mesh cells in the vertical direction. Thus if underlying mesh for the OcTree mesh is 1028 by 1028 by 512, the 1D model must have 512 layer conductivities.
+    - The boundary conditions computed using 1D models is only accurate when surface topography is minimal. In the case where surface topography is significant, it is suggested the user used E3DMT version 2.
+ 
+ 
 .. _e3dmt_input_fwd_ln6:
 
     - **Background Susceptibility:** The user may provide the file path to a background susceptibility model on this line. If a constant susceptibility is being used, "VALUE" may be entered and followed by the background susceptibility. For no background susceptibility, the flag "NO_SUS" is used.
