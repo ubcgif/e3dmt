@@ -11,7 +11,7 @@ Here, the code **blk3cellOct.exe** and the input file **blk3cellOct.inp** (:ref:
 
 To generate the model, the following input file was used
 
-.. figure:: ../input_files/images/blk3cellOct_input_ver2.png
+.. figure:: ../inputfiles/images/blk3cellOct_input_ver2.png
      :align: center
      :width: 700
 
@@ -19,7 +19,7 @@ The resulting Octree model shows an L-shaped conductor (:math:`\sigma` = 1 S/m) 
 
 .. figure:: images/octree_model2.png
      :align: center
-     :width: 700
+     :width: 500
 
 
 

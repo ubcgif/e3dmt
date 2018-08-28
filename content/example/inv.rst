@@ -12,13 +12,13 @@ Here, the code **e3dMTinv_ver2.exe** and the input file **e3dMTver2.inp** (:ref:
 To invert the synthetic data, the following input file was used:
 
 
-.. figure:: ../input_files/images/inv_input_ver2.png
+.. figure:: ../inputfiles/images/inv_input_ver2.png
      :align: center
      :width: 700
 
 The true model (left) and recovered model (right) at iteration 7 are shown below. A cutoff of 0.05 S/m has been used for both models and the recovered model is transected at z = -1200 m. In examining recovered models, this iteration accurately explained the data without fitting the noise and recovered the block.
 
-.. figure:: images/fwd2.png
+.. figure:: images/inv2.png
      :align: center
      :width: 700
 

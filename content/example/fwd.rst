@@ -12,7 +12,7 @@ Here, the code **e3dMTinv_ver2.exe** and the input file **e3dMTver2_fwd.inp** (:
 To forward model the data, the following input file was used:
 
 
-.. figure:: ../input_files/images/fwd_input_ver2.png
+.. figure:: ../inputfiles/images/fwd_input_ver2.png
      :align: center
      :width: 700
 

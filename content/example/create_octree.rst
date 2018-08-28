@@ -11,7 +11,7 @@ Here, the code **octree_mesh_mt.exe** and the input file **MTcreate_mesh.inp** (
 
 To generate the OcTree mesh, the following input file was used:
 
-.. figure:: ../input_files/images/create_octree_input_ver2.png
+.. figure:: ../inputfiles/images/create_octree_input_ver2.png
      :align: center
      :width: 700
 
@@ -19,5 +19,5 @@ The surface topography and resulting OcTree mesh are shown below
 
 .. figure:: images/octree_mesh2.png
      :align: center
-     :width: 700
+     :width: 500
 
