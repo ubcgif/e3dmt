@@ -266,12 +266,21 @@ Once this is done, the source term in Eq. :eq:`discrete_e_sys` is computed for a
     \frac{1}{i\omega} \mathbf{A u_s} = \mathbf{s}
 
 
+.. _theory_solver:
 
+Direct vs. Iterative Solver
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. Iterative Solver
-.. ^^^^^^^^^^^^^^^^
+When solving the forward problem, Eq. :eq:`discrete_e_sys` can be solved one of two ways:
 
-.. For higher frequencies, the numerical solution to Eq. :eq:`discrete_e_sys` is fairly stable; as a large diagonal term results in a favourable conditioning number. However, MT and ZTEM sensors frequently measure low frequencies to image deeper targets. In this case, we must ensure the numerical solution to Eq. :eq:`discrete_e_sys` is stable. For this we use the following iterative solver approach.
+    1. **Direct solver:** uses Paradiso (E3DMT version 1 and 2)
+    2. **Iterative solver:** uses the `BiCGstab <https://en.wikipedia.org/wiki/Biconjugate_gradient_stabilized_method>`__ algorithm (E3DMT version 1 only). Parameters related to this algorithm are as follows:
+
+        - **tol_bicg:** relative tolerance (stopping criteria) when solver is used during forward modeling; i.e. solves Eq. :eq:`discrete_e_sys`. Ideally, this number is very small (~1e-10).
+        - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; i.e. must solve Eq. :eq:`sensitivity_fields` to solve Eq. :eq:`GN_gen`. This value does not need to be as large as the previous parameter (~1e-5).
+        - **max_it_bicg:** maximum number of BICG iterations
+        - **freq_Aphi:** for frequencies below *freq_Aphi*, an SSOR preconditioner is constructed and used to solve the system more efficiently. However, the construction of preconditioners at each frequency may required a significant portion of additional RAM. To solve the system for all frequencies without using a preconditioner, set this value to a negative number. 
+
 
 
 .. _theory_sensitivity:
