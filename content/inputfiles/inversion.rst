@@ -222,12 +222,17 @@ Both the forward and inverse problems are solved using the **e3dMTinv_ver2** exe
 +--------+--------------------------------------------------------------+-------------------------------------------------------------------------+
 
 
+	- Example input file for forward modeling (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver2/assets/input_files2/e3dMTver2_fwd.inp>`__ ).
+	- Example input file for inversion (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver2/assets/input_files2/e3dMTver2.inp>`__ ).
 
-.. .. figure:: images/e3dmt_inv_input2.png
-..      :align: center
-..      :width: 700
 
-..      Example input file for the inversion program.
+
+
+.. figure:: images/inv_input_ver2.png
+     :align: center
+     :width: 700
+
+     Example input file for the inversion program 
 
 
 Line Descriptions

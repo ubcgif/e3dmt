@@ -109,6 +109,10 @@ The file **blk3cellOct.inp** defines the model (conductivity/susceptibility/acti
 where superscript :math:`(i)` for :math:`i=1,2,...,N` refers to a particular block. :math:`x_1,x_2,y_1,y_2,z_1` and :math:`z_2` define the nodes of each block and :math:`m` defines conductivity/susceptibility value.
 
 
+.. figure:: images/blk3cellOct_input.png
+     :align: center
+     :width: 700
 
+     Example input file for blk3cellOct (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver2/assets/input_files2/blk3cellOct.inp>`__ )
 
 

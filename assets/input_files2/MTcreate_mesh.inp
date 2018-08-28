@@ -1,0 +1,12 @@
+500 500 100                              ! minimum cell size dx, dy, dz
+1 1 128                                  ! mincellfactor  mincellsize  max_topo_cell
+15000 15000 15000 20000                  ! total expansion in x, y, down, air
+2500 3500 5000                           ! depth_core_inv1 depth_core_inv2 depth_core_inv3
+5 5 5                                    ! # of small cells around receivers,  ncell2,  ncell4
+input_files\locFile.dat                  ! data file
+input_files\recFile.dat                  ! receiver file
+input_files\freqFile.dat                 ! frequency file
+input_files\topo.txt                     ! topography file | TOPO_CONST d | NO_TOPO
+NOT_SHIFT_DATA                           ! SHIFT_DATA | NOT_SHIFT DATA
+MAKE_POLYGON 2000                        ! polygon points file | MAKE_POLYGON d
+CREATE_LARGE_MESH octree_mesh.txt        ! CREATE_LARGE_MESH filename
