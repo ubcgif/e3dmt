@@ -9,11 +9,17 @@ Here, the code **blk3cellOct.exe** and the input file **blk3cellOct.inp** (:ref:
 	- Learn how to :ref:`run blk3cellOct from command line<e3dmt_model>`
 	- Learn the format of the input files :ref:`blk3cellOct.inp<e3dmt_input_model>`
 
-Here is the input file for blk3cellOct.exe
+To generate the model, the following input file was used
 
+.. figure:: ../input_files/images/blk3cellOct_input_ver2.png
+     :align: center
+     :width: 700
 
+The resulting Octree model shows an L-shaped conductor (:math:`\sigma` = 1 S/m) within a resistive background (:math:`\sigma_b` = 0.01 S/m).
 
-
+.. figure:: images/octree_model2.png
+     :align: center
+     :width: 700
 
 
 
