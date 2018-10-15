@@ -88,12 +88,12 @@ Data Array
 No matter what data type is being used (DATATYPE = MTZ, MTE, MTT or MTH), each row of the data array contains the x, y and z positions for readings at a particular location, i.e.:
 
 .. math::
-    | \; x \; | \; y \; | \; z \; |
+    | \; Easting \; | \; Northing \; | \; Elevation \; |
 
 
 .. important::
 
-    - The coordinates are right-handed with X (Easting), Y (Northing) and Z+ (Up).
+    - The locations are Easting, Northing and elevation in metres.
     - If MT and/or ZTEM data are being modeled, the frequencies do not need to match nor do the locations for each frequency.
     - For **MTT data (ZTEM)**, the first line in the array refers to the base/reference station location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTT", the forward model will output :math:`N-1` rows of predicted data.
     - For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTH", the forward model will output :math:`N` rows of predicted data.

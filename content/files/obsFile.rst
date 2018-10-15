@@ -144,7 +144,7 @@ and similarly for :math:`y`.
 .. important::
 
     - If MT and/or ZTEM data are being modeled, the frequencies do not need to match nor do the locations for each frequency.
-    - For **MTT and MTE data (ZTEM)**, the first line in the array refers to the base/reference station location. Only the x,y and z locations are required. **However**, each remaining field must be given a flag value of "i". *Example for first row:* :math:`350 \;\; 200 \;\; 0 \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i`
+    - For **MTT and MTE data (ZTEM)**, the first line in the array refers to the base/reference station location. Only the Easting, Northing and elevation is required. **However**, each remaining field must be given a flag value of "i". *Example for first row:* :math:`350 \;\; 200 \;\; 0 \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i \;\; i`
     - For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at different locations. Data and uncertainty values are required for all rows.
     - For **MTT and MTE data (ZTEM)**, the first line in the array refers to the base/reference station location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTT", the inversion will output :math:`N-1` rows of predicted data in the predicted data files.
     - For **MTH data (ZTEM)**, measurements Hx, Hy and Hz are taken at the same location. Thus if there are :math:`N` receiver locations specified for a given array with data type "MTH", the inversion model will output :math:`N` rows of predicted data in the predicted data files.
