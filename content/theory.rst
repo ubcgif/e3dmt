@@ -6,6 +6,11 @@ Background Theory
 This section aims to provide the user with a basic review of the physics, discretization, and optimization techniques used to solve the frequency domain quasi-static electromagnetics problem. It
 is assumed that the user has some background in these areas. For further reading see :cite:`Nabighian1991`.
 
+.. important::
+    The theory provided on this page works for the following right-handed coordinate systems:
+        - X = Easting, Y = Northing, Z = Up (standard Cartesian)
+        - X = Northing, Y = Easting, Z = Down (standard magnetotelluric which this code uses!)
+
 .. _theory_fundamentals:
 
 Fundamental Physics
@@ -74,15 +79,13 @@ where :math:`Q` is some constant. Taking the ratio of the electric and magnetic 
 gives:
 
 .. math::
-    Z = \frac{E_x}{H_y} = \frac{-i\omega \mu}{k} = \sqrt{\dfrac{-i\omega\mu}{\sigma}}
+    Z_{xy} = \frac{E_x}{H_y} = \frac{-i\omega \mu}{k} = \sqrt{\dfrac{-i\omega\mu}{\sigma}}
     :label: impedance_hs
 
 
 This implies that conductivity :math:`\sigma` of the Earth can be determined by taking measurements of the
 field components, and therefore the impedance constitutes the basic MT response function, or data.
 A 1D layered Earth model can be used to compute the source wave components by iteratively propagating a plane wave from the surface to depth.
-
-.. For -iwt formulation. Theory verified up to here.
 
 Magnetotelluric (MT) Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -102,6 +105,12 @@ such that:
     :label: impedance_tensor
 
 where 1 and 2 refer to fields associated with plane waves polarized along two perpendicular directions.
+
+.. important::
+    For standard MT data, X = Northing, Y = Easting and Z = Down; which this code uses! Thus:
+        - Superscript :math:`\! ^{(1)}` refers to fields resulting from a plane wave whose electric field is polarized along the Northing direction. And superscript :math:`\! ^{(2)}` refers to fields resulting from a plane wave whose electric field is polarized along the Easting direction.
+        - :math:`Z_{xy}` is essentially the ratio of the electric field along the Northing and the magnetic field along the Easting.
+
 
 
 
@@ -132,6 +141,11 @@ where 1 and 2 refer to fields associated with plane waves polarized along two pe
     \begin{bmatrix} T_{zx} \\ T_{zy} \end{bmatrix} = \big ( H_x^{(1)} H_y^{(2)} - H_x^{(2)} H_y^{(1)} \big )^{-1}
     \begin{bmatrix} - H_y^{(1)} H_z^{(2)} + H_y^{(2)} H_z^{(1)} \\ H_x^{(1)} H_z^{(2)} - H_x^{(2)} H_z^{(1)} \end{bmatrix}
     
+
+.. important::
+    For standard natural source data, X = Northing, Y = Easting and Z = Down; which this code uses! Thus:
+        - Superscript :math:`\! ^{(1)}` refers to fields resulting from a plane wave whose electric field is polarized along the Northing direction. And superscript :math:`\! ^{(2)}` refers to fields resulting from a plane wave whose electric field is polarized along the Easting direction.
+        - :math:`T_{zx}` is the transfer function related to an incident plane wave whose electric field is polarized along the Northing direction; which produces magnetic fields with components in the Easting direction.
 
 
 Octree Mesh
