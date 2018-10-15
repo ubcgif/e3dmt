@@ -17,17 +17,17 @@ The lines of the receiver file are formatted as follows:
 
 |
 | :ref:`RxID<e3dmt_rec_ln1>` :math:`\;` :ref:`N<e3dmt_rec_ln2>` :math:`\;` :ref:`1<e3dmt_rec_ln3>`
-| :math:`\;\;\; x_1 \; y_1 \; z_1`
+| :math:`\;\;\; p_1 \; q_1 \; r_1`
 | :math:`\;\;\;\;\;\;\;\; \vdots`
-| :math:`\;\; x_N \; y_N \; z_N`
+| :math:`\;\; p_N \; q_N \; r_N`
 | :ref:`RxID<e3dmt_rec_ln1>` :math:`\;` :ref:`N<e3dmt_rec_ln2>` :math:`\;` :ref:`1<e3dmt_rec_ln3>`
-| :math:`\;\;\; x_1 \; y_1 \; z_1`
+| :math:`\;\;\; p_1 \; q_1 \; r_1`
 | :math:`\;\;\;\;\;\;\;\; \vdots`
-| :math:`\;\; x_N \; y_N \; z_N`
+| :math:`\;\; p_N \; q_N \; r_N`
 | :ref:`RxID<e3dmt_rec_ln1>` :math:`\;` :ref:`N<e3dmt_rec_ln2>` :math:`\;` :ref:`1<e3dmt_rec_ln3>`
-| :math:`\;\;\; x_1 \; y_1 \; z_1`
+| :math:`\;\;\; p_1 \; q_1 \; r_1`
 | :math:`\;\;\;\;\;\;\;\; \vdots`
-| :math:`\;\; x_N \; y_N \; z_N`
+| :math:`\;\; p_N \; q_N \; r_N`
 |
 |
 
@@ -63,7 +63,17 @@ Parameter Descriptions
         
 .. _e3dmt_rec_ln4:
 
-    - :math:`\mathbf{x_i \;\; y_i \;\; z_i}`: node locations for the electric dipole or inductive loop receiver. The coordinates are right-handed with X (Easting), Y (Northing) and Z+ (Up).
+    - :math:`\mathbf{p_i \;\; q_i \;\; r_i}`: Easting, Northing and elevation for node locations for the electric dipole or inductive loop receiver.
+
+
+.. important:: 
+    The data may use a labeling convention with X = Easting, Y = Northing and Z = Down, but the node locations are in terms of Easting, Northing and elevation. To correctly define receivers:
+        - Define your inductive loop receivers in the CCW direction, as we are using a right-handed coordinate system
+        - Define :math:`E_x` receivers from South to North
+        - Define :math:`E_y` receivers from West to East
+        - Define :math:`H_x` receivers with a dipole moment pointing towards North
+        - Define :math:`H_y` receivers with a dipole moment pointing towards East
+        - Define :math:`H_z` receivers with a dipole moment downwards
 
 
 

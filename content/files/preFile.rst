@@ -3,60 +3,6 @@
 Predicted Data File
 ===================
 
-
-.. Version 1 (2014)
-.. ----------------
-
-.. The predicted data file is output from **e3dMTfwd.exe** and contains the locations and predicted data. The order of the data point is in the same order as the :ref:`survey and locations file <surveyFile>`. Each block, separated by a blank line, are the data for a particular transmitter and frequency. Thus predicted data files take the format:
-
-.. |
-.. | **Data Array 1**
-.. |
-.. | **Data Array 2**
-.. |
-.. | :math:`\;\;\;\;\;\;\;\; \vdots`
-.. |
-.. | **Data Array N**
-.. |
-.. |
-
-
-
-.. MT data (DATATYPE = MTZ)
-.. ^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. Each row in the array contains the elements of the impedance tensor at a particular location separated into real and imaginary components. The units for predicted MT data are (V/A). The columns for this data format are as follows:
-
-.. .. math::
-..     | \; x \; | \; y \; | \; z \; | \; Z^\prime_{11} \; | \; Z^{\prime \prime}_{11} \; | \; Z^\prime_{12} \; | \; Z^{\prime \prime}_{12} \; | \; Z^\prime_{21} \; | \; Z^{\prime \prime}_{21} \; | \; Z^\prime_{22} \; | \; Z^{\prime \prime}_{22} \; |
-
-.. where
-
-..     - The coordinates are right-handed with X (Easting), Y (Northing) and Z+ (Up)
-..     - :math:`Z^\prime_{ij}` is the real component of entry i,j of the impedance tensor
-..     - :math:`Z^{\prime\prime}_{ij}` is the imaginary component of entry i,j of the impedance tensor
-
-
-.. ZTEM data (DATATYPE = MTT, MTE or MTH)
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. Each row in the array contains the elements of the transfer function at a particular location separated into real and imaginary components. Predicted ZTEM data are unitless with no normalization factor. The columns for this data format are as follows:
-
-.. .. math::
-..     | \; x \; | \; y \; | \; z \; | \; T^\prime_x \; | \; T^{\prime \prime}_x \; | \; T^\prime_y \; | \; T^{\prime \prime}_y \; |
-
-.. where
-
-..     - The coordinates are right-handed with X (Easting), Y (Northing) and Z+ (Up)
-..     - :math:`T^\prime_x` is the real component of :math:`T_x`
-..     - :math:`T^{\prime\prime}_x` is the imaginary component of :math:`T_x`
-
-.. and similarly for :math:`y`.
-
-
-.. Version 2 (2017)
-.. ----------------
-
 Predicted data files output by **e3dMTinv_ver2.exe** contain the locations and predicted data. The ordering (rows) of the data correspond to the rows in the :ref:`index file <indexFile>`. For plotting purposes, the predicted data are defined at a single point; despite the fact that raw fields are measured with a set of receivers. This point depends on the locations of the receivers at for each measurement location and is different for MT and ZTEM data.
 
 
@@ -66,17 +12,18 @@ MT data (DATATYPE MT)
 Each row in the array contains the elements of the impedance tensor, defined at a particular location and separated into real and imaginary components. The units for predicted MT data are (V/A). The rows for this data format are as follows:
 
 .. math::
-    | \; x \; | \; y \; | \; z \; | \; Z^\prime_{11} \; | \; Z^{\prime \prime}_{11} \; | \; Z^\prime_{12} \; | \; Z^{\prime \prime}_{12} \; | \; Z^\prime_{21} \; | \; Z^{\prime \prime}_{21} \; | \; Z^\prime_{22} \; | \; Z^{\prime \prime}_{22} \; |
+    | \; Easting \; | \; Northing \; | \; Elevation \; | \; Z^\prime_{xx} \; | \; Z^{\prime \prime}_{xx} \; | \; Z^\prime_{xy} \; | \; Z^{\prime \prime}_{xy} \; | \; Z^\prime_{yx} \; | \; Z^{\prime \prime}_{yx} \; | \; Z^\prime_{yy} \; | \; Z^{\prime \prime}_{yy} \; |
 
 where
 
-    - The coordinates are right-handed with X (Easting), Y (Northing) and Z+ (Up)
+    - The locations are Easting, Northing and elevation in metres
     - :math:`Z^\prime_{ij}` is the real component of entry i,j of the impedance tensor
     - :math:`Z^{\prime\prime}_{ij}` is the imaginary component of entry i,j of the impedance tensor
 
 .. important::
 
-    - The x, y, z location is the average of the node locations defining the Hy receiver. Thus if the same Hy receiver is used for several measurements, the data will be plotted in the same location.
+    - For standard MT data, X = Northing, Y = Easting and Z = Down; which this code uses! Thus :math:`Z_{xy}` is essentially the ratio of the electric field along the Northing and the magnetic field along the Easting. For more, see the :ref:`theory section<theory_nsem>`.
+    - The location of the data point is the average of the node locations defining the Hy receiver. Thus if the same Hy receiver is used for several measurements, the data will be plotted in the same location.
 
 
 ZTEM data (DATATYPE ZTEM)
@@ -85,19 +32,20 @@ ZTEM data (DATATYPE ZTEM)
 Each row in the array contains the elements of the transfer function, defined at a particular location and separated into real and imaginary components. Predicted ZTEM data are unitless with no normalization factor. The rows for this data format are as follows:
 
 .. math::
-    | \; x \; | \; y \; | \; z \; | \; T^\prime_x \; | \; T^{\prime \prime}_x \; | \; T^\prime_y \; | \; T^{\prime \prime}_y \; |
+    | \; Easting \; | \; Northing \; | \; Elevation \; | \; T^\prime_{zx} \; | \; T^{\prime \prime}_{zx} \; | \; T^\prime_{zy} \; | \; T^{\prime \prime}_{zy} \; |
 
 where
 
-    - The coordinates are right-handed with X (Easting), Y (Northing) and Z+ (Up)
-    - :math:`T^\prime_x` is the real component of :math:`T_x`
-    - :math:`T^{\prime\prime}_x` is the imaginary component of :math:`T_x`
+    - The locations are Easting, Northing and elevation in metres
+    - :math:`T^\prime_{zx}` is the real component of :math:`T_{zx}`
+    - :math:`T^{\prime\prime}_{zx}` is the imaginary component of :math:`T_{zx}`
 
-and similarly for :math:`y`.
+and similarly for :math:`T_{zy}`.
 
 .. important::
 
-    - The x, y, z location is the average of the node locations defining the Hz receiver. Thus if the same Hz receiver is used for several measurements, the data will be plotted in the same location.
+    - For standard natural source data, X = Northing, Y = Easting and Z = Down; which this code uses! Thus :math:`T_{zx}` is the transfer function related to an incident plane wave whose electric field is polarized along the Northing direction; which produces magnetic fields with components in the Easting direction. For more, see the :ref:`theory section<theory_nsem>`.
+    - The location of the data point is the average of the node locations defining the Hz receiver. Thus if the same Hz receiver is used for several measurements, the data will be plotted in the same location.
 
 
 
