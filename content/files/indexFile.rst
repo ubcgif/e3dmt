@@ -10,6 +10,7 @@ Format
 ------
 
 .. note::
+    - Recall that we are using a labeling convention for fields such that X = Northing, Y = Easting and Z = Down.
     - Bolded entries are fixed flags recognized by the Fortran codes and blue hyperlinked entries are values/regular expressions specified by the user
 
 
@@ -17,11 +18,11 @@ MT Data
 ^^^^^^^
 
 | **DATATYPE MT**
-| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
-| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
-| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
 | :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
-| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
 |
 |
 
@@ -44,11 +45,11 @@ ZTEM Data
 ^^^^^^^^^
 
 | **DATATYPE ZTEM**
-| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
-| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
-| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
 | :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
-| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_ind_ln6>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
 |
 |
 
@@ -78,23 +79,23 @@ Parameter Descriptions
 
 .. _e3dmt_ind_ln2:
 
-    - **Ex_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Ex.
+    - **Ex_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the X (Northing) component of the electric field (Ex).
 
 .. _e3dmt_ind_ln3:
 
-    - **Ey_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Ey.
+    - **Ey_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the Y (Easting) component of the electric field (Ey).
 
 .. _e3dmt_ind_ln4:
 
-    - **Hx_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hx.
+    - **Hx_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the X (Northing) component of the magnetic field (Hx).
 
 .. _e3dmt_ind_ln5:
 
-    - **Hy_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hy.
+    - **Hy_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the Y (Easting) component of the magnetic field (Hy).
 
 .. _e3dmt_ind_ln6:
 
-    - **Hz_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hz.
+    - **Hz_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the Z (Downward) component of the magnetic field (Hz).
 
 .. _e3dmt_ind_ln7:
 

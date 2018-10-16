@@ -10,6 +10,7 @@ This file is input when inverting field-collected data. This file contains the s
 
 .. important::
 
+    - Recall that we are using a labeling convention for fields such that X = Northing, Y = Easting and Z = Down.
     - As of May 2018, the E3DMT version 2 code cannot simultaneously invert both MT and ZTEM data, just one or the other.
     - If a flag value of '-99' is entered as an uncertainty, the corresponding data value is not fit during the inversion. Therefore, we can omit inverting the diagonal elements of the impedance tensor.
 
@@ -22,11 +23,11 @@ The format of the observation file for MT data begins by defining the datatype f
 
 
 | **DATATYPE MT**
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
 | :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
 |
 |
 
@@ -63,11 +64,11 @@ The format of the observation file for ZTEM data begins by defining the datatype
 
 
 | **DATATYPE ZTEM**
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
 | :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
 |
 |
 
@@ -100,23 +101,23 @@ Parameter Descriptions
 
 .. _e3dmt_obs2_ln2:
 
-    - **Ex_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Ex.
+    - **Ex_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the X (Northing) component of the electric field (Ex).
 
 .. _e3dmt_obs2_ln3:
 
-    - **Ey_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Ey.
+    - **Ey_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the Y (Easting) component of the electric field (Ey).
 
 .. _e3dmt_obs2_ln4:
 
-    - **Hx_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hx.
+    - **Hx_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the X (Northing) component of the magnetic field (Hx).
 
 .. _e3dmt_obs2_ln5:
 
-    - **Hy_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hy.
+    - **Hy_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the Y (Easting) component of the magnetic field (Hy).
 
 .. _e3dmt_obs2_ln6:
 
-    - **Hz_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures Hz.
+    - **Hz_ind:** The index corresponding to the desired receiver within the :ref:`receiver file<receiverFile>` that measures the Z (Downward) component of the magnetic field (Hz).
 
 .. _e3dmt_obs2_ln7:
 
