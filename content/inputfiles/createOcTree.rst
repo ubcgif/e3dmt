@@ -68,7 +68,7 @@ Line Descriptions
 
 .. _e3dmt_input_octreeln7:
 
-    - **shift_data:** Set as either "NOT_SHIFT_DATA" or "SHIFT_DATA *filename*". **EXPLANATION REQUIRED**
+    - **shift_data:** If the flag "NOT_SHIFT_DATA" is used, then it is possible for stations to lie below the topography specified on line 6. If "SHIFT_DATA *filename*" is used, then a locations file is created in which all stations are projected to be above the surface topography.
 
 .. _e3dmt_input_octreeln8:
 
