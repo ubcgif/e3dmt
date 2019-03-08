@@ -259,8 +259,8 @@ Let :math:`\mathbf{u_s}` and :math:`\sigma_s` be the electric fields and 1D cond
 where :math:`\mathbf{A}` is similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the transferred conductivity :math:`\sigma_s`.
 
 
-3D Approach (Version 2 only)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3D Approach
+~~~~~~~~~~~
 
 Let :math:`\sigma_b` be the 3D background conductivity model. And let :math:`\mathbf{A}` be an operator similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the background conductivity. If :math:`j=1,...,J` denotes the indicies for all internal edges and :math:`k=1,...,K` denotes the indicies for all top edges, then for each polarization we solve a smaller system:
 
@@ -278,23 +278,6 @@ Once this is done, the source term in Eq. :eq:`discrete_e_sys` is computed for a
 
 .. math::
     \frac{1}{i\omega} \mathbf{A u_s} = \mathbf{s}
-
-
-.. _theory_solver:
-
-Direct vs. Iterative Solver
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-When solving the forward problem, Eq. :eq:`discrete_e_sys` can be solved one of two ways:
-
-    1. **Direct solver:** uses Paradiso (E3DMT version 1 and 2)
-    2. **Iterative solver:** uses the `BiCGstab <https://en.wikipedia.org/wiki/Biconjugate_gradient_stabilized_method>`__ algorithm (E3DMT version 1 only). Parameters related to this algorithm are as follows:
-
-        - **tol_bicg:** relative tolerance (stopping criteria) when solver is used during forward modeling; i.e. solves Eq. :eq:`discrete_e_sys`. Ideally, this number is very small (~1e-10).
-        - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; i.e. must solve Eq. :eq:`sensitivity_fields` to solve Eq. :eq:`GN_gen`. This value does not need to be as large as the previous parameter (~1e-5).
-        - **max_it_bicg:** maximum number of BICG iterations
-        - **freq_Aphi:** for frequencies below *freq_Aphi*, an SSOR preconditioner is constructed and used to solve the system more efficiently. However, the construction of preconditioners at each frequency may required a significant portion of additional RAM. To solve the system for all frequencies without using a preconditioner, set this value to a negative number. 
-
 
 
 .. _theory_sensitivity:
