@@ -374,62 +374,6 @@ where :math:`\phi_d` is the data misfit and :math:`\phi_m` is the model objectiv
 Data Misfit
 ^^^^^^^^^^^
 
-E3DMT Version 1
-~~~~~~~~~~~~~~~
-
-This code uses a measure of data misfit which is uncommon in GIF codes. To understand this data misfit, we will consider the inversion of MT data. From Eq. :eq:`impedance_tensor`, we see that the magnetic and electric fields at observation locations are related by:
-
-.. math::
-    \mathbf{Z H} - \mathbf{E} = \mathbf{0}
-
-
-where according to Eq. :eq:`fields_projected`:
-
-.. math::
-    \mathbf{E} = \mathbf{Q_e u_e}
-
-and
-
-.. math::
-    \mathbf{H} = \mathbf{Q_h u_e}
-
-
-such that :math:`\mathbf{Q_e}` and :math:`\mathbf{Q_h}` map the electric fields on the edges :math:`\mathbf{u_e}` for a particular polarization to the receiver locations.
-For polarizations 1 and 2, we can construct the following:
-
-.. math::
-    \begin{bmatrix} \mathbf{Z} & \\ & \mathbf{Z} \end{bmatrix} \! \begin{bmatrix} \mathbf{Q_h u_e}^{(1)} \\ \mathbf{Q_h u_e}^{(2)} \end{bmatrix} \! - \!
-    \begin{bmatrix} \mathbf{Q_e u_e}^{(1)} \\ \mathbf{Q_e u_e}^{(2)} \end{bmatrix} \! = \!
-    \Bigg ( \! \begin{bmatrix} \mathbf{Z} & \\ & \mathbf{Z} \end{bmatrix} \! \begin{bmatrix} \mathbf{Q_h} \! & \\ & \mathbf{Q_h} \! \end{bmatrix}
-    - \begin{bmatrix} \mathbf{Q_e} \! & \\ & \mathbf{Q_e} \! \end{bmatrix} \! \Bigg ) \!
-    \begin{bmatrix} \mathbf{u_e}^{(1)} \\ \mathbf{u_e}^{(2)} \end{bmatrix} \! = \!
-    \mathbf{\tilde{Q} \tilde{u}_e}
-    :label: misfit_ver1_1
-
-where :math:`\mathbf{\tilde{Q}}` is a linear operator that depends on the observed impedance tensor elements :math:`\mathbf{Z}` and :math:`\mathbf{\tilde{u}_e}` contains the predicted electric fields on cell edges for a particular conductivity model :math:`\boldsymbol{\sigma}`. Eq. :eq:`misfit_ver1_1` can be augmented for multiple receivers and frequencies but its general form remains the same.
-
-If we have a conductivity model which explains the data perfectly, we expect Eq. :eq:`misfit_ver1_1` to equate to a vector zeros. As a result, a reasonable measure of data misfit for this code can be given by:
-
-.. math::
-    \phi_d = \big \| \mathbf{W_d} \big ( \mathbf{\tilde{Q} \tilde{u}_e} \big ) \big \|^2
-
-
-where :math:`\mathbf{W_d}` is a diagonal matrix that weights the residual of :math:`\mathbf{\tilde{Q} \tilde{u}_e}`. To construct :math:`\mathbf{W_d}`, we take the uncertainties applied to impedance tensor elements :math:`\boldsymbol{\varepsilon}`, scale them by the magnetic field obtained using the reference conductivity model :math:`\mathbf{H_{ref}}`, and take the reciprocal:
-
-.. math::
-    \mathbf{W_d} = \textrm{diag} \big [ ( \mathbf{H_{ref}} \boldsymbol{\varepsilon} )^{-1} \big ]
-    :label: data_weight_1
-
-
-A similar approach is done for measuring the data misfit of the ZTEM problem, except the entries of the matrix :math:`\mathbf{\tilde{Q}}` are different.
-
-
-.. important:: Because the data misfit for E3DMT version 1 is different than the one `typically used by GIF codes <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Uncertainties.html>`__, determining an appropriate stopping criteria for the inversion is less straightforward. It should also be noted from Eq. :eq:`data_weight_1` that the data weighting matrix :math:`\mathbf{W_d}` also depends on the user's choice in reference model. Until the user is confident in their stopping criteria, it is suggested the user set a low chi factor and continue to run the inversion until it is obvious recovered models are over-fitting the data.
-
-
-E3DMT Version 2
-~~~~~~~~~~~~~~~
-
 Here, the data misfit is represented as the L2-norm of a weighted residual between the observed data (:math:`d_{obs}`) and the predicted data for a given conductivity model :math:`\boldsymbol{\sigma}`, i.e.:
 
 .. math::
