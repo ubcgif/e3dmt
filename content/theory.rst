@@ -232,9 +232,6 @@ depends on the Earth's conductivity. If the fields at each observation location 
 Source Term
 ^^^^^^^^^^^
 
-1D Approach
-~~~~~~~~~~~
-
 For this approach, we solve a 1D wave equation of the following form:
 
 .. math::
@@ -259,41 +256,45 @@ Let :math:`\mathbf{u_s}` and :math:`\sigma_s` be the electric fields and 1D cond
 where :math:`\mathbf{A}` is similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the transferred conductivity :math:`\sigma_s`.
 
 
-3D Approach (Version 2 only)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Let :math:`\sigma_b` be the 3D background conductivity model. And let :math:`\mathbf{A}` be an operator similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the background conductivity. If :math:`j=1,...,J` denotes the indicies for all internal edges and :math:`k=1,...,K` denotes the indicies for all top edges, then for each polarization we solve a smaller system:
-
-.. math::
-    \mathbf{A_{j,j} u_j} = - \mathbf{A_{j,k} b}
-
-
-where :math:`\mathbf{b}` is a vector of ones with length :math:`K` and :math:`\mathbf{u_j}` is the background electric field on internal edges. From this we form a vector :math:`\mathbf{u_b}` where:
-
-    - :math:`\mathbf{u_b} = 1` on the top edges
-    - :math:`\mathbf{u_b} = \mathbf{u_j}` on internal edges
-    - :math:`\mathbf{u_b} = 0` otherwise
-
-Once this is done, the source term in Eq. :eq:`discrete_e_sys` is computed for a given frequency and polarization using:
-
-.. math::
-    \frac{1}{i\omega} \mathbf{A u_s} = \mathbf{s}
-
-
 .. _theory_solver:
 
 Direct vs. Iterative Solver
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When solving the forward problem, Eq. :eq:`discrete_e_sys` can be solved one of two ways:
+Direct Solver
+~~~~~~~~~~~~~
 
-    1. **Direct solver:** uses Paradiso (E3DMT version 1 and 2)
-    2. **Iterative solver:** uses the `BiCGstab <https://en.wikipedia.org/wiki/Biconjugate_gradient_stabilized_method>`__ algorithm (E3DMT version 1 only). Parameters related to this algorithm are as follows:
+For this approach we compute the electric fields on cell edges by solving Eq. :eq:`discrete_e_sys` with the Pardiso solver.
 
-        - **tol_bicg:** relative tolerance (stopping criteria) when solver is used during forward modeling; i.e. solves Eq. :eq:`discrete_e_sys`. Ideally, this number is very small (~1e-10).
-        - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; i.e. must solve Eq. :eq:`sensitivity_fields` to solve Eq. :eq:`GN_gen`. This value does not need to be as large as the previous parameter (~1e-5).
-        - **max_it_bicg:** maximum number of BICG iterations
-        - **freq_Aphi:** for frequencies below *freq_Aphi*, an SSOR preconditioner is constructed and used to solve the system more efficiently. However, the construction of preconditioners at each frequency may required a significant portion of additional RAM. To solve the system for all frequencies without using a preconditioner, set this value to a negative number. 
+Iterative Solver
+~~~~~~~~~~~~~~~~
+
+For this approach we let
+
+.. math::
+	\mathbf{u_e} = \mathbf{a} + \mathbf{G} \phi
+	:label: e_decomposition
+
+where :math:`\mathbf{u_e}` is the fields on cell edges, :math:`\mathbf{a}` is the vector potential, :math:`\phi` is the scalar potential and :math:`\mathbf{G}` is the discrete gradient operator. To compute the electric fields, the `BiCGstab <https://en.wikipedia.org/wiki/Biconjugate_gradient_stabilized_method>`__ algorithm is used to solve the following system:
+
+.. math::
+	\begin{bmatrix} \mathbf{A} (\sigma) + \mathbf{D} & -i\omega \mathbf{M_\sigma G} \\ -i\omega \mathbf{G^T M_\sigma} & -i\omega \mathbf{G^T M_\sigma G} \end{bmatrix}
+	\begin{bmatrix} \mathbf{a} \\ \phi \end{bmatrix} = 
+	\begin{bmatrix} -i\omega\mathbf{s} \\ -i\omega \mathbf{G^T s} \end{bmatrix}
+	:label: maxwell_a_phi
+
+where
+
+.. math::
+	\mathbf{D} = \mathbf{G}  \, diag \big ( \mathbf{A^T_{n2c} V} \, \boldsymbol{\mu^{-1}} \big ) \mathbf{G^T}
+
+
+where :math:`\mathbf{D}` improves the conditioning number of the system. Once Eq. :eq:`maxwell_a_phi` is solved, Eq. :eq:`e_decomposition` is used to obtain the electric fields. Adjustable parameters for solving Eq. :eq:`maxwell_a_phi` iteratively using BiCGstab are defined as follows:
+
+     - **tol_bicg:** relative tolerance (stopping criteria) when solver is used during forward modeling; i.e. solves Eq. :eq:`discrete_e_sys`. Ideally, this number is very small (~1e-10).
+     - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; i.e. must solve Eq. :eq:`sensitivity_fields` to solve Eq. :eq:`GN_gen`. This value does not need to be as large as the previous parameter (~1e-5).
+     - **max_it_bicg:** maximum number of BICG iterations
+     - **freq_Aphi:** for frequencies below *freq_Aphi*, an SSOR preconditioner is constructed and used to solve the system more efficiently. However, the construction of preconditioners at each frequency may required a significant portion of additional RAM. To solve the system for all frequencies without using a preconditioner, set this value to a negative number. 
 
 
 
@@ -391,9 +392,6 @@ where :math:`\phi_d` is the data misfit and :math:`\phi_m` is the model objectiv
 Data Misfit
 ^^^^^^^^^^^
 
-E3DMT Version 1
-~~~~~~~~~~~~~~~
-
 This code uses a measure of data misfit which is uncommon in GIF codes. To understand this data misfit, we will consider the inversion of MT data. From Eq. :eq:`impedance_tensor`, we see that the magnetic and electric fields at observation locations are related by:
 
 .. math::
@@ -429,6 +427,7 @@ If we have a conductivity model which explains the data perfectly, we expect Eq.
 
 .. math::
     \phi_d = \big \| \mathbf{W_d} \big ( \mathbf{\tilde{Q} \tilde{u}_e} \big ) \big \|^2
+    :label: data_misfit
 
 
 where :math:`\mathbf{W_d}` is a diagonal matrix that weights the residual of :math:`\mathbf{\tilde{Q} \tilde{u}_e}`. To construct :math:`\mathbf{W_d}`, we take the uncertainties applied to impedance tensor elements :math:`\boldsymbol{\varepsilon}`, scale them by the magnetic field obtained using the reference conductivity model :math:`\mathbf{H_{ref}}`, and take the reciprocal:
@@ -442,25 +441,6 @@ A similar approach is done for measuring the data misfit of the ZTEM problem, ex
 
 
 .. important:: Because the data misfit for E3DMT version 1 is different than the one `typically used by GIF codes <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Uncertainties.html>`__, determining an appropriate stopping criteria for the inversion is less straightforward. It should also be noted from Eq. :eq:`data_weight_1` that the data weighting matrix :math:`\mathbf{W_d}` also depends on the user's choice in reference model. Until the user is confident in their stopping criteria, it is suggested the user set a low chi factor and continue to run the inversion until it is obvious recovered models are over-fitting the data.
-
-
-E3DMT Version 2
-~~~~~~~~~~~~~~~
-
-Here, the data misfit is represented as the L2-norm of a weighted residual between the observed data (:math:`d_{obs}`) and the predicted data for a given conductivity model :math:`\boldsymbol{\sigma}`, i.e.:
-
-.. math::
-    \phi_d = \big \| \mathbf{W_d} \big ( \mathbf{d_{obs}} - \mathbb{F}[\boldsymbol{\sigma}] \big ) \big \|^2
-    :label: data_misfit_2
-
-
-where :math:`W_d` is a diagonal matrix containing the reciprocals of the uncertainties :math:`\boldsymbol{\varepsilon}` for each measured data point, i.e.:
-
-.. math::
-    \mathbf{W_d} = \textrm{diag} \big [ \boldsymbol{\varepsilon}^{-1} \big ] 
-
-
-.. important:: For a better understanding of the data misfit, see the `GIFtools cookbook <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Uncertainties.html>`__ .
 
 
 Model Objective Function
@@ -587,7 +567,7 @@ where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` i
 Gauss-Newton Solve
 ~~~~~~~~~~~~~~~~~~
 
-Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-Newton iteration :math:`k`. Using the data misfit from Eq. :eq:`data_misfit_2` and the model objective function from Eq. :eq:`MOF`, we must solve:
+Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-Newton iteration :math:`k`. Using the data misfit from Eq. :eq:`data_misfit` and the model objective function from Eq. :eq:`MOF`, we must solve:
 
 .. math::
     \Big [ \mathbf{J^T W_d^T W_d J + \beta \mathbf{W^T W}} \Big ] \mathbf{\delta m}_k =
