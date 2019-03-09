@@ -3,12 +3,14 @@
 Observations File
 =================
 
+.. important:: E3DMT version 2 is able to invert field data from survey files that follow the :ref:`E3DMT version 1<obsFile1>` format as well as a newly developed :ref:`version 2 format<obsFile2>`.
+
 .. _obsFile1:
 
 Version 1
 ---------
 
-E3DMT version 2 is capable of inverting field collected data in E3DMT version 1 format. This file is input when inverting field-collected data. This file contains the survey information, field observations and data uncertainties. 
+The E3DMT version 1 observations file contains the survey information, field observations and data uncertainties. 
 
 Format
 ^^^^^^
@@ -169,7 +171,7 @@ This file is input when inverting field-collected data. This file contains the s
 Format
 ^^^^^^
 
-The lines of a data observations file is as follows:
+The lines of a data observations file are as follows:
 
 | **DATATYPE** :ref:`dflag<e3dmt_obs2_dflag>`
 | *Data Array 1*
@@ -190,13 +192,13 @@ The lines of a data observations file is as follows:
     - **dflag:** Specifies whether the following data array is MT or ZTEM data. To specify for each block, use the flag *MT* or *ZTEM*. Multiple MT or ZTEM data blocks can be used. Therefore, joint inversion is possible with this code.
 
 
-**MT Data Array**
+MT Data Array
+~~~~~~~~~~~~~
 
-The format of the observation file for MT data begins by defining the datatype flag on the first line. The frequency index, receiver indicies, observed data and uncertainties are then defined on each subsequent line.
+The indicies used to define MT data arrays are as follows:
 
-.. note:: Blue hyperlinked entries are values/regular expressions specified by the user
-
-
+|
+|
 | :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
 | :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
 | :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [Z_{xx} \; data] \; [Z_{xy} \; data] \; [Z_{yx} \; data] \; [Z_{yy} \; data]`
@@ -231,11 +233,13 @@ Below we show an example of a survey index file for MT data.
 
      Observed data file for MT data.
 
-**ZTEM Data Array**
+ZTEM Data Array
+~~~~~~~~~~~~~~~
 
-The format of the observation file for ZTEM data begins by defining the datatype flag on the first line. The frequency index, receiver indicies, observed data and uncertainties are then defined on each subsequent line.
+The indicies used to define ZTEM data arrays are as follows:
 
-
+|
+|
 | :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
 | :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`
 | :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`Hz_ind<e3dmt_obs2_ln6>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; [T_{zx} \; data] \; [T_{zy} \; data]`

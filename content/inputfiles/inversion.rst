@@ -6,7 +6,10 @@ Inversion Input File
 .. _e3dmt_input_inv2:
 
 
-Both the forward and inverse problems are solved using the **e3dMTinv_ver2** executable program. In both cases, the lines of the input file are the same. However in the case of forward modeling, some lines in the input file are not used by the code and can be given any value. The lines of input file are as follows:
+.. important::
+
+    - Both the forward and inverse problems are solved using the **e3dMTinv_ver2** executable program. In both cases, the lines of the input file are the same. However in the case of forward modeling, some lines in the input file are not used by the code and can be given any value.
+    - **e3dMTinv_ver2** can accept observation files that use the original (version 1) or version 2 format. This may change the number of lines in the input file.
 
 .. tabularcolumns:: |L|C|C|
 
@@ -15,11 +18,11 @@ Both the forward and inverse problems are solved using the **e3dMTinv_ver2** exe
 +========+==============================================================+=========================================================================+
 | 1      |:ref:`OcTree Mesh<e3dmt_input_inv2_ln1>`                      | path to octree mesh file                                                |
 +--------+--------------------------------------------------------------+-------------------------------------------------------------------------+
-| 2a     |:ref:`Observation File<e3dmt_input_inv2_ln2a>`                | path to observations file                                               |
+| 2a     |:ref:`Observation File<e3dmt_input_inv2_ln2a>`                | path to observations file (v1 and v2)                                   |
 +--------+--------------------------------------------------------------+-------------------------------------------------------------------------+
-| 2b     |:ref:`Receiver File<e3dmt_input_inv2_ln2b>`                   | path to receivers file (new format only)                                |
+| 2b     |:ref:`Receiver File<e3dmt_input_inv2_ln2b>`                   | path to receivers file (v2 only)                                        |
 +--------+--------------------------------------------------------------+-------------------------------------------------------------------------+
-| 2c     |:ref:`Frequencies File<e3dmt_input_inv2_ln2c>`                | path to frequencies file (new format only)                              |
+| 2c     |:ref:`Frequencies File<e3dmt_input_inv2_ln2c>`                | path to frequencies file (v2 only)                                      |
 +--------+--------------------------------------------------------------+-------------------------------------------------------------------------+
 | 3      |:ref:`Background Conductivity<e3dmt_input_inv2_ln3>`          | set background conductivity                                             |
 +--------+--------------------------------------------------------------+-------------------------------------------------------------------------+
@@ -63,8 +66,6 @@ Both the forward and inverse problems are solved using the **e3dMTinv_ver2** exe
 
     - Example input file for forward modeling (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver2/assets/input_files2/e3dMTver2_fwd.inp>`__ ).
     - Example input file for inversion (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver2/assets/input_files2/e3dMTver2.inp>`__ ).
-
-
 
 
 .. figure:: images/inv_input_ver2.png

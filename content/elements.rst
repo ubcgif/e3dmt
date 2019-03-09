@@ -53,8 +53,8 @@ Here, we describe the formats of supporting files used to run E3DMT executable f
 .. toctree::
     :maxdepth: 1
 
-    Receiver File <files/receiverFile>
     Survey Index File <files/indexFile>
+    Receiver File <files/receiverFile>
     Frequencies Files <files/freqFile>
     Predicted Data File <files/preFile>
     Observations File <files/obsFile>
