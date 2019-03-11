@@ -153,7 +153,7 @@ Octree Mesh
 
 By using an Octree discretization of the earth domain, the areas near sources and likely model
 location can be give a higher resolution while cells grow large at distance. In this manner, the
-necessary refinement can be obtained without added computational expense. Figure(2) shows an
+necessary refinement can be obtained without added computational expense. The figure below shows an
 example of an Octree mesh, with nine cells, eight of which are the base mesh minimum size.
 
 
@@ -174,9 +174,7 @@ only refined when the model begins to change rapidly.
 Discretization of Operators
 ---------------------------
 
-The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`impedance_tensor`, they are required for the solution of the system. The divergence
-operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please
-see :cite:`Haber2012` for a detailed description of the discretization process.
+The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`impedance_tensor`, they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please see :cite:`Haber2012` for a detailed description of the discretization process.
 
 
 Forward Problem
