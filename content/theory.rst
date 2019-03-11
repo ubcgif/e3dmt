@@ -182,7 +182,10 @@ see :cite:`Haber2012` for a detailed description of the discretization process.
 Forward Problem
 ---------------
 
-To solve the forward problem, we must first discretize and solve for the fields in Eq. :eq:`NSEM_system`, where :math:`e^{-i\omega t}` is suppressed. Using finite volume discretization, the electric fields on cell edges (:math:`\mathbf{u_e}`) are obtained by solving the following system at every frequency:
+Director Solver Approach
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+To solve the forward problem, we must first discretize and solve for the fields in Eq. :eq:`NSEM_system`, where :math:`e^{-i\omega t}` is suppressed. Using the Pardiso direct solver package and a finite volume discretization, the electric fields on cell edges (:math:`\mathbf{u_e}`) are obtained by solving the following system at every frequency:
 
 .. math::
     \big [ \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma} \big ] \, \mathbf{u_e} = - i \omega \mathbf{s}
@@ -229,6 +232,40 @@ where the matrix
 depends on the Earth's conductivity. If the fields at each observation location are known, MT data can be obtained using Eq. :eq:`impedance_tensor` and ZTEM data can be obtained using Eq. :eq:`transfer_fcn`. The only thing that is needed is the source term for Eq. :eq:`discrete_e_sys`.
 
 
+.. _theory_solver:
+
+Iterative Solver Approach
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For this approach we decompose the electric field as follows:
+
+.. math::
+    \mathbf{u_e} = \mathbf{a} + \mathbf{G} \phi
+    :label: e_decomposition
+
+where :math:`\mathbf{u_e}` is the fields on cell edges, :math:`\mathbf{a}` is the vector potential, :math:`\phi` is the scalar potential and :math:`\mathbf{G}` is the discrete gradient operator. To compute the electric fields, the `BiCGstab <https://en.wikipedia.org/wiki/Biconjugate_gradient_stabilized_method>`__ algorithm is used to solve the following system:
+
+.. math::
+    \begin{bmatrix} \mathbf{A} (\sigma) + \mathbf{D} & -i\omega \mathbf{M_\sigma G} \\ -i\omega \mathbf{G^T M_\sigma} & -i\omega \mathbf{G^T M_\sigma G} \end{bmatrix}
+    \begin{bmatrix} \mathbf{a} \\ \phi \end{bmatrix} = 
+    \begin{bmatrix} -i\omega\mathbf{s} \\ -i\omega \mathbf{G^T s} \end{bmatrix}
+    :label: maxwell_a_phi
+
+where
+
+.. math::
+    \mathbf{D} = \mathbf{G}  \, diag \big ( \mathbf{A^T_{n2c} V} \, \boldsymbol{\mu^{-1}} \big ) \mathbf{G^T}
+
+
+is a matrix that is added to the (1,1) block of Eq. :eq:`maxwell_a_phi` to improve the stability of the system. Once Eq. :eq:`maxwell_a_phi` is solved, Eq. :eq:`e_decomposition` is used to obtain the electric fields on cell edges. Adjustable parameters for solving Eq. :eq:`maxwell_a_phi` iteratively using BiCGstab are defined as follows:
+
+     - **tol_bicg:** relative tolerance (stopping criteria) when solver is used during forward modeling; i.e. solves Eq. :eq:`discrete_e_sys`. Ideally, this number is very small (~1e-10).
+     - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; i.e. must solve Eq. :eq:`sensitivity_fields` to solve Eq. :eq:`GN_gen`. This value does not need to be as large as the previous parameter (~1e-5).
+     - **max_it_bicg:** maximum number of BICG iterations (~100)
+     - **freq_Aphi:** for frequencies below *freq_Aphi*, an SSOR preconditioner is constructed and used to solve the system more efficiently. However, the construction of preconditioners at each frequency may required a significant portion of additional RAM. To solve the system for all frequencies without using a preconditioner, set this value to a negative number. 
+
+
+
 Source Term
 ^^^^^^^^^^^
 
@@ -254,48 +291,6 @@ Let :math:`\mathbf{u_s}` and :math:`\sigma_s` be the electric fields and 1D cond
 
 
 where :math:`\mathbf{A}` is similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the transferred conductivity :math:`\sigma_s`.
-
-
-.. _theory_solver:
-
-Direct vs. Iterative Solver
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Direct Solver
-~~~~~~~~~~~~~
-
-For this approach we compute the electric fields on cell edges by solving Eq. :eq:`discrete_e_sys` with the Pardiso solver.
-
-Iterative Solver
-~~~~~~~~~~~~~~~~
-
-For this approach we let
-
-.. math::
-	\mathbf{u_e} = \mathbf{a} + \mathbf{G} \phi
-	:label: e_decomposition
-
-where :math:`\mathbf{u_e}` is the fields on cell edges, :math:`\mathbf{a}` is the vector potential, :math:`\phi` is the scalar potential and :math:`\mathbf{G}` is the discrete gradient operator. To compute the electric fields, the `BiCGstab <https://en.wikipedia.org/wiki/Biconjugate_gradient_stabilized_method>`__ algorithm is used to solve the following system:
-
-.. math::
-	\begin{bmatrix} \mathbf{A} (\sigma) + \mathbf{D} & -i\omega \mathbf{M_\sigma G} \\ -i\omega \mathbf{G^T M_\sigma} & -i\omega \mathbf{G^T M_\sigma G} \end{bmatrix}
-	\begin{bmatrix} \mathbf{a} \\ \phi \end{bmatrix} = 
-	\begin{bmatrix} -i\omega\mathbf{s} \\ -i\omega \mathbf{G^T s} \end{bmatrix}
-	:label: maxwell_a_phi
-
-where
-
-.. math::
-	\mathbf{D} = \mathbf{G}  \, diag \big ( \mathbf{A^T_{n2c} V} \, \boldsymbol{\mu^{-1}} \big ) \mathbf{G^T}
-
-
-where :math:`\mathbf{D}` improves the conditioning number of the system. Once Eq. :eq:`maxwell_a_phi` is solved, Eq. :eq:`e_decomposition` is used to obtain the electric fields. Adjustable parameters for solving Eq. :eq:`maxwell_a_phi` iteratively using BiCGstab are defined as follows:
-
-     - **tol_bicg:** relative tolerance (stopping criteria) when solver is used during forward modeling; i.e. solves Eq. :eq:`discrete_e_sys`. Ideally, this number is very small (~1e-10).
-     - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; i.e. must solve Eq. :eq:`sensitivity_fields` to solve Eq. :eq:`GN_gen`. This value does not need to be as large as the previous parameter (~1e-5).
-     - **max_it_bicg:** maximum number of BICG iterations
-     - **freq_Aphi:** for frequencies below *freq_Aphi*, an SSOR preconditioner is constructed and used to solve the system more efficiently. However, the construction of preconditioners at each frequency may required a significant portion of additional RAM. To solve the system for all frequencies without using a preconditioner, set this value to a negative number. 
-
 
 
 .. _theory_sensitivity:
@@ -341,6 +336,7 @@ To differentiate :eq:`Zxx_prime` (or any other element and component of the impe
     \frac{\partial \mathbf{u_e}}{\partial \boldsymbol{\sigma}} = - i\omega \mathbf{A}^{-1} diag(\mathbf{u_e}) \, \mathbf{A_{e2c}^T V }
     :label: sensitivity_fields
 
+.. note:: Eq. :eq:`sensitivity_fields` defines the sensitivities when using the direct solver formulation. Computations involving the sensitivities will differ if the :ref:`iterative solver approach<theory_solver>` is used.
 
 ZTEM Data
 ^^^^^^^^^
@@ -372,6 +368,8 @@ which can be expanded and expressed explicitly in terms of the real and imaginar
 
 To differentiate :eq:`Tzx_prime` (or any other element and component) with respect to the model, we replace :math:`H_j^{(i)}` according to Eq. :eq:`fields_at_loc` and use the chain rule. The final expression contains the derivative of the electric fields on the edges (:math:`\mathbf{u_e}`) with respect to the model with is given by Eq. :eq:`sensitivity_fields`.
 
+
+.. note:: Eq. :eq:`sensitivity_fields` defines the sensitivities when using the direct solver formulation. Computations involving the sensitivities will differ if the :ref:`iterative solver approach<theory_solver>` is used.
 
 
 .. _theory_inv:
