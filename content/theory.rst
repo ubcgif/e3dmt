@@ -38,7 +38,7 @@ solving the system;
 Natural Sources: MT and ZTEM
 ----------------------------
 
-The sources in the magnetotelluric (MT) and Z-axis tipper elecromagnetic (ZTEM) methods are modeled as plane waves originating
+The sources in the magnetotelluric (MT) and Z-axis tipper electromagnetic (ZTEM) methods are modeled as plane waves originating
 from natural phenomenon. These waves can be of very low frequency (< 1 Hz) and very high
 energy, making it possible to image very deep targets. This also implies that the source term is
 zero inside the domain of interest, and therefore the source term on the boundaries becomes very
@@ -174,8 +174,7 @@ only refined when the model begins to change rapidly.
 Discretization of Operators
 ---------------------------
 
-The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`impedance_tensor`, they are required for the solution of the system. The divergence
-operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please
+The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`impedance_tensor` or :eq:`transfer_fcn`, they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please
 see :cite:`Haber2012` for a detailed description of the discretization process.
 
 
