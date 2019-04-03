@@ -66,33 +66,36 @@ Also included are the following Octree utility programs:
       - refine octree
 
 
-.. E3DMT version 2 (2017) Program Library Content
-.. ----------------------------------------------
-
-.. The main executable programs within the E3DMT version 2 (2017) program library are:
-
-..     - **octree_mesh_mt:** Creates the OcTree used in forward simulations and inversions from survey data
-..     - **blk3cellOct:** Creates simple block conductivity models on the OcTree mesh
-..     - **e3dMTinv_ver2:** Is used for both forward modeling and inverting natural source electromagnetic data
-
-
-
-
 Licensing
 ---------
 
 Licensing for commercial use is managed by distributors, not by the UBC-GIF research group.
 
 
-Installing E3DMT
-----------------
+Installation
+------------
+
+E3DMT Executables
+^^^^^^^^^^^^^^^^^
 
 There is no automatic installer currently available for E3DMT version 1. Please follow the following steps in order to use the software:
 
    1. Extract all files provided from the given zip-based archive and place them all together in a new folder.
    2. Add this directory as new path to your environment variables.
-   3. If you are running the software on a cluster of computers, please install the Message Pass Interface (MPI) on your computer and add it to your path in addition from
-   4. Make sure to create a separate directory for each new inversion, where all the associated files will be stored. Do not store anything in the bin directory other than executable applications and Graphical User Interface applications (GUIs).
+   3. Make sure to create a separate directory for each new inversion, where all the associated files will be stored. Do not store anything in the bin directory other than executable applications and Graphical User Interface applications (GUIs).
+
+MPI Executables
+^^^^^^^^^^^^^^^
+
+Message passaging interface (MPI) programming allows E3DMT version 1 to utilize parallel computing. Even if the code is being run on a single machine, the user is **required** to download the necessary MPI package to use the E3DMT version 1 executables. To set up MPI:
+
+    1. Download and install:
+    	
+    	- `Microsoft MPI v10.0 <https://www.microsoft.com/en-us/download/details.aspx?id=57467>`__ : Required for window machines
+    	- `MPICH <https://www.mpich.org/downloads/>`__ : Required for Linux machines
+    	- `Open MPI v4 <https://www.open-mpi.org/software/ompi/v4.0/>`__ : Optional programming to set MPI threads
+
+    2. Path the folders containing MPI executables to your environment variables.
 
 
 
