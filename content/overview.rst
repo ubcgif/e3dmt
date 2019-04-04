@@ -71,7 +71,7 @@ There is no automatic installer currently available for E3DMT version 2. Please 
 
    1. Extract all files provided from the given zip-based archive and place them all together in a new folder.
    2. Add this directory as new path to your environment variables.
-   3. If you are running the software on a cluster of computers, please install the Message Pass Interface (MPI) on your computer and add it to your path in addition from
+   3. Make sure to create a separate directory for each new inversion, where all the associated files will be stored. Do not store anything in the bin directory other than executable applications and Graphical User Interface applications (GUIs).
 
 MPI Executables
 ^^^^^^^^^^^^^^^
