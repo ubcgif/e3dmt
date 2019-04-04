@@ -24,7 +24,7 @@ Format
 The lines of a data file with one or more transmitters are formatted as follows:
 
 | **N_TRX** :math:`\;` :ref:`A<e3dmt_obs_ln1>`
-| **!IGNORE** :math:`\;` :ref:`B<e3dmt_obs_ln2>`
+| **IGNORE** :math:`\;` :ref:`B<e3dmt_obs_ln2>`
 |
 | **DATATYPE** :math:`\;` :ref:`C<e3dmt_obs_ln3>`
 | **FREQUENCY** :math:`\;` :ref:`D<e3dmt_obs_ln4>`

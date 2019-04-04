@@ -33,7 +33,7 @@ Version 2 of the E3DMT code makes use of the following executables:
 Main Input Files
 ----------------
 
-Here, we describe the main input files for executables contained with the E3DMT version 2 coding package.
+Here, we describe the main input files for executables contained with the E3DMT version 2 package.
 
 .. toctree::
     :maxdepth: 2
@@ -62,6 +62,7 @@ Here, we describe the formats of supporting files used to run E3DMT executable f
     Octree Mesh File <files/octree_mesh>
     Model File <files/model>
     Model and Face Weights Files <files/weights>
+    Bounds File <files/bounds>
 
 
 

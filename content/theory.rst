@@ -375,6 +375,8 @@ The inverse problem is solved by minimizing the following global objective funct
 where :math:`\phi_d` is the data misfit, :math:`\phi_m` is the model objective function and :math:`\beta` is the trade-off parameter. The data misfit ensures the recovered model adequately explains the set of field observations. The model objective function adds geological constraints to the recovered model. The trade-off parameter weights the relative emphasis between fitting the data and imposing geological structures.
 
 
+.. _theory_inv_misfit:
+
 Data Misfit
 ^^^^^^^^^^^
 

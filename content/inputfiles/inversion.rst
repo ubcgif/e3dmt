@@ -125,7 +125,7 @@ Line Descriptions
 
 .. important::
 
-    If data are only being forward modeled, only the :ref:`background susceptibility model<e3dmt_input_inv2_ln6>`, :ref:`active topography cells<e3dmt_input_inv2_ln7>` and :ref:`tol_ipcg max_iter_ipcg<e3dmt_input_inv2_ln16>` fields are relevant. **However**, the remaining fields must not be empty and must have correct syntax for the code to run.
+    If data are only being forward modeled, only the :ref:`background susceptibility model<e3dmt_input_inv2_ln6>`, :ref:`active topography cells<e3dmt_input_inv2_ln7>`, :ref:`memory options <e3dmt_input_inv2_ln20>` and :ref:`phase convention <e3dmt_input_inv2_ln20>` fields are relevant. **However**, the remaining fields must not be empty and must have correct syntax for the code to run.
 
 
 .. _e3dmt_input_inv2_ln5:
@@ -138,11 +138,11 @@ Line Descriptions
 
 .. _e3dmt_input_inv2_ln7:
 
-    - **Active Topography Cells:** Here, the user can choose to specify the cells which lie below the surface topography. To do this, the user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
+    - **Active Topography Cells:** Here the user specifies the cells which lie below the surface topography. To do this, the user supplies the file path to an active cells model file. The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above.
 
 .. _e3dmt_input_inv2_ln8:
 
-    - **Active Model Cells:** Here, the user can choose to specify the model cells which are active during the inversion. To do this, the user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active cells model has values 1 for cells lying below the surface topography and values 0 for cells lying above. Values for inactive cells are provided by the background conductivity model.
+    - **Active Model Cells:** Here, the user can choose to specify the model cells which are active during the inversion. To do this, the user may supply the file path to an active cells model file or type "ALL_ACTIVE". The active model cells are given a value of 1 and inactive cells are given a value of 0. Recovered values for inactive cells are provided by the background conductivity model. All cells lying above surface topography will have a conductivity value equal to air values.
 
 .. _e3dmt_input_inv2_ln9:
 
@@ -179,7 +179,10 @@ Line Descriptions
 
 .. _e3dmt_input_inv2_ln14:
 
-    - **Chi Factor:** The chi factor defines the target misfit for the inversion. A chi factor of 1 means the target misfit is equal to the total number of data observations. For more, see the `GIFtools cookbook <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Beta.html>`__ .
+    - **Chi Factor:** The chi factor defines the target misfit for the inversion (*DEFAULT = 1*); see the `GIFtools cookbook <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Beta.html>`__ . Where :math:`\phi_d` is the :ref:`data misfit <theory_inv_misfit>` , :math:`N` is the number of data and :math:`\chi_{fact}` is the chi factor, the inversion terminates when:
+
+.. math::
+    \phi_d \leq \chi_{fact} \times N 
 
 .. _e3dmt_input_inv2_ln15:
 
@@ -191,7 +194,7 @@ Line Descriptions
 
 .. _e3dmt_input_inv2_ln17:
 
-    - **Reference Model Update:** Here, the user specifies whether the reference model is updated at each inversion step result. If so, enter "CHANGE_MREF". If not, enter "NOT_CHANGE_MREF".
+    - **Reference Model Update:** If the flag "NOT_CHANGE_MREF" is entered, the reference model remains unchanged throughout the inversion. If the flag "CHANGE_MREF" is entered, the current model is set as the reference model for the next beta iteration.
 
 .. _e3dmt_input_inv2_ln18:
 
@@ -199,11 +202,15 @@ Line Descriptions
 
 .. _e3dmt_input_inv2_ln19:
 
-    - **Bounds:** Bound constraints on the recovered model. Choose "BOUNDS_CONST" and enter the values of the minimum and maximum model conductivity; example "BOUNDS_CONST 1E-6 0.1". Enter "BOUNDS_NONE" if the inversion is unbounded, or if there is no a-prior information about the subsurface model.
+    - **Bounds:** Bound constraints on the recovered model.
+
+        - Enter "BOUNDS_NONE" if the inversion is unbounded, or if there is no a-prior information about the subsurface model.
+        - Choose "BOUNDS_CONST" and enter the values of the minimum and maximum model conductivity; example "BOUNDS_CONST 1E-6 0.1".
+        - Enter the file path to a :ref:`bounds file <boundsFile>`
 
 .. _e3dmt_input_inv2_ln20:
 
-    - **Memory Options:** This code uses a factorization to solve the forward system at each frequency. These factorizations must be stored. By using the flag 'FACTOR_IC' (in cpu), factorizations are stored within a computer's RAM. Although this is faster, larger problems cannot be solved if insufficient temporary memory is available. The factorizations are stored in permanent memory (disk) if the flag 'FACTOR_OOC' (out of cpu) is used followed by the path to a directory. This is slower because the program must read these files many times. The second options is ill-advised if files are being transferred over a network.
+    - **Memory Options:** This code uses a factorization to solve the forward system at each frequency. These factorizations must be stored. By using the flag 'FACTOR_IC' (in core), factorizations are stored within a computer's RAM. Although this is faster, larger problems cannot be solved if insufficient temporary memory is available. The factorizations are stored in permanent memory (disk/solid state) if the flag 'FACTOR_OOC' (out of core) is used followed by the path to a directory. This is slower because the program must read these files many times. The second options is ill-advised if files are being transferred over a network.
 
 
 .. _e3dmt_input_inv2_ln21:
@@ -217,25 +224,25 @@ Line Descriptions
 Details regarding boundary conditions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The way background models are used to determine the boundary conditions for the problem depends on :ref:`background conductivity (line 5)<e3dmt_input_inv2_ln3>` and the :ref:`active topography cells (line 9) <e3dmt_input_inv2_ln7>`. This can be explained as follows:
+The way background models are used to determine the boundary conditions for the problem depends on :ref:`background conductivity <e3dmt_input_inv2_ln3>` and the :ref:`active topography cells <e3dmt_input_inv2_ln7>`. This can be explained as follows:
 
 **1DBACKGROUND:**
 
-        - Assume *VALUE* is used to define the 1D background model (line 5) and the flag *ALL_ACTIVE* is used to define active topography cells (line 9). Then the boundary conditions are obtained by solving the fields for a whole space. This approach is strongly discouraged!
+        - Assume *VALUE* is used to define the 1D :ref:`background conductivity model <e3dmt_input_inv2_ln3>` and the flag *ALL_ACTIVE* is used to define :ref:`active topography cells <e3dmt_input_inv2_ln7>`. Then the boundary conditions are obtained by solving the fields for a whole space. This approach is strongly discouraged!
 
-        - Assume *VALUE* is used to define the 1D background model (line 5) and an *active cells model* is used to define the active topography cells (line 9). Then the highest surface elevation in the active cells model is used as the surface elevation for the 1D model. Below this surface, the background conductivity is equal to the specified value. Above this surface, the background conductivity is set to air.
+        - Assume *VALUE* is used to define the 1D :ref:`background conductivity model <e3dmt_input_inv2_ln3>` and an *active cells model* is used to define the :ref:`active topography cells <e3dmt_input_inv2_ln7>`. Then the highest surface elevation in the active cells model is used as the surface elevation for the 1D model. Below this surface, the background conductivity is equal to the specified value. Above this surface, the background conductivity is set to air.
 
-        - Assume a *1D model* defines the background conductivity (line 5) and the flag *ALL_ACTIVE* is used to define active topography cells (line 9). The top of the 1D model corresponds to the top of the OcTree mesh when solving the 1D problem. As a result, it is important to include air cells in the 1D model.
+        - Assume a *1D model* defines the :ref:`background conductivity model <e3dmt_input_inv2_ln3>` and the flag *ALL_ACTIVE* is used to define :ref:`active topography cells <e3dmt_input_inv2_ln7>`. The top of the 1D model corresponds to the top of the OcTree mesh when solving the 1D problem. As a result, it is important to include air cells in the 1D model.
 
-        - Assume a *1D model* defines the background conductivity (line 5) and an *active cells model* is used to define the active topography cells (line 9). Then the highest surface elevation in the active cells model is used as the surface elevation for the 1D model. The 1D problem is still solved and the top of the 1D model still corresponds to the top of the OcTree mesh. However, all layers above the surface are set to air regardless of the values specified in the 1D model.
+        - Assume a *1D model* defines the :ref:`background conductivity model <e3dmt_input_inv2_ln3>` and an *active cells model* is used to define the :ref:`active topography cells <e3dmt_input_inv2_ln7>`. Then the highest surface elevation in the active cells model is used as the surface elevation for the 1D model. The 1D problem is still solved and the top of the 1D model still corresponds to the top of the OcTree mesh. However, all layers above the surface are set to air regardless of the values specified in the 1D model.
 
 
 **3DBACKGROUND:**
 
-        - Assume *VALUE* is used to define the 3D background model (line 5) and the flag *ALL_ACTIVE* is used to define active topography cells (line 9). Then the boundary conditions are obtained by solving the fields for a whole space. This approach is strongly discouraged!
+        - Assume *VALUE* is used to define the 3D :ref:`background conductivity model <e3dmt_input_inv2_ln3>` and the flag *ALL_ACTIVE* is used to define :ref:`active topography cells <e3dmt_input_inv2_ln7>`. Then the boundary conditions are obtained by solving the fields for a whole space. This approach is strongly discouraged!
 
-        - Assume *VALUE* is used to define the 3D background model (line 5) and an *active cells model* is used to define the active topography cells (line 9). A 3D problem is solved where all cells below the surface are set to the specified value and all the cells above the surface are set to air.
+        - Assume *VALUE* is used to define the 3D :ref:`background conductivity model <e3dmt_input_inv2_ln3>` and an *active cells model* is used to define the :ref:`active topography cells <e3dmt_input_inv2_ln7>`. A 3D problem is solved where all cells below the surface are set to the specified value and all the cells above the surface are set to air.
 
-        - Assume a *3D model* defines the background conductivity (line 5) and the flag *ALL_ACTIVE* is used to define active topography cells (line 9). A 3D problem is solved for the specified background model.
+        - Assume a *3D model* defines the :ref:`background conductivity model <e3dmt_input_inv2_ln3>` and the flag *ALL_ACTIVE* is used to define :ref:`active topography cells <e3dmt_input_inv2_ln7>`. A 3D problem is solved for the specified background model.
 
-        - Assume a *1D model* defines the background conductivity (line 5) and an *active cells model* is used to define the active topography cells (line 9). A 3D problem is solved where all cells above the surface are set to air, regardless of the values specified in the model.
+        - Assume a *1D model* defines the :ref:`background conductivity model <e3dmt_input_inv2_ln3>` and an *active cells model* is used to define the :ref:`active topography cells <e3dmt_input_inv2_ln7>`. A 3D problem is solved where all cells above the surface are set to air, regardless of the values specified in the model.
