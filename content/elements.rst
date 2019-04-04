@@ -20,21 +20,11 @@ E3DMT version 1 makes use of the following executables:
     - **3DModel2Octree:** Converts models from tensor to Octree meshes
     - **interface_weights:** Creates interface weights
 
-.. Version 2 (2017)
-.. ----------------
-
-.. .. important:: This generation of the E3DMT code is meant to be maintained longterm.
-
-.. Version 2 of the E3DMT code makes use of the following executables:
-
-..     - **e3dMTinv_ver2:** An all in one executable that can forward model or invert MT or ZTEM data
-..     - **octree_mesh_mt:** Creates an octree mesh based on the :ref:`receiver file<receiverFile>`
-..     - **blk3cellOct:** Creates models from a set of blocks directly on the octree mesh
 
 Main Input Files
 ----------------
 
-Here, we describe the main input files for executables contained with the E3DMT version 1 coding package.
+Here, we describe the main input files for executables contained with the E3DMT version 1 package.
 
 .. toctree::
     :maxdepth: 2
