@@ -76,7 +76,7 @@ There is no automatic installer currently available for E3DMT version 2. Please 
 MPI Executables
 ^^^^^^^^^^^^^^^
 
-Message passaging interface (MPI) programming allows E3DMT version 2 to utilize parallel computing. Even if the code is being run on a single machine, the user is **required** to download the necessary MPI package to use the E3DMT version 1 executables. To set up MPI:
+Message passaging interface (MPI) programming allows E3DMT version 2 to utilize parallel computing. Even if the code is being run on a single machine, the user is **required** to download the necessary MPI package to use the E3DMT version 2 executables. To set up MPI:
 
     1. Download and install:
     	
