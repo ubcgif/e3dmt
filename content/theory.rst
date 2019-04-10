@@ -199,23 +199,25 @@ where :math:`\mathbf{V}` is a diagonal matrix containing  all cell volumes, :mat
 
 The right-hand side :math:`\mathbf{s}` has values :math:`\mathbf{E_0}` on the boundary and 0 at inner edges. Values for :math:`\mathbf{E_0}` are obtained by solving a set of 1D problems for a given planewave polarization; either :math:`\mathbf{E_0} = E_x \, \hat{x}` or :math:`\mathbf{E_0} = E_y \, \hat{y}`. For explanation of the 1D solution, see Ward and Hohmann.
 
-Once the electric field on cell edges has been computed, the electric (:math:`\mathbf{E}`) and magnetic (:math:`\mathbf{H}`) fields at observation locations can be obtain via the following:
+Once the electric field on cell edges has been computed, we must project to the receivers. For E3DMT version 2, straight wires of finite length are used to measure the average electric field along the path of the wire. And closed wire loops are used to measure the average magnetic field perpendicular to the loop.
+
+Electric field measurements (:math:`E`) are obtained by integrating the electric field (:math:`\mathbf{e}`) along the path of the wire to compute the voltage, then dividing by the length of the wire. In practice, electric field measurements can be approximated accurately by applying a linear projection matrix (:math:`\mathbf{P_e}`) to the electric fields computed on cell edges:
+
+.. math::
+    E = \frac{1}{| \mathbf{r_2 - r_1 }| } \int_{\mathbf{r_1}}^{\mathbf{r_2}} \mathbf{e} \cdot d\mathbf{l} \approx \mathbf{P_e \, u_e}
+
+
+Magnetic field measurements (:math:`H`) are obtained by integrating the electric field (:math:`\mathbf{e}`) over the path of close loop to compute the EMF. The EMF is then divided by :math:`i\omega \mu_0 A`, where :math:`A` is the cross-sectional area, to represent the quantity in terms of the average magnetic field normal to the receiver. In practice, magnetic field measurements can be approximated accurately by applying a linear projection matrix (:math:`\mathbf{P_h}`) to the electric fields computed on cell edges:
+
+.. math::
+    H = \frac{1}{i\omega \mu_0 A} \int_C \mathbf{e} \cdot d\mathbf{l} \approx \mathbf{P_h \, u_e}
+
+To obtain impedance tensor (MT) or ZTEM data, we need the electric and/or magnetic fields for two orthogonal source polarizations; generally one in the x direction and one in the y direction. Let :math:`\mathbf{s}^{(1)}` and :math:`\mathbf{s}^{(2)}` denote the right-hand sides for source fields generated for each polarization. And let :math:`\mathbf{u_e}^{(1)}` and :math:`\mathbf{u_e}^{(2)}` denote the corresponding solutions for the electric fields on the edges. Then the average electric field (Ex or Ey) or average magnetic field (Hx, Hy or Hz) for some receiver is given by:
 
 .. math::
     \begin{align}
-    \mathbf{E} &= \mathbf{Q_e \, u_e} = \mathbf{Q_c \, A_{e2c} \, u_e} \\
-    \mathbf{H} &= \mathbf{Q_h \, u_e} = \frac{1}{i \omega} \mathbf{Q_c} \, diag(\boldsymbol{\mu}^{-1}) \, \mathbf{A_{f2c} C \, u_e}
-    \end{align}
-    :label: fields_projected
-
-where :math:`\mathbf{Q_c}` represents the appropriate projection matrix from cell centers to a particular receiver (Ex, Ey, Hx, Hy or Hz).
-
-To obtain impedance tensor (MT) or ZTEM data, we need the electric and/or magnetic fields for two orthogonal source polarizations; generally one in the x direction and one in the y direction. Let :math:`\mathbf{s}^{(1)}` and :math:`\mathbf{s}^{(2)}` denote the right-hand sides for source fields generated for each polarization. And let :math:`\mathbf{u_e}^{(1)}` and :math:`\mathbf{u_e}^{(2)}` denote the corresponding solutions for the electric fields on the edges. Then the electric fields (Ex or Ey) and magnetic fields (Hx, Hy or Hz) at some observation location can be expressed as:
-
-.. math::
-    \begin{align}
-    E^{(j)} &= \mathbf{Q_e \, u_e}^{(j)} = -i\omega \mathbf{Q_e \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2 \\
-    H^{(j)} &= \mathbf{Q_h \, u_e}^{(j)} = -i\omega \mathbf{Q_h \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2
+    E^{(j)} &= \mathbf{P_e \, u_e}^{(j)} = -i\omega \mathbf{P_e \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2 \\
+    H^{(j)} &= \mathbf{P_h \, u_e}^{(j)} = -i\omega \mathbf{P_h \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2
     \end{align}
     :label: fields_at_loc
 
