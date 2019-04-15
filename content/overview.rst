@@ -80,9 +80,8 @@ Message passaging interface (MPI) programming allows E3DMT version 2 to utilize 
 
     1. Download and install:
     	
-    	- `Microsoft MPI v10.0 <https://www.microsoft.com/en-us/download/details.aspx?id=57467>`__ : Required for window machines
+    	- `Microsoft MPI v10.0 <https://www.microsoft.com/en-us/download/details.aspx?id=57467>`__ : Required for windows machines
     	- `MPICH <https://www.mpich.org/downloads/>`__ : Required for Linux machines
-    	- `Open MPI v4 <https://www.open-mpi.org/software/ompi/v4.0/>`__ : Optional programming to set MPI threads
 
     2. Path the folders containing MPI executables to your environment variables.
 
