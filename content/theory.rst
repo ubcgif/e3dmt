@@ -552,7 +552,7 @@ where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` i
 1. The gradient is sufficiently small, i.e.:
 
 .. math::
-    \| \nabla \phi_k \|^2 < \textrm{tol_nl}
+    \| \nabla \phi_k \|^2 < asdfasd
 
 2. The smallest component of the model perturbation its small in absolute value, i.e.:
 
