@@ -4,7 +4,7 @@ Background Theory
 =================
 
 This section aims to provide the user with a basic review of the physics, discretization, and optimization techniques used to solve the frequency domain quasi-static electromagnetics problem. It
-is assumed that the user has some background in these areas. For further reading see :cite:`Nabighian1991`.
+is assumed that the user has some background in these areas. For further reading see :cite:`Nabighian1991` .
 
 .. important::
     The theory provided on this page works for the following right-handed coordinate systems:
@@ -27,7 +27,7 @@ equations are:
     \end{align}
     :label:
 
-where :math:`\mathbf{E}` and :math:`\mathbf{H}` are the electric and magnetic fields, :math:`\mathbf{s}` is some external source and :math:`e^{-i\omega t}` is suppressed. Symbols :math:`\mu`, :math:`\sigma` and :math:`\omega` are the magnetic permeability, conductivity, and angular frequency, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
+where :math:`\mathbf{E}` and :math:`\mathbf{H}` are the electric and magnetic fields, :math:`\mathbf{s}` is some external source and :math:`e^{-i\omega t}` is suppressed. Symbols :math:`\mu`, :math:`\sigma` and :math:`\omega` are the magnetic permeability, conductivity, and angular frequency, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991` ). By doing so, some difficulties arise when
 solving the system;
 
     - the curl operator has a non-trivial null space making the resulting linear system highly ill-conditioned
@@ -159,7 +159,7 @@ example of an Octree mesh, with nine cells, eight of which are the base mesh min
 
 .. figure:: images/OcTree.png
      :align: center
-     :width: 700
+     :width: 400
 
 
 When working with Octree meshes, the underlying mesh is defined as a regular 3D orthogonal grid where
