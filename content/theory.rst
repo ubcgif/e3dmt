@@ -4,7 +4,7 @@ Background Theory
 =================
 
 This section aims to provide the user with a basic review of the physics, discretization, and optimization techniques used to solve the frequency domain quasi-static electromagnetics problem. It
-is assumed that the user has some background in these areas. For further reading see :cite:`Nabighian1991` .
+is assumed that the user has some background in these areas. For further reading see :cite:`Nabighian1991`.
 
 .. important::
     The theory provided on this page works for the following right-handed coordinate systems:
@@ -27,7 +27,7 @@ equations are:
     \end{align}
     :label:
 
-where :math:`\mathbf{E}` and :math:`\mathbf{H}` are the electric and magnetic fields, :math:`\mathbf{s}` is some external source and :math:`e^{-i\omega t}` is suppressed. Symbols :math:`\mu`, :math:`\sigma` and :math:`\omega` are the magnetic permeability, conductivity, and angular frequency, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991` ). By doing so, some difficulties arise when
+where :math:`\mathbf{E}` and :math:`\mathbf{H}` are the electric and magnetic fields, :math:`\mathbf{s}` is some external source and :math:`e^{-i\omega t}` is suppressed. Symbols :math:`\mu`, :math:`\sigma` and :math:`\omega` are the magnetic permeability, conductivity, and angular frequency, respectively. This formulation assumes a quasi-static mode so that the system can be viewed as a diffusion equation (Weaver, 1994; Ward and Hohmann, 1988 in :cite:`Nabighian1991`). By doing so, some difficulties arise when
 solving the system;
 
     - the curl operator has a non-trivial null space making the resulting linear system highly ill-conditioned
@@ -38,7 +38,7 @@ solving the system;
 Natural Sources: MT and ZTEM
 ----------------------------
 
-The sources in the magnetotelluric (MT) and Z-axis tipper electromagnetic (ZTEM) methods are modeled as plane waves originating
+The sources in the magnetotelluric (MT) and Z-axis tipper elecromagnetic (ZTEM) methods are modeled as plane waves originating
 from natural phenomenon. These waves can be of very low frequency (< 1 Hz) and very high
 energy, making it possible to image very deep targets. This also implies that the source term is
 zero inside the domain of interest, and therefore the source term on the boundaries becomes very
@@ -153,13 +153,13 @@ Octree Mesh
 
 By using an Octree discretization of the earth domain, the areas near sources and likely model
 location can be give a higher resolution while cells grow large at distance. In this manner, the
-necessary refinement can be obtained without added computational expense. Figure(2) shows an
+necessary refinement can be obtained without added computational expense. The figure below shows an
 example of an Octree mesh, with nine cells, eight of which are the base mesh minimum size.
 
 
 .. figure:: images/OcTree.png
      :align: center
-     :width: 400
+     :width: 700
 
 
 When working with Octree meshes, the underlying mesh is defined as a regular 3D orthogonal grid where
@@ -175,17 +175,13 @@ only refined when the model begins to change rapidly.
 Discretization of Operators
 ---------------------------
 
-The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`impedance_tensor` or :eq:`transfer_fcn`, they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please
-see :cite:`Haber2012` for a detailed description of the discretization process.
+The operators div, grad, and curl are discretized using a finite volume formulation. Although div and grad do not appear in :eq:`impedance_tensor`, they are required for the solution of the system. The divergence operator is discretized in the usual flux-balance approach, which by Gauss' theorem considers the current flux through each face of a cell. The nodal gradient (operates on a function with values on the nodes) is obtained by differencing adjacent nodes and dividing by edge length. The discretization of the curl operator is computed similarly to the divergence operator by utilizing Stokes theorem by summing the magnetic field components around the edge of each face. Please see :cite:`Haber2012` for a detailed description of the discretization process.
 
 
 Forward Problem
 ---------------
 
-Director Solver Approach
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-To solve the forward problem, we must first discretize and solve for the fields in Eq. :eq:`NSEM_system`, where :math:`e^{-i\omega t}` is suppressed. Using the Pardiso direct solver package and a finite volume discretization, the electric fields on cell edges (:math:`\mathbf{u_e}`) are obtained by solving the following system at every frequency:
+To solve the forward problem, we must first discretize and solve for the fields in Eq. :eq:`NSEM_system`, where :math:`e^{-i\omega t}` is suppressed. Using finite volume discretization, the electric fields on cell edges (:math:`\mathbf{u_e}`) are obtained by solving the following system at every frequency:
 
 .. math::
     \big [ \mathbf{C^T \, M_\mu \, C} + i\omega \mathbf{M_\sigma} \big ] \, \mathbf{u_e} = - i \omega \mathbf{s}
@@ -203,23 +199,25 @@ where :math:`\mathbf{V}` is a diagonal matrix containing  all cell volumes, :mat
 
 The right-hand side :math:`\mathbf{s}` has values :math:`\mathbf{E_0}` on the boundary and 0 at inner edges. Values for :math:`\mathbf{E_0}` are obtained by solving a set of 1D problems for a given planewave polarization; either :math:`\mathbf{E_0} = E_x \, \hat{x}` or :math:`\mathbf{E_0} = E_y \, \hat{y}`. For explanation of the 1D solution, see Ward and Hohmann.
 
-Once the electric field on cell edges has been computed, the electric (:math:`\mathbf{E}`) and magnetic (:math:`\mathbf{H}`) fields at observation locations can be obtain via the following:
+Once the electric field on cell edges has been computed, we must project to the receivers. For E3DMT version 2, straight wires of finite length are used to measure the average electric field along the path of the wire. And closed wire loops are used to measure the average magnetic field perpendicular to the loop.
+
+Electric field measurements (:math:`E`) are obtained by integrating the electric field (:math:`\mathbf{e}`) along the path of the wire to compute the voltage, then dividing by the length of the wire. In practice, electric field measurements can be approximated accurately by applying a linear projection matrix (:math:`\mathbf{P_e}`) to the electric fields computed on cell edges:
+
+.. math::
+    E = \frac{1}{| \mathbf{r_2 - r_1 }| } \int_{\mathbf{r_1}}^{\mathbf{r_2}} \mathbf{e} \cdot d\mathbf{l} \approx \mathbf{P_e \, u_e}
+
+
+Magnetic field measurements (:math:`H`) are obtained by integrating the electric field (:math:`\mathbf{e}`) over the path of close loop to compute the EMF. The EMF is then divided by :math:`i\omega \mu_0 A`, where :math:`A` is the cross-sectional area, to represent the quantity in terms of the average magnetic field normal to the receiver. In practice, magnetic field measurements can be approximated accurately by applying a linear projection matrix (:math:`\mathbf{P_h}`) to the electric fields computed on cell edges:
+
+.. math::
+    H = \frac{1}{i\omega \mu_0 A} \int_C \mathbf{e} \cdot d\mathbf{l} \approx \mathbf{P_h \, u_e}
+
+To obtain impedance tensor (MT) or ZTEM data, we need the electric and/or magnetic fields for two orthogonal source polarizations; generally one in the x direction and one in the y direction. Let :math:`\mathbf{s}^{(1)}` and :math:`\mathbf{s}^{(2)}` denote the right-hand sides for source fields generated for each polarization. And let :math:`\mathbf{u_e}^{(1)}` and :math:`\mathbf{u_e}^{(2)}` denote the corresponding solutions for the electric fields on the edges. Then the average electric field (Ex or Ey) or average magnetic field (Hx, Hy or Hz) for some receiver is given by:
 
 .. math::
     \begin{align}
-    \mathbf{E} &= \mathbf{Q_e \, u_e} = \mathbf{Q_c \, A_{e2c} \, u_e} \\
-    \mathbf{H} &= \mathbf{Q_h \, u_e} = \frac{1}{i \omega} \mathbf{Q_c} \, diag(\boldsymbol{\mu}^{-1}) \, \mathbf{A_{f2c} C \, u_e}
-    \end{align}
-    :label: fields_projected
-
-where :math:`\mathbf{Q_c}` represents the appropriate projection matrix from cell centers to a particular receiver (Ex, Ey, Hx, Hy or Hz).
-
-To obtain impedance tensor (MT) or ZTEM data, we need the electric and/or magnetic fields for two orthogonal source polarizations; generally one in the x direction and one in the y direction. Let :math:`\mathbf{s}^{(1)}` and :math:`\mathbf{s}^{(2)}` denote the right-hand sides for source fields generated for each polarization. And let :math:`\mathbf{u_e}^{(1)}` and :math:`\mathbf{u_e}^{(2)}` denote the corresponding solutions for the electric fields on the edges. Then the electric fields (Ex or Ey) and magnetic fields (Hx, Hy or Hz) at some observation location can be expressed as:
-
-.. math::
-    \begin{align}
-    E^{(j)} &= \mathbf{Q_e \, u_e}^{(j)} = -i\omega \mathbf{Q_e \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2 \\
-    H^{(j)} &= \mathbf{Q_h \, u_e}^{(j)} = -i\omega \mathbf{Q_h \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2
+    E^{(j)} &= \mathbf{P_e \, u_e}^{(j)} = -i\omega \mathbf{P_e \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2 \\
+    H^{(j)} &= \mathbf{P_h \, u_e}^{(j)} = -i\omega \mathbf{P_h \, A}(\sigma)^{-1} \, \mathbf{s}^{(j)} \;\;\; \textrm{for} \;\;\; j=1,2
     \end{align}
     :label: fields_at_loc
 
@@ -232,42 +230,11 @@ where the matrix
 depends on the Earth's conductivity. If the fields at each observation location are known, MT data can be obtained using Eq. :eq:`impedance_tensor` and ZTEM data can be obtained using Eq. :eq:`transfer_fcn`. The only thing that is needed is the source term for Eq. :eq:`discrete_e_sys`.
 
 
-.. _theory_solver:
-
-Iterative Solver Approach
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-For this approach we decompose the electric field as follows:
-
-.. math::
-    \mathbf{u_e} = \mathbf{a} + \mathbf{G} \phi
-    :label: e_decomposition
-
-where :math:`\mathbf{u_e}` is the fields on cell edges, :math:`\mathbf{a}` is the vector potential, :math:`\phi` is the scalar potential and :math:`\mathbf{G}` is the discrete gradient operator. To compute the electric fields, the `BiCGstab <https://en.wikipedia.org/wiki/Biconjugate_gradient_stabilized_method>`__ algorithm is used to solve the following system:
-
-.. math::
-    \begin{bmatrix} \mathbf{A} (\sigma) + \mathbf{D} & -i\omega \mathbf{M_\sigma G} \\ -i\omega \mathbf{G^T M_\sigma} & -i\omega \mathbf{G^T M_\sigma G} \end{bmatrix}
-    \begin{bmatrix} \mathbf{a} \\ \phi \end{bmatrix} = 
-    \begin{bmatrix} -i\omega\mathbf{s} \\ -i\omega \mathbf{G^T s} \end{bmatrix}
-    :label: maxwell_a_phi
-
-where
-
-.. math::
-    \mathbf{D} = \mathbf{G}  \, diag \big ( \mathbf{A^T_{n2c} V} \, \boldsymbol{\mu^{-1}} \big ) \mathbf{G^T}
-
-
-is a matrix that is added to the (1,1) block of Eq. :eq:`maxwell_a_phi` to improve the stability of the system. Once Eq. :eq:`maxwell_a_phi` is solved, Eq. :eq:`e_decomposition` is used to obtain the electric fields on cell edges. Adjustable parameters for solving Eq. :eq:`maxwell_a_phi` iteratively using BiCGstab are defined as follows:
-
-     - **tol_bicg:** relative tolerance (stopping criteria) when solver is used during forward modeling; i.e. solves Eq. :eq:`discrete_e_sys`. Ideally, this number is very small (~1e-10).
-     - **tol_ipcg_bicg:** relative tolerance (stopping criteria) when solver needed in computation of :math:`\delta m` during Gauss Newton iteration; i.e. must solve Eq. :eq:`sensitivity_fields` to solve Eq. :eq:`GN_gen`. This value does not need to be as large as the previous parameter (~1e-5).
-     - **max_it_bicg:** maximum number of BICG iterations (~100)
-     - **freq_Aphi:** for frequencies below *freq_Aphi*, an SSOR preconditioner is constructed and used to solve the system more efficiently. However, the construction of preconditioners at each frequency may required a significant portion of additional RAM. To solve the system for all frequencies without using a preconditioner, set this value to a negative number. 
-
-
-
 Source Term
 ^^^^^^^^^^^
+
+1D Approach
+~~~~~~~~~~~
 
 For this approach, we solve a 1D wave equation of the following form:
 
@@ -291,6 +258,27 @@ Let :math:`\mathbf{u_s}` and :math:`\sigma_s` be the electric fields and 1D cond
 
 
 where :math:`\mathbf{A}` is similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the transferred conductivity :math:`\sigma_s`.
+
+
+3D Approach
+~~~~~~~~~~~
+
+Let :math:`\sigma_b` be the 3D background conductivity model. And let :math:`\mathbf{A}` be an operator similar to expression :eq:`A_operator`, except the mass matrix :math:`\mathbf{M_\sigma}` is formed using the background conductivity. If :math:`j=1,...,J` denotes the indicies for all internal edges and :math:`k=1,...,K` denotes the indicies for all top edges, then for each polarization we solve a smaller system:
+
+.. math::
+    \mathbf{A_{j,j} u_j} = - \mathbf{A_{j,k} b}
+
+
+where :math:`\mathbf{b}` is a vector of ones with length :math:`K` and :math:`\mathbf{u_j}` is the background electric field on internal edges. From this we form a vector :math:`\mathbf{u_b}` where:
+
+    - :math:`\mathbf{u_b} = 1` on the top edges
+    - :math:`\mathbf{u_b} = \mathbf{u_j}` on internal edges
+    - :math:`\mathbf{u_b} = 0` otherwise
+
+Once this is done, the source term in Eq. :eq:`discrete_e_sys` is computed for a given frequency and polarization using:
+
+.. math::
+    \frac{1}{i\omega} \mathbf{A u_s} = \mathbf{s}
 
 
 .. _theory_sensitivity:
@@ -336,7 +324,6 @@ To differentiate :eq:`Zxx_prime` (or any other element and component of the impe
     \frac{\partial \mathbf{u_e}}{\partial \boldsymbol{\sigma}} = - i\omega \mathbf{A}^{-1} diag(\mathbf{u_e}) \, \mathbf{A_{e2c}^T V }
     :label: sensitivity_fields
 
-.. note:: Eq. :eq:`sensitivity_fields` defines the sensitivities when using the direct solver formulation. Computations involving the sensitivities will differ if the :ref:`iterative solver approach<theory_solver>` is used.
 
 ZTEM Data
 ^^^^^^^^^
@@ -369,8 +356,6 @@ which can be expanded and expressed explicitly in terms of the real and imaginar
 To differentiate :eq:`Tzx_prime` (or any other element and component) with respect to the model, we replace :math:`H_j^{(i)}` according to Eq. :eq:`fields_at_loc` and use the chain rule. The final expression contains the derivative of the electric fields on the edges (:math:`\mathbf{u_e}`) with respect to the model with is given by Eq. :eq:`sensitivity_fields`.
 
 
-.. note:: Eq. :eq:`sensitivity_fields` defines the sensitivities when using the direct solver formulation. Computations involving the sensitivities will differ if the :ref:`iterative solver approach<theory_solver>` is used.
-
 
 .. _theory_inv:
 
@@ -391,60 +376,26 @@ The inverse problem is solved by minimizing the following global objective funct
 
 where :math:`\phi_d` is the data misfit, :math:`\phi_m` is the model objective function and :math:`\beta` is the trade-off parameter. The data misfit ensures the recovered model adequately explains the set of field observations. The model objective function adds geological constraints to the recovered model. The trade-off parameter weights the relative emphasis between fitting the data and imposing geological structures.
 
+
 .. _theory_inv_misfit:
 
 Data Misfit
 ^^^^^^^^^^^
 
-This code uses a measure of data misfit which is uncommon in GIF codes. To understand this data misfit, we will consider the inversion of MT data. From Eq. :eq:`impedance_tensor`, we see that the magnetic and electric fields at observation locations are related by:
+Here, the data misfit is represented as the L2-norm of a weighted residual between the observed data (:math:`d_{obs}`) and the predicted data for a given conductivity model :math:`\boldsymbol{\sigma}`, i.e.:
 
 .. math::
-    \mathbf{Z H} - \mathbf{E} = \mathbf{0}
+    \phi_d = \frac{1}{2} \big \| \mathbf{W_d} \big ( \mathbf{d_{obs}} - \mathbb{F}[\boldsymbol{\sigma}] \big ) \big \|^2
+    :label: data_misfit_2
 
 
-where according to Eq. :eq:`fields_projected`:
-
-.. math::
-    \mathbf{E} = \mathbf{Q_e u_e}
-
-and
+where :math:`W_d` is a diagonal matrix containing the reciprocals of the uncertainties :math:`\boldsymbol{\varepsilon}` for each measured data point, i.e.:
 
 .. math::
-    \mathbf{H} = \mathbf{Q_h u_e}
+    \mathbf{W_d} = \textrm{diag} \big [ \boldsymbol{\varepsilon}^{-1} \big ] 
 
 
-such that :math:`\mathbf{Q_e}` and :math:`\mathbf{Q_h}` map the electric fields on the edges :math:`\mathbf{u_e}` for a particular polarization to the receiver locations.
-For polarizations 1 and 2, we can construct the following:
-
-.. math::
-    \begin{bmatrix} \mathbf{Z} & \\ & \mathbf{Z} \end{bmatrix} \! \begin{bmatrix} \mathbf{Q_h u_e}^{(1)} \\ \mathbf{Q_h u_e}^{(2)} \end{bmatrix} \! - \!
-    \begin{bmatrix} \mathbf{Q_e u_e}^{(1)} \\ \mathbf{Q_e u_e}^{(2)} \end{bmatrix} \! = \!
-    \Bigg ( \! \begin{bmatrix} \mathbf{Z} & \\ & \mathbf{Z} \end{bmatrix} \! \begin{bmatrix} \mathbf{Q_h} \! & \\ & \mathbf{Q_h} \! \end{bmatrix}
-    - \begin{bmatrix} \mathbf{Q_e} \! & \\ & \mathbf{Q_e} \! \end{bmatrix} \! \Bigg ) \!
-    \begin{bmatrix} \mathbf{u_e}^{(1)} \\ \mathbf{u_e}^{(2)} \end{bmatrix} \! = \!
-    \mathbf{\tilde{Q} \tilde{u}_e}
-    :label: misfit_ver1_1
-
-where :math:`\mathbf{\tilde{Q}}` is a linear operator that depends on the observed impedance tensor elements :math:`\mathbf{Z}` and :math:`\mathbf{\tilde{u}_e}` contains the predicted electric fields on cell edges for a particular conductivity model :math:`\boldsymbol{\sigma}`. Eq. :eq:`misfit_ver1_1` can be augmented for multiple receivers and frequencies but its general form remains the same.
-
-If we have a conductivity model which explains the data perfectly, we expect Eq. :eq:`misfit_ver1_1` to equate to a vector zeros. As a result, a reasonable measure of data misfit for this code can be given by:
-
-.. math::
-    \phi_d = \frac{1}{2} \big \| \mathbf{W_d} \big ( \mathbf{\tilde{Q} \tilde{u}_e} \big ) \big \|^2
-    :label: data_misfit
-
-
-where :math:`\mathbf{W_d}` is a diagonal matrix that weights the residual of :math:`\mathbf{\tilde{Q} \tilde{u}_e}`. To construct :math:`\mathbf{W_d}`, we take the uncertainties applied to impedance tensor elements :math:`\boldsymbol{\varepsilon}`, scale them by the magnetic field obtained using the reference conductivity model :math:`\mathbf{H_{ref}}`, and take the reciprocal:
-
-.. math::
-    \mathbf{W_d} = \textrm{diag} \big [ ( \mathbf{H_{ref}} \boldsymbol{\varepsilon} )^{-1} \big ]
-    :label: data_weight_1
-
-
-A similar approach is done for measuring the data misfit of the ZTEM problem, except the entries of the matrix :math:`\mathbf{\tilde{Q}}` are different.
-
-
-.. important:: Because the data misfit for E3DMT version 1 is different than the one `typically used by GIF codes <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Uncertainties.html>`__, determining an appropriate stopping criteria for the inversion is less straightforward. It should also be noted from Eq. :eq:`data_weight_1` that the data weighting matrix :math:`\mathbf{W_d}` also depends on the user's choice in reference model. Until the user is confident in their stopping criteria, it is suggested the user set a low chi factor and continue to run the inversion until it is obvious recovered models are over-fitting the data.
+.. important:: For a better understanding of the data misfit, see the `GIFtools cookbook <http://giftoolscookbook.readthedocs.io/en/latest/content/fundamentals/Uncertainties.html>`__ .
 
 
 Model Objective Function
@@ -485,18 +436,43 @@ where the regularizer is given by:
 
 The Hadamard product is given by :math:`\odot`, :math:`\mathbf{v_x}` is the volume of each cell averaged to x-faces, :math:`\mathbf{w_x}` is the weighting function :math:`w_x` evaluated on x-faces and :math:`\mathbf{G_x}` computes the x-component of the gradient from cell centers to cell faces. Similarly for y and z.
 
+If we require that the recovered model values lie between :math:`\mathbf{m_L  \preceq m \preceq m_H}` , the resulting bounded optimization problem we must solve is:
+
+.. math::
+    \begin{align}
+    &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m}) \\
+    &\; \textrm{s.t.} \;\; \mathbf{m_L \preceq m \preceq m_H}
+    \end{align}
+    :label: inverse_problem
+
+A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
+information refer again to :cite:`Haber2012` and references therein.
+
+
+
+.. Due to the ill-posedness of the problem, there are no stable solutions obtain by freely minimizing the data misfit, and thus regularization is needed. The regularization used penalties for both smoothness, and likeness to a reference model :math:`\mathbf{m_{ref}}` supplied by the user.
+
+.. .. math::
+..     \phi_m (\mathbf{m-m_{ref}}) = \frac{1}{2} \big \| \nabla (\mathbf{m - m_{ref}}) \big \|^2_2
+..     :label:
+
+.. An important consideration comes when discretizing the regularization. The gradient operates on
+.. cell centered variables in this instance. Applying a short distance approximation is second order
+.. accurate on a domain with uniform cells, but only :math:`\mathcal{O}(1)` on areas where cells are non-uniform. To
+.. rectify this a higher order approximation is used (:cite:`Haber2012`). The discrete regularization
+.. operator can then be expressed as
 
 .. .. math::
 ..     \begin{align}
 ..     \phi_m(\mathbf{m}) &= \frac{1}{2} \int_\Omega \big | \nabla m \big |^2 dV \\
-..     & \approx \frac{1}{2}  \mathbf{ m^T G_c^T} \textrm{diag} (\mathbf{A_f^T v}) \mathbf{G_c m}
+..     & \approx \frac{1}{2}  \beta \mathbf{ m^T G_c^T} \textrm{diag} (\mathbf{A_f^T v}) \mathbf{G_c m}
 ..     \end{align}
 ..     :label:
 
 .. where :math:`\mathbf{A_f}` is an averaging matrix from faces to cell centres, :math:`\mathbf{G}` is the cell centre to cell face gradient operator, and v is the cell volume For the benefit of the user, let :math:`\mathbf{W^T W}` be the weighting matrix given by:
 
 .. .. math::
-..     \mathbf{W^T W} = \mathbf{ G_c^T} \textrm{diag}(\mathbf{A_f^T v}) \mathbf{G_c} =
+..     \mathbf{W^T W} = \beta \mathbf{ G_c^T} \textrm{diag}(\mathbf{A_f^T v}) \mathbf{G_c m} =
 ..     \begin{bmatrix} \mathbf{\alpha_x} & & \\ & \mathbf{\alpha_y} & \\ & & \mathbf{\alpha_z} \end{bmatrix} \big ( \mathbf{G_x^T \; G_y^T \; G_z^T} \big ) \textrm{diag} (\mathbf{v_f}) \begin{bmatrix} \mathbf{G_x} \\ \mathbf{G_y} \\ \mathbf{G_z} \end{bmatrix}
 ..     :label:
 
@@ -515,17 +491,18 @@ The Hadamard product is given by :math:`\odot`, :math:`\mathbf{v_x}` is the volu
 ..     \mathbf{W^T W} = \mathbf{\alpha_x G_x^T} \textrm{diag} (w_x v_f) \mathbf{G_x} + \mathbf{\alpha_y G_y^T} \textrm{diag} (w_y v_f) \mathbf{G_y} + \mathbf{\alpha_z G_z^T} \textrm{diag} (w_z v_f) \mathbf{G_z}
 ..     :label: MOF
 
-If we require that the recovered model values lie between :math:`\mathbf{m_L  \preceq m \preceq m_H}` , the resulting bounded optimization problem we must solve is:
+.. The resulting optimization problem is therefore:
 
-.. math::
-    \begin{align}
-    &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m}) \\
-    &\; \textrm{s.t.} \;\; \mathbf{m_L \preceq m \preceq m_H}
-    \end{align}
-    :label: inverse_problem
+.. .. math::
+..     \begin{align}
+..     &\min_m \;\; \phi_d (\mathbf{m}) + \beta \phi_m(\mathbf{m - m_{ref}}) \\
+..     &\; \textrm{s.t.} \;\; \mathbf{m_L \leq m \leq m_H}
+..     \end{align}
+..     :label: inverse_problem
 
-A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
-information refer again to :cite:`Haber2012` and references therein.
+.. where :math:`\beta` is a regularization parameter, and :math:`\mathbf{m_L}` and :math:`\mathbf{m_H}` are upper and lower bounds provided by some a prior geological information.
+.. A simple Gauss-Newton optimization method is used where the system of equations is solved using ipcg (incomplete preconditioned conjugate gradients) to solve for each G-N step. For more
+.. information refer again to :cite:`Haber2012` and references therein.
 
 
 Inversion Parameters and Tolerances
@@ -548,7 +525,7 @@ but how do we choose an acceptable trade-off parameter :math:`\beta`? For this, 
 
     - **beta_max:** The initial value for :math:`\beta`
     - **beta_factor:** The factor at which :math:`\beta` is decrease to a subsequent solution of Eq. :eq:`inverse_problem`
-    - **beta_min:** The minimum :math:`\beta` for which Eq. :eq:`inverse_problem` is solved before the inversion will quit
+    - **nBetas:** The number of times the inversion code will decrease :math:`\beta` and solve Eq. :eq:`inverse_problem` before it quits
     - **Chi Factor:** The inversion program stops when the data misfit :math:`\phi_d \leq N \times Chi \; Factor`, where :math:`N` is the number of data observations
 
 .. _theory_GN:
@@ -593,7 +570,7 @@ where :math:`\mathbf{\delta m}_k` is the step direction, :math:`\nabla \phi_k` i
 Gauss-Newton Solve
 ~~~~~~~~~~~~~~~~~~
 
-Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-Newton iteration :math:`k`. Using the data misfit from Eq. :eq:`data_misfit` and the model objective function from Eq. :eq:`MOF`, we must solve:
+Here we discuss the details of solving Eq. :eq:`GN_gen` for a particular Gauss-Newton iteration :math:`k`. Using the data misfit from Eq. :eq:`data_misfit_2` and the model objective function from Eq. :eq:`MOF`, we must solve:
 
 .. math::
     \Big [ \mathbf{J^T W_d^T W_d J + \beta \mathbf{W^T W}} \Big ] \mathbf{\delta m}_k =
