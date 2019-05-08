@@ -146,15 +146,18 @@ Line Descriptions
 
 .. _e3dmt_input_inv2_ln9:
 
-    - **Cell Weights:** Here, the user specifies whether cell weights are supplied. If so, the user provides the file path to a :ref:`cell weights file <weightsFile>`  If no additional cell weights are supplied, the user enters "NO_WEIGHT".
+    - **Cell Weights:** Here, the user specifies whether cell weights are supplied. The user has two options:
+
+        - **No cell weights:** the user enters the flag *NO_WEIGHT*.
+        - **Weights file:** the user provides the file path to a :ref:`cell weights file <weightsFile>`  
 
 .. _e3dmt_input_inv2_ln10:
 
-    - **Face Weights:** Here, the user specifies whether face weights are supplied. If so, the user has three options:
+    - **Face Weights:** Here, the user specifies whether face weights are supplied. The user has three options:
 
         - **No face weights:** the user enters the flag *NO_FACE_WEIGHT*
-        - **Simple weights:** the user enters the number of layers for which horizontal face weights are applied, followed by the weights for each layer; for example "*3 100 50 25*" sets horizontal interface weights for three layer below the surface. Yes surface topography is taken into account.
-        - **Weights file:** the user provides the file path to a face weights file :ref:`cell weights file <weightsFile>`.
+        - **Simple weights:** the user enters the flag *FACE_WEIGHTS*, THEN the number of layers for which horizontal face weights are applied, followed by the weights for each layer; for example "*FACE_WEIGHTS 3 100 50 25*" sets horizontal interface weights for three layer below the surface. Yes surface topography is taken into account.
+        - **Weights file:** the user enters the flag *WEIGHTS_FILE* followed by the file path to a face weights file :ref:`cell weights file <weightsFile>`. *NOTE* this option has not been added as of 2019-03-14 but will be added in the future.
 
 .. _e3dmt_input_inv2_ln11:
 
