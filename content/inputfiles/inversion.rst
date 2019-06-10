@@ -55,7 +55,7 @@ Both **e3dMTinv.exe** and **e3dMTinv_iter.exe** use the same input file. The lin
      :align: center
      :width: 700
 
-     Example input file for the inversion program (`Download <https://github.com/ubcgif/e3dmt/raw/master/assets/input_files1/e3dMT_octree_inv.inp>`__ ).
+     Example input file for the inversion program (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver1/assets/input_files_ver1/e3dMT_octree_inv.inp>`__ ).
 
 
 Line Descriptions
