@@ -12,7 +12,7 @@ Here, the program libraries for E3DMT version 1 will be used to:
 
 Zip folders containing all necessary files can be downloaded here:
 
-	- `Files for example <https://github.com/ubcgif/e3dmt/raw/master/assets/e3dmt_ver1_example.zip>`__
+	- `Files for example <https://github.com/ubcgif/e3dmt/raw/manual_ver1/assets/e3dmt_ver1_example.zip>`__
 
 The full examples are parse into 4 sections:
 
