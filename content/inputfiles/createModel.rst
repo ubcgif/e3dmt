@@ -113,6 +113,6 @@ where superscript :math:`(i)` for :math:`i=1,2,...,N` refers to a particular blo
      :align: center
      :width: 700
 
-     Example input file for blk3cellOct (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver2/assets/input_files2/blk3cellOct.inp>`__ )
+     Example input file for blk3cellOct (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver2/assets/input_files_ver2/blk3cellOct.inp>`__ )
 
 

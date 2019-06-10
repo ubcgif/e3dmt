@@ -11,7 +11,7 @@ ALL_ACTIVE                                  ! active model cells | ALL_ACTIVE
 NO_WEIGHT                                   ! model weights | NO_WEIGHT
 NO_FACE_WEIGHT                              ! face weights | NO_FACE_WEIGHT
 USE_L2                                      ! USE_EKBLOM p eps | USE_L2
-100 1e-8 0.2                                ! DEFAULT | beta_max beta_min beta_factor
+1 1e-6 0.2                                  ! DEFAULT | beta_max beta_min beta_factor
 4e-6 1 1 1                                  ! as ax ay az
 1                                           ! chi factor
 3 20                                        ! iter_per_beta nBetas
