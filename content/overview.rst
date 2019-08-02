@@ -43,16 +43,18 @@ The E3DMT version 2 (2017) program library was developed under the IRC consortiu
 
 Since then, improvements have been implemented as time and resources permit.
 
-E3DMT version 2 (2017) Program Library Content
-----------------------------------------------
+E3DMT version 2 Program Library Content
+---------------------------------------
 
-The main executable programs within the E3DMT version 2 (2017) program library are:
+The main executable programs within the E3DMT version 2 program library are:
 
-    - **octree_mesh_mt:** Creates the OcTree used in forward simulations and inversions from survey data
+    - **e3dmt_v2:** Is used for both forward modeling and inverting natural source electromagnetic data
+    - **create_octree_mesh_e3dmt_v2:** Creates the OcTree mesh from survey geometry
+
+Mesh utilities that can be used in conjunction with this package include:
+
     - **blk3cellOct:** Creates simple block conductivity models on the OcTree mesh
-    - **e3dMTinv_ver2:** Is used for both forward modeling and inverting natural source electromagnetic data
-
-
+    - **interface_weights:** Creates interface weights for inversion
 
 
 Licensing

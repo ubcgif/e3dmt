@@ -1,5 +1,3 @@
-.. GIFtoolsCookbook documentation master file, created by
-
 
 ED3MT (Version 2) package
 =========================

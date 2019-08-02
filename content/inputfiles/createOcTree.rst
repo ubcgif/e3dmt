@@ -5,7 +5,7 @@ Create OcTree Mesh Input File
 
 .. _e3dmt_input_octree2:
 
-:ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **octree_mesh_mt.exe**. Parameters necessary for defining the OcTree mesh are set in the input file. The lines of input file are as follows:
+:ref:`OcTree meshes<octreeFile>` used in the E3DMT code are created using the program **create_octree_mesh_e3dmt_v2.exe**. Parameters necessary for defining the OcTree mesh are set in the input file. The lines of input file are as follows:
 
 .. tabularcolumns:: |C|C|C|
 

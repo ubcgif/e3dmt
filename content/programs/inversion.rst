@@ -3,7 +3,7 @@
 Inversion Program
 =================
 
-Both the forward and inverse problems are solved using the **e3dMTinv_ver2** executable program. In each case, format of the :ref:`input file<e3dmt_input_inv2>` (denoted here as **e3dMTver2.inp**) is the same. In the case of forward modeling however, some lines in the input file are omitted.
+Both the forward and inverse problems are solved using the **e3dmt_v2** executable program. In each case, format of the :ref:`input file<e3dmt_input_inv2>` (denoted here as **e3dMTver2.inp**) is the same. In the case of forward modeling however, some lines in the input file are omitted.
 
 Running the Program
 ^^^^^^^^^^^^^^^^^^^
@@ -49,9 +49,9 @@ The program **e3dMTinv_ver2.exe** creates the following output files:
 
     - **dpred.txt** predicted data for each recovered conductivity model
 
-    - **e3dMTinv.log:** log file for the inversion
+    - **e3dmt_v2.log:** log file for the inversion
 
-    - **e3dMTinv.out:**
+    - **e3dmt_v2.out:**
 
 
 

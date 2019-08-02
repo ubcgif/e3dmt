@@ -5,30 +5,18 @@ Elements of the Program E3DMT
 
 This section provides a brief description of each program in the E3DMT version 2 library. In addition, we describe the file formats for all input and supporting files used by the coding library.
 
-.. Version 1 (2014)
-.. ----------------
-
-.. .. important:: Although described here, this generation of the code may not be supported by GIFtools in the future.
-
-.. Version 1 of the E3DMT codes makes use of the following executables:
-
-..     - **e3dMTfwd:** Solves the forward problem. Computes the electric and magnetic response to a 3D conductivity model (fields, and impedance)
-..     - **e3dMTinv:** Solves the inverse problem using a direct solver approach (MUMPS). Recovers a conductivity model by inverting MT or ZTEM data. All entries of the impedance tensor or transfer function are needed.
-..     - **e3dMTinv_iter:** Solves the inverse problem using an iterative solver approach. Recovers a conductivity model by inverting MT or ZTEM data. All entries of the impedance tensor or transfer function are needed.
-..     - **MTcreate_octree_mesh_e3d:** Creates an octree mesh based on the :ref:`survey file<surveyFile>`
-..     - **blk3cell:** Creates models from a set of blocks on a tensor mesh
-..     - **3DModel2Octree:** Converts models from tensor to Octree meshes
-..     - **interface_weights:** Creates interface weights
-
 Executables
 -----------
 
-Version 2 of the E3DMT code makes use of the following executables:
+The main executable programs within the E3DMT version 2 program library are:
 
-    - **e3dMTinv_ver2:** An all in one executable that can forward model or invert MT or ZTEM data
-    - **octree_mesh_mt:** Creates an octree mesh based on the :ref:`receiver file<receiverFile>`
-    - **blk3cellOct:** Creates models from a set of blocks directly on the octree mesh
-    - **interface_weights:** Creates interface weights
+    - **e3dmt_v2:** Is used for both forward modeling and inverting natural source electromagnetic data
+    - **create_octree_mesh_e3dmt_v2:** Creates the OcTree mesh from survey geometry
+
+Mesh utilities that can be used in conjunction with this package include:
+
+    - **blk3cellOct:** Creates simple block conductivity models on the OcTree mesh
+    - **interface_weights:** Creates interface weights for inversion
 
 Main Input Files
 ----------------

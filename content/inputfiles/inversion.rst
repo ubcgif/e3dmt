@@ -8,8 +8,8 @@ Inversion Input File
 
 .. important::
 
-    - Both the forward and inverse problems are solved using the **e3dMTinv_ver2** executable program. In both cases, the lines of the input file are the same. However in the case of forward modeling, some lines in the input file are not used by the code and can be given any value.
-    - **e3dMTinv_ver2** can accept observation files that use the original (version 1) or version 2 format. This may change the number of lines in the input file.
+    - Both the forward and inverse problems are solved using the **e3dmt_v2** executable program. In both cases, the lines of the input file are the same. However in the case of forward modeling, some lines in the input file are not used by the code and can be given any value.
+    - **e3dmt_v2** can accept observation files that use the original (version 1) or version 2 format. This may change the number of lines in the input file.
 
 .. tabularcolumns:: |L|C|C|
 
