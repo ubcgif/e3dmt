@@ -64,8 +64,8 @@ Inversion Input File
 +--------+--------------------------------------------------------------+-------------------------------------------------------------------------+
 
 
-    - Example input file for forward modeling (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver2/assets/input_files_ver2/e3dMTver2_fwd.inp>`__ ).
-    - Example input file for inversion (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver2/assets/input_files_ver2/e3dMTver2.inp>`__ ).
+    - Example input file for forward modeling (`Download <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/input_files_ver2/e3dMTver2_fwd.inp>`__ ).
+    - Example input file for inversion (`Download <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/input_files_ver2/e3dMTver2.inp>`__ ).
 
 
 .. figure:: images/inv_input_ver2.png
