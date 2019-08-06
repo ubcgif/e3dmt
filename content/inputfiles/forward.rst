@@ -33,7 +33,7 @@ The forward problem is solved using the executable program **e3dMTfwd.exe**. Par
      :align: center
      :width: 700
 
-     Example input file for forward modeling program (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver1/assets/input_files_ver1/e3dMT_octree_fwd.inp>`__ ).
+     Example input file for forward modeling program (`Download <https://github.com/ubcgif/e3dmt/raw/e3dmt/assets/input_files_ver1/e3dMT_octree_fwd.inp>`__ ).
 
 
 Line Descriptions

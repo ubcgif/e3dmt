@@ -35,7 +35,7 @@ where superscript :math:`(i)` for :math:`i=1,2,...,N` refers to a particular blo
      :align: center
      :width: 700
 
-     Example input file for blk3cell (`Download <https://github.com/ubcgif/e3dmt/raw/manual_ver1/assets/input_files_ver1/blk3cell.inp>`__ )
+     Example input file for blk3cell (`Download <https://github.com/ubcgif/e3dmt/raw/e3dmt/assets/input_files_ver1/blk3cell.inp>`__ )
 
 
 .. _e3dmt_3Dmodel2octree_input:
