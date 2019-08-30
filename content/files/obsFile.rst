@@ -94,7 +94,7 @@ Data Arrays by Type
 
 **MT data (DATATYPE = MTZ):**
 
-Each row in the array contains the elements of the impedance tensor at a particular location separated into real and imaginary components, along with the corresponding uncertainties. The units for MT data are (V/A). The columns for this data format are as follows:
+Each row in the array contains the elements of the impedance tensor at a particular location separated into real and imaginary components, along with the corresponding uncertainties. The units for MT data are (V/A). `Download MT data example <https://github.com/ubcgif/e3dmt/raw/manual_ver1/assets/MT_data.dat>`__ . The columns for this data format are as follows:
 
 .. math::
     | \; Easting \; | \; Northing \; | \; Elevation \; | \;\;\; Z_{xx} \; data \;\;\; | \;\;\; Z_{xy} \; data \;\;\; | \;\;\; Z_{yx} \; data \;\;\; | \;\;\; Z_{yy} \; data \;\;\; |
@@ -118,7 +118,7 @@ where
 
 **ZTEM data (DATATYPE = MTT, MTE or MTH):**
 
-Each row in the array contains the elements of the transfer function at a particular location separated into real and imaginary components, along with the corresponding uncertainties. Data values and uncertainties are unitless with no normalization factor. The columns for this data format are as follows:
+Each row in the array contains the elements of the transfer function at a particular location separated into real and imaginary components, along with the corresponding uncertainties. Data values and uncertainties are unitless with no normalization factor. `Download ZTEM data example <https://github.com/ubcgif/e3dmt/raw/manual_ver1/assets/ZTEM_data.dat>`__ . The columns for this data format are as follows:
 
 .. math::
     | \; Easting \; | \; Northing \; | \; Elevation \; | \;\;\; T_{zx} \; data \;\;\; | \;\;\; T_{zy} \; data \;\;\; |

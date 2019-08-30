@@ -1,9 +1,9 @@
-.. _example_model:
+.. _exampleMT_model:
 
 Create Model
 ============
 
-Here, the code **blk3cell.exe** and the input file **blk3cell.inp** (:ref:`see format <e3dmt_blk3cell_input>`) are used to create a conductivity model on the underlying tensor mesh. Then, the code **3DModel2Octree.exe** and the input file **3Dmodel2octree.inp** (:ref:`see format <e3dmt_3Dmodel2octree_input>`) are used to interpolate the tensor mesh onto the OcTree mesh. For this example, we use the mesh that was created in the example ":ref:`create OcTree mesh<example_octree>`". Files relevant to this part of the example are in the sub-folder *octree_model*. Before running this example, you may want to do the following:
+Here, the code **blk3cell.exe** and the input file **blk3cell.inp** (:ref:`see format <e3dmt_blk3cell_input>`) are used to create a conductivity model on the underlying tensor mesh. Then, the code **3DModel2Octree.exe** and the input file **3Dmodel2octree.inp** (:ref:`see format <e3dmt_3Dmodel2octree_input>`) are used to interpolate the tensor mesh onto the OcTree mesh. For this example, we use the mesh that was created in the example ":ref:`create OcTree mesh<exampleMT_octree>`". Files relevant to this part of the example are in the sub-folder *octree_model*. Before running this example, you may want to do the following:
 
 	- `Download and open the zip folder containing the entire E3DMT version 1 example <https://github.com/ubcgif/e3dmt/raw/manual_ver1/assets/e3dmt_v1_example_MT.zip>`__ (if not done already)
 	- Learn how to run :ref:`blk3cell<e3dmt_model_blk3cell>` and :ref:`3DModel2Octree<e3dmt_model_3DtoOctree>` from command line
