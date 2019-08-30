@@ -18,6 +18,6 @@ To invert the synthetic data, the input file below was used:
 
 The true model (left) and recovered model (right) are shown below. A cutoff of 0.1 S/m has been used for both models and the recovered model is transected horizontally at z = -500 m. 
 
-.. figure:: images/inv1.png
+.. figure:: images/inv.png
      :align: center
      :width: 700

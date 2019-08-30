@@ -18,7 +18,7 @@ To generate the OcTree mesh, the following input file was used:
 
 The resulting OcTree mesh and surface topography are shown below.
 
-.. figure:: images/octree_mesh1.png
+.. figure:: images/octree_mesh.png
      :align: center
      :width: 500
 

@@ -18,7 +18,7 @@ To forward model the data, the following input file was used:
 
 Predicted data are shown below.
 
-.. figure:: images/fwd1.png
+.. figure:: images/fwd.png
      :align: center
      :width: 700
 

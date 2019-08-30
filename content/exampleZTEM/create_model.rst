@@ -31,7 +31,7 @@ Here is the input file for **3DModel2Octree.exe**
 The resulting Octree model shows an L-shaped conductor (:math:`\sigma` = 1 S/m) within a resistive background (:math:`\sigma_b` = 0.01 S/m).
 
 
-.. figure:: images/octree_model1.png
+.. figure:: images/octree_model.png
      :align: center
      :width: 500
 
