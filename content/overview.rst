@@ -49,21 +49,18 @@ Since then, improvements have been implemented as time and resources permit.
 Program Library Content
 -----------------------
 
-The main executable programs within the E3DMT version 1 (2014) program library are:
+The main executable programs within the E3DMT version 1 program library are:
 
-    - **MTcreate_octree_mesh_e3d:** Creates the OcTree used in forward simulations and inversions from survey data.
-    - **blk3cell:** Creates simple conductivity models on a core tensor mesh
-    - **3DModel2Octree:** Converts 3D conductivity on core mesh to OcTree mesh
-    - **e3dMTfwd:** Performs the forward simulation
-    - **e3dMTinv and e3dmtinv_iter:** Inverts observed data in order to recover a conductivity model
+    - **e3dmt_fwd:** Solves the forward problem. Computes the electric and magnetic response to a 3D conductivity model (fields, and impedance)
+    - **e3dmt:** Solves the inverse problem using a direct solver approach (MUMPS). Recovers a conductivity model by inverting MT or ZTEM data. All entries of the impedance tensor or transfer function are needed.
+    - **e3dmt_iter:** Solves the inverse problem using an iterative solver approach. Recovers a conductivity model by inverting MT or ZTEM data. All entries of the impedance tensor or transfer function are needed.
+    - **create_octree_mesh_e3dmt:** Creates an octree mesh based on the :ref:`survey file<surveyFile>`
 
-Also included are the following Octree utility programs:
+Common Octree utility programs used with this package include:
 
-      - create weight file
-      - face weights
-      - octree cell centre
-      - octreeTo3D
-      - refine octree
+    - **blk3cell:** Creates models from a set of blocks on a tensor mesh
+    - **3DModel2Octree:** Converts models from tensor to Octree meshes
+    - **interface_weights:** Creates interface weights
 
 
 Licensing

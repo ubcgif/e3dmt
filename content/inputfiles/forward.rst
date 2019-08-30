@@ -4,7 +4,7 @@ Forward Modeling Input File
 ===========================
 
 
-The forward problem is solved using the executable program **e3dMTfwd.exe**. Parameters necessary for running the forward modeling code are set in the input file. The lines of input file are as follows:
+The forward problem is solved using the executable program **e3dmt_fwd.exe**. Parameters necessary for running the forward modeling code are set in the input file. The lines of input file are as follows:
 
 .. tabularcolumns:: |L|C|C|
 
@@ -33,7 +33,7 @@ The forward problem is solved using the executable program **e3dMTfwd.exe**. Par
      :align: center
      :width: 700
 
-     Example input file for forward modeling program (`Download <https://github.com/ubcgif/e3dmt/raw/e3dmt/assets/input_files_ver1/e3dMT_octree_fwd.inp>`__ ).
+     Example input file for forward modeling program (`Download <https://github.com/ubcgif/e3dmt/raw/e3dmt/assets/input_files_ver1/e3dmtfwd.inp>`__ ).
 
 
 Line Descriptions
