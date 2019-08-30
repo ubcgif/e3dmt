@@ -3,7 +3,7 @@
 Create OcTree Mesh
 ==================
 
-:ref:`OcTree meshes<octreeFile>` used in the E3DMT version 2 code are created using the program **create_octree_mesh_e3dmt_v2.exe**. Parameters necessary for defining the OcTree mesh are set in the :ref:`input file<e3dmt_input_octree2>`; referred to here as **MTcreate_mesh.inp**.
+:ref:`OcTree meshes<octreeFile>` used in the E3DMT version 2 code are created using the program **create_octree_mesh_e3dmt_v2.exe**. Parameters necessary for defining the OcTree mesh are set in the :ref:`input file<e3dmt_input_octree2>`; referred to here as **octree_mesh.inp**.
 
 To generate an OcTree mesh, open a command window. Type the path to the code **create_octree_mesh_e3dmt_v2.exe**, followed by a space, followed by the path to the input file.
 

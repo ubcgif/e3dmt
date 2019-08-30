@@ -1,5 +1,5 @@
 input_files/octree_mesh.txt                 ! octree mesh file
-input_files/dobs.dat                        ! observations/survey index file
+input_files/MT_data.dat                     ! observations/survey index file
 input_files/recFile.dat                     ! receivers file
 input_files/freqFile.dat                    ! frequencies file
 1DBACKGROUND VALUE 0.01                     ! background conductivity settings
@@ -7,17 +7,17 @@ VALUE 0.01                                  ! initial model | FWDMODEL conductiv
 VALUE 0.01                                  ! reference model | VALUE d
 NO_SUS                                      ! susceptibility model | NO_SUS
 input_files/active_cells_topo.txt           ! active topography cells | ALL_ACTIVE
-ALL_ACTIVE                                  ! active model cells | ALL_ACTIVE
+input_files/active_cells_topo.txt           ! active model cells | ALL_ACTIVE
 NO_WEIGHT                                   ! model weights | NO_WEIGHT
 NO_FACE_WEIGHT                              ! face weights | NO_FACE_WEIGHT
 USE_L2                                      ! USE_EKBLOM p eps | USE_L2
-1 1e-6 0.2                                  ! DEFAULT | beta_max beta_min beta_factor
-4e-6 1 1 1                                  ! as ax ay az
+0.1 1e-6 0.2                                ! DEFAULT | beta_max beta_min beta_factor
+2.5e-5 1 1 0.25                             ! as ax ay az
 1                                           ! chi factor
 3 20                                        ! iter_per_beta nBetas
 1e-2 20                                     ! tol_ipcg max_iter_ipcg
 NOT_CHANGE_MREF                             ! CHANGE_MREF | NOT_CHANGE_MREF
 SMOOTH_MOD_DIF                              ! SMOOTH_MOD | SMOOTH_MOD_DIF
 BOUNDS_NONE                                 ! bounds file | BOUNDS_CONST lb ub | BOUNDS_NONE
-FACTOR_OOC factor_dir                       ! FACTOR_IC | FACTOR_OOC directory_path
+FACTOR_IC                                   ! FACTOR_IC | FACTOR_OOC directory_path
 MINUS_IOMEGA                                ! Fourier convention MINUS_IOMEGA | PLUS_IOMEGA
