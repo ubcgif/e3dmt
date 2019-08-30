@@ -1,9 +1,9 @@
-.. _example_octree:
+.. _exampleMT_octree:
 
 Create OcTree Mesh
 ==================
 
-Here, the code **create_octree_mesh_e3dmt_v2.exe** and the input file **octree_mesh.inp** (ref:`see format<e3dmt_input_octree>`)are used to create an OcTree mesh based on the set of observation location and surface topography. Files relevant to this part of the example are in the sub-folder octree_mesh. Before running this example, you may want to do the following:
+Here, the code **create_octree_mesh_e3dmt_v2.exe** and the input file **octree_mesh.inp** (ref:`see format<e3dmt_input_octree>`)are used to create an OcTree mesh based on the set of observation location and surface topography. Files relevant to this part of the example are in the sub-folder *octree_mesh*. Before running this example, you may want to do the following:
 
 	- `Download and open the zip folder containing the entire E3DMT version 2 example <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/e3dmt_v2_example_MT.zip>`__ (if not done already)
 	- Learn how to :ref:`run code from command line<e3dmt_octree>`

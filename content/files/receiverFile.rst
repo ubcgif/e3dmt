@@ -3,7 +3,7 @@
 Receiver File
 =============
 
-The exact dimensions of the receivers used to measure electric and magnetic fields for the E3DMT version 2 code (2017) are defined within the receiver file. This file is required for both forward modeling and inversion. Electric dipole and inductive loop receivers do not need to be defined in any particular order, however they must be reference properly within the :ref:`survey index file<indexFile>`.
+The exact dimensions of the receivers used to measure electric and magnetic fields for the E3DMT version 2 code are defined within the receiver file. This file is required for both forward modeling and inversion. Electric dipole and inductive loop receivers do not need to be defined in any particular order, however they must be reference properly within the :ref:`survey index file<indexFile>`.
 
 .. note::
     - Bolded entries are fixed flags recognized by the Fortran codes and blue hyperlinked entries are values/regular expressions specified by the user
@@ -31,7 +31,7 @@ The lines of the receiver file are formatted as follows:
 |
 |
 
-In general, the user should use an ordering of Ex, Ey, Hx, Hy for MT data and Hx, Hy, Hz for ZTEM data but it is not necessary. Below, we show an example of a receiver file which may be used to model MT data.
+In general, the user should use an ordering of Ex, Ey, Hx, Hy for MT data and Hx, Hy, Hz for ZTEM data but it is not necessary. `Download receiver file example for MT data <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/MTrecFile.dat>`__ . `Download receiver file example for ZTEM data <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/ZTEMrecFile.dat>`__ . Below, we show an example of a receiver file which may be used to model MT data.
 
 
 .. figure:: images/receiver_file.png

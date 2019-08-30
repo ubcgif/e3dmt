@@ -160,7 +160,7 @@ and similarly for :math:`y`.
 Version 2
 ---------
 
-This file is input when inverting field-collected data. This file contains the survey information, field observations and data uncertainties. 
+This file is input when inverting field-collected data. This file contains the survey information, field observations and data uncertainties. `Download MT data file example <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/MT_data.dat>`__ . `Download ZTEM data file example <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/ZTEM_data.dat>`__ .
 
 .. important::
 
