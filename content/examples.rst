@@ -15,7 +15,7 @@ Magnetotellurics
 
 Zip folders containing all necessary files for the MT example can be downloaded here:
 
-    - Files for example using E3DMT version 2 are `downloaded here <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/e3dmt_v2_exampleMT.zip>`__ 
+    - Files for example using E3DMT version 2 are `downloaded here <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/e3dmt_v2_example_MT.zip>`__
 
 The full set of examples is parsed into 4 sections:
 
@@ -33,7 +33,7 @@ ZTEM
 
 Zip folders containing all necessary files for the ZTEM example can be downloaded here:
 
-    - Files for example using E3DMT version 2 are `downloaded here <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/e3dmt_v2_example_ZTEM.zip>`__ 
+    - Files for example using E3DMT version 2 are `downloaded here <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/e3dmt_v2_example_ZTEM.zip>`__
 
 The full set of examples is parsed into 4 sections:
 
