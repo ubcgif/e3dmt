@@ -68,7 +68,11 @@ Line Descriptions
 
 .. _e3dmt_input_octreeln7:
 
-    - **shift_data:** If the flag "NOT_SHIFT_DATA" is used, then it is possible for stations to lie below the topography specified on line 6. If "SHIFT_DATA *filename*" is used, then a locations file is created in which all stations are projected to be above the surface topography.
+    - **shift_data:** Here, there are 3 options:
+
+        - If the flag "NOT_SHIFT_DATA" is used, then it is possible for stations to lie below the topography specified on line 6.
+        - If "SHIFT_TO_SURFACE *filename*" is used, then a locations file is created in which all stations are projected to be above at the discretized surface topography. This is used primarily for MT surveys
+        - If "SHIFT_FLIGHT_HEIGHT *filename*" is used, then a locations file is created in which the data locations are shifted to preserve true flight height over the discretized surface topography. This is used for ZTEM surveys.
 
 .. _e3dmt_input_octreeln8:
 
