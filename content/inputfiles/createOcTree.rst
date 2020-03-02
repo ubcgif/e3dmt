@@ -109,10 +109,11 @@ Line Descriptions
 
 .. _e3dmt_input_octree2ln10:
 
-    - **shift_data:**
+    - **shift_data:** Here, there are 3 options:
 
-    	- If the flag *NOT_SHIFT_DATA* is used, survey locations are preserved when creating the OcTree mesh
-    	- The user may also use the flag *SHIFT_DATA* followed by an output file name. If any of the receivers lie below the surface topography, the program will project those receivers to the surface and output a new survey file containing the new receiver locations.
+        - If the flag "NOT_SHIFT_DATA" is used, then we do not change the locations of the receivers.
+        - If "SHIFT_TO_SURFACE *filename*" is used, then a receivers file is created in which all receivers are projected to be at the discretized surface topography. This is used primarily for MT surveys
+        - If "SHIFT_FLIGHT_HEIGHT *filename*" is used, then a receivers file is created in which the data locations are shifted to preserve true flight height over the discretized surface topography. This is used for ZTEM surveys.
 
 .. _e3dmt_input_octree2ln11:
 
