@@ -56,11 +56,11 @@ Line Descriptions
 
 .. _e3dmt_input_octree2ln2a:
 
-    - **min_cell_fact:** Used to scale the cell values of :ref:`dist_1 dist_2 dist_3 ... dist_n <e3dmt_input_octree2ln4>` inside the core mesh region. If *min_cell_fact*=1, discretization below the Earth in the core mesh region will begin with the smallest cell size. If *min_cell_fact*=2, the discretization below the Earth will begin with 2 times the smallest cell size; *DEFAULT = 1*. Must be a power of 2.
+    - **min_cell_fact:** Used to scale the cell values of :ref:`dist_1 dist_2 dist_3 ... dist_n <e3dmt_input_octree2ln4>` inside the core mesh region. If *min_cell_fact* = 1, discretization below the Earth in the core mesh region will begin with the smallest cell size. If *min_cell_fact* = 2, the discretization below the Earth will begin with 2 times the smallest cell size; *DEFAULT = 1* . Must be a power of 2.
 
 .. _e3dmt_input_octree2ln2b:
 
-    - **min_cell_size:** For ground-based surveys, this value is redundant; leave as 1. For airborne ZTEM, we may want to specify the cell size between the surface topography and the fine cells around the receivers (:ref:`n1 n2 n3<e3dmt_input_octree2ln5>`). Here, *min_cell_size* is a factor defining the size of these cells relative to the underlying mesh cell size (:ref:`dx dy dz<e3dmt_input_octree2ln1>`). *max_topo_cell* is an integer value equal or greater than 1 and must be a power of 2. *DEFAULT = 1*.
+    - **min_cell_size:** For ground-based surveys, this value is redundant; leave as 1. For airborne ZTEM, we may want to specify the cell size between the surface topography and the fine cells around the receivers (:ref:`n1 n2 n3<e3dmt_input_octree2ln5>`). Here, *min_cell_size* is a factor defining the size of these cells relative to the underlying mesh cell size (:ref:`dx dy dz<e3dmt_input_octree2ln1>`). *max_topo_cell* is an integer value equal or greater than 1 and must be a power of 2. *DEFAULT = 1* .
 
 .. _e3dmt_input_octree2ln2c:
 
@@ -72,7 +72,7 @@ Line Descriptions
 
 .. _e3dmt_input_octree2ln4:
 
-    - **dist_1 dist_2 dist_3 ... dist_n:** Sets the discretization of the core mesh region below the Earth. Up to a depth of *dist_1* from surface topography, the cell size is *min_cell_size X smallest cell size*; *min_cell_size X (dx, dy, dz)*. For the following *dist_2* metres in depth, the cell widths are doubled. For the following *dist_3* metres in depth, the cell widths are doubled again. The user can enter an unlimited number of core mesh layers. Outside a depth and horizontal distance of *dist_1+dist_2+dist_3+...+dist_n*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
+    - **dist_1 dist_2 dist_3 ... dist_n:** Sets the discretization of the core mesh region below the Earth. Up to a depth of *dist_1* from surface topography, the cell size is *min_cell_size X smallest cell size*; *min_cell_size X (dx, dy, dz)* . For the following *dist_2* metres in depth, the cell widths are doubled. For the following *dist_3* metres in depth, the cell widths are doubled again. The user can enter an unlimited number of core mesh layers. Outside a depth and horizontal distance of *dist_1+dist_2+dist_3+...+dist_n*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
 
 .. _e3dmt_input_octree2ln5:
 
