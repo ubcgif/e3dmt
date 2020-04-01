@@ -56,7 +56,7 @@ Line Descriptions
 
 .. _e3dmt_input_octree2ln2a:
 
-    - **min_cell_fact:** Used to scale the cell values of :ref:`dist_1 dist_2 dist_3 ... dist_n <e3dmt_input_octree2ln4>` outside the survey region. Allows the user to reduce the level of discretization of surface topography outside the survey region. For relatively flat topography, this value has little bearing on the final mesh; *DEFAULT = 1*. Must be a power of 2.
+    - **min_cell_fact:** Used to scale the cell values of :ref:`dist_1 dist_2 dist_3 ... dist_n <e3dmt_input_octree2ln4>` inside the core mesh region. If *min_cell_fact*=1, discretization below the Earth in the core mesh region will begin with the smallest cell size. If *min_cell_fact*=2, the discretization below the Earth will begin with 2 times the smallest cell size; *DEFAULT = 1*. Must be a power of 2.
 
 .. _e3dmt_input_octree2ln2b:
 
@@ -72,11 +72,13 @@ Line Descriptions
 
 .. _e3dmt_input_octree2ln4:
 
-    - **dist_1 dist_2 dist_3 ... dist_n:** Sets the distance from surface topography and receivers in which the cells widths are increased by a factor of 2 in x, y and z. Up to a depth of *dist_1* from surface topography, the smallest cell size is used (set by *dx, dy, dz*). For the following *dist_2* metres, the cell widths are doubled. For the following *dist_3* metres, the cell widths are doubled again. The user can enter an unlimited number of core mesh layers. Outside a depth and horizontal distance of *dist_1+dist_2+dist_3+...+dist_n*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
+    - **dist_1 dist_2 dist_3 ... dist_n:** Sets the discretization of the core mesh region below the Earth. Up to a depth of *dist_1* from surface topography, the cell size is *min_cell_size X smallest cell size*; *min_cell_size X (dx, dy, dz)*. For the following *dist_2* metres in depth, the cell widths are doubled. For the following *dist_3* metres in depth, the cell widths are doubled again. The user can enter an unlimited number of core mesh layers. Outside a depth and horizontal distance of *dist_1+dist_2+dist_3+...+dist_n*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
 
 .. _e3dmt_input_octree2ln5:
 
     - **n1 n2 n3:** This sets the thicknesses of layers of finest discretization near the receivers. **n1 = 4** means that around each receiver, there is a layer 4 cells thick that uses the finest discretization. This is followed by a layer which is **n2** cells thick, where the cell dimensions are increased by a factor of 2. Likewise for the 3rd layer.
+
+.. note: You must ensure that the parameter *dist_1* is larger than *n1 X dz*.
 
 .. _e3dmt_input_octree2ln6:
 
