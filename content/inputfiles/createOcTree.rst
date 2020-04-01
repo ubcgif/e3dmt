@@ -78,7 +78,7 @@ Line Descriptions
 
     - **n1 n2 n3:** This sets the thicknesses of layers of finest discretization near the receivers. **n1 = 4** means that around each receiver, there is a layer 4 cells thick that uses the finest discretization. This is followed by a layer which is **n2** cells thick, where the cell dimensions are increased by a factor of 2. Likewise for the 3rd layer.
 
-.. note: You must ensure that the parameter *dist_1* is larger than *n1 X dz*.
+.. note:: You must ensure that the parameter *dist_1* is larger than *n1 X dz*. You will get an error otherwise.
 
 .. _e3dmt_input_octree2ln6:
 
