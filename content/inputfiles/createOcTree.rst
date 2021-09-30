@@ -50,6 +50,8 @@ Line Descriptions
 
     - **x_pad y_pad down_pad up_pad:** Distance from the origin in the x, y, downward and upward directions, respectively, that the mesh extends.
 
+.. important:: In the case where you are modeling ZTEM data and the base station is very far from the general survey region, you MUST ensure the padding extends far enough to contain the base station. Otherwise, the mesh generation will fail.
+
 .. _e3dmt_input_octreeln3:
 
     - **dist_1 dist_2 dist_3:** Sets the distance from surface topography and receivers in which the cells widths are increased by a factor of 2 in x, y and z. Up to a depth of *dist_1* from surface topography and within a horizontal distance of *dist_1* from any receiver, the smallest cell size is used (set by *dx, dy, dz*). For the following *dist_2* metres, the cell widths are doubled. For the following *dist_3* metres, the cell widths are doubled again. Outside a depth and horizontal distance of *h1+h2+h3*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
