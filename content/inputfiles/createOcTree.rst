@@ -70,6 +70,8 @@ Line Descriptions
 
     - **x_pad y_pad down_pad up_pad:** Distance from the data boundary in the x, y, downward and upward directions, respectively, that the mesh extends. True padding in the octree mesh may be larger since cell sizes must increase by factors of 2.
 
+.. important:: In the case where you are modeling ZTEM data and the base station is very far from the general survey region, you MUST ensure the padding extends far enough to contain the base station. Otherwise, the mesh generation will fail.
+
 .. _e3dmt_input_octree2ln4:
 
     - **dist_1 dist_2 dist_3 ... dist_n:** Sets the discretization of the core mesh region below the Earth. Up to a depth of *dist_1* from surface topography, the cell size is *min_cell_size* times the *smallest cell size*; *(min_cell_size) X (dx, dy, dz)* . For the following *dist_2* metres in depth, the cell widths are doubled. For the following *dist_3* metres in depth, the cell widths are doubled again. The user can enter an unlimited number of core mesh layers. Outside a depth and horizontal distance of *dist_1+dist_2+dist_3+...+dist_n*, the cells widths increase by a factor of 2 for every additional layer (see the figure below).
