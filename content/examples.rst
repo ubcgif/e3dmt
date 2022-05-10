@@ -10,6 +10,7 @@ Here, the program libraries for E3DMT version 2 will be used to:
     - predict MT or ZTEM data for a synthetic model
     - invert MT of ZTEM data created using our synthetic model
 
+
 Magnetotellurics
 ----------------
 
@@ -20,7 +21,7 @@ Zip folders containing all necessary files for the MT example can be downloaded 
 The full set of examples is parsed into 4 sections:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     Create octree mesh <exampleMT/create_octree>
     Create octree model <exampleMT/create_model>
@@ -38,7 +39,7 @@ Zip folders containing all necessary files for the ZTEM example can be downloade
 The full set of examples is parsed into 4 sections:
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     Create octree mesh <exampleZTEM/create_octree>
     Create octree model <exampleZTEM/create_model>
