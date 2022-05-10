@@ -16,10 +16,10 @@ Highlights
 
 Many advancements have been made since the creation of the original OcTree code (`E3DMT <https://e3dmt.readthedocs.io/en/e3dmt/>`__ ). Hightlights include:
 
-    - the ability define electric and magnetic field receivers along arbitrary orientations
-    - joint inversion of magnetotelluric and Z-axis tipper data
-    - implimentation of improved direct solvers and paralellization
-    - the ability to store factorization in RAM or disk
+  - the ability define electric and magnetic field receivers along arbitrary orientations
+  - joint inversion of magnetotelluric and Z-axis tipper data
+  - implimentation of improved direct solvers and paralellization
+  - the ability to store factorization in RAM or disk
 
 
 Contents
