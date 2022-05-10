@@ -4,7 +4,7 @@ ED3MT (Version 1) package
 
 E3DMT version 1 package is a program library for carrying out forward modelling and inversion of magnetotelluric and Z-axis tipper EM data 3D. 
 
-.. figure:: ./content/images/title_image.PNG
+.. figure:: content/images/title_image.PNG
      :align: center
      :width: 700
 
