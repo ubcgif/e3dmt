@@ -14,7 +14,7 @@ E3DMT version 1 package is a program library for carrying out forward modelling 
 Highlights
 ^^^^^^^^^^
 
-Many advancements have been made since the creation of the original tensor code (`MTZ3D <mtz3d.readthedocs.io>`__ ). Hightlights include:
+Many advancements have been made since the creation of the original tensor code (`MTZ3D <mtz3d.readthedocs.io>`_ ). Hightlights include:
 
   - the ability to model both magnetotelluric impedance data and Z-axis tipper data on an OcTree mesh
   - joint inversion of magnetotelluric and Z-axis tipper data
