@@ -16,9 +16,9 @@ Highlights
 
 Many advancements have been made since the creation of the original tensor code (`MTZ3D <mtz3d.readthedocs.io>`__ ). Hightlights include:
 
-    - the ability to model both magnetotelluric impedance data and Z-axis tipper data on an OcTree mesh
-    - joint inversion of magnetotelluric and Z-axis tipper data
-    - the ability to solve linear systems with iterative or direct solvers
+  - the ability to model both magnetotelluric impedance data and Z-axis tipper data on an OcTree mesh
+  - joint inversion of magnetotelluric and Z-axis tipper data
+  - the ability to solve linear systems with iterative or direct solvers
 
 
 Contents

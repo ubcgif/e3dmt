@@ -5,10 +5,10 @@ Examples
 
 Here, the program libraries for E3DMT version 1 will be used to:
 
-    - create an Octree mesh based on the survey
-    - create octree models
-    - predict MT or ZTEM data for a synthetic model
-    - invert MT or ZTEM data created using our synthetic model
+  - create an Octree mesh based on the survey
+  - create octree models
+  - predict MT or ZTEM data for a synthetic model
+  - invert MT or ZTEM data created using our synthetic model
 
 
 Magnetotellurics
@@ -27,6 +27,7 @@ The full example is parsed into 4 sections:
     Create octree model <exampleMT/create_model>
     Forward modeling <exampleMT/fwd>
     Inversion <exampleMT/inv>
+
 
 ZTEM
 ----
