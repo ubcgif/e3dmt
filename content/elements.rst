@@ -30,7 +30,7 @@ Main Input Files
 Here, we describe the main input files for executables contained with the E3DMT version 1 package.
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     Create octree mesh <inputfiles/createOcTree>
     Create octree model <inputfiles/createModel>
