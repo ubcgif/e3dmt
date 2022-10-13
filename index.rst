@@ -18,6 +18,7 @@ Many advancements have been made since the creation of the original OcTree code 
 
   - the ability define electric and magnetic field receivers along arbitrary orientations
   - joint inversion of magnetotelluric and Z-axis tipper data
+  - mesh generation for joint inversion
   - implimentation of improved direct solvers and paralellization
   - the ability to store factorization in RAM or disk
 

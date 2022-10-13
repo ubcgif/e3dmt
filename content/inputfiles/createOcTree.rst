@@ -118,6 +118,7 @@ Line Descriptions
         - If the flag "NOT_SHIFT_DATA" is used, then we do not change the locations of the receivers.
         - If "SHIFT_TO_SURFACE *filename*" is used, then a receivers file is created in which all receivers are projected to be at the discretized surface topography. This is used primarily for MT surveys
         - If "SHIFT_FLIGHT_HEIGHT *filename*" is used, then a receivers file is created in which the data locations are shifted to preserve true flight height over the discretized surface topography. This is used for ZTEM surveys.
+        - If "SHIFT_GENERAL *filename*" is used, then E-field receivers as well as H-field receivers within a height of 0.1 x the smallest cell size are projected to the discrete surface. For non-surface H-field receivers, flight height is preserved. **ADDED 2022-09-27**.
 
 .. _e3dmt_input_octree2ln11:
 
