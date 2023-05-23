@@ -67,7 +67,7 @@ Parameter Descriptions
 
 
 .. important:: 
-    The data may use a labeling convention with X = Easting, Y = Northing and Z = Down, but the node locations are in terms of Easting, Northing and elevation. To correctly define receivers:
+    The data may use a labeling convention with X = Northing, Y = Easting and Z = +ve Down, but the node locations are in terms of Easting, Northing and elevation. To correctly define receivers:
         - Define your inductive loop receivers in the CCW direction, as we are using a right-handed coordinate system
         - Define :math:`E_x` receivers from South to North
         - Define :math:`E_y` receivers from West to East
