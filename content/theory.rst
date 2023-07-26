@@ -112,6 +112,44 @@ where 1 and 2 refer to fields associated with plane waves polarized along two pe
         - :math:`Z_{xy}` is essentially the ratio of the electric field along the Northing and the magnetic field along the Easting.
 
 
+Mobile Magnetotelluric (MMT) Data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Mobile MT systems measure 2 orthogonal horizontal components of the electric field (Ex, Ey) at a base station located on the Earth's surface, and 3-component magnetic field data (Hx, Hy, Hz) at locations throughout the survey region. For each datum, the components of the magnetic field are linearly related to the measured electric field components at the base station via an admittance tensor :math:`\mathbf{Y}`, such that:
+
+.. math::
+    \begin{bmatrix} H_x \\ H_y \\ H_z \end{bmatrix} =
+    \begin{bmatrix} Y_{xx} & Y_{xy} \\ Y_{yx} & Y_{yy} \\ Y_{zx} & Y_{zy} \end{bmatrix}
+    \begin{bmatrix} E_x \\ E_y \end{bmatrix}
+    :label: admittance_tensor
+
+The datum for mobile MT is an apparent conductivity :math:`\sigma_a`. In much of the theory presented by Expert Geophysics for their Mobile MT system, the apparent conductivity can be computed via taking the determinant of the 3x2 admittance tensor as follows:
+
+.. math::
+    \sigma_a = \mu \omega \big | det(\mathbf{Y})^2 \big |
+
+
+The exact method for taking the determinant of the 3x2 matrix is considered proprietary by Expert Geophysics. However, most practitioners assume that since Hz is much weaker than Hx and Hy in the absence of major 3D effects, the last row of the admittance tensor can be neglected and the determinant reduces to:
+
+.. math::
+    det(\mathbf{Y}) \approx \sqrt{Y_{xx} Y_{yy} - Y_{xy} Y_{yx}}
+
+
+For a 3-dimensional Earth, the reduced admittance tensor can be defined using the ratios of electric and magnetic field components in both the x and y directions for 2 orthogonal plane wave polarizations; one polarization with the electric field along the x axis and one polarization with the electric file along the y axis. We can define the reduced admittance tensor as the inverse of the impedance tensor used to define class MT data. Therefore:
+
+.. math::
+    \begin{bmatrix} Y_{xx} & Y_{xy} \\ Y_{yx} & Y_{yy} \end{bmatrix} =
+    \begin{bmatrix} H_{x}^{(1)} & H_{x}^{(2)} \\ H_{y}^{(1)} & H_{y}^{(2)} \end{bmatrix}
+    \begin{bmatrix} E_{x}^{(1)} & E_{x}^{(2)} \\ E_{y}^{(1)} & E_{y}^{(2)} \end{bmatrix}^{-1}
+    :label: admittance_tensor_2
+
+where 1 and 2 refer to fields associated with plane waves polarized along two perpendicular directions. Ultimately, electric and magnetic fields for 2 polarizations are comupted by the E3DMT v2 code. These values are substituted into the admittance tensor entries used to approximate the determinant, which is then used to compute the apparent conductivity.
+
+.. important::
+    For MMT data, X = Northing, Y = Easting and Z = Down; which this code uses! Thus:
+        - Superscript :math:`\! ^{(1)}` refers to fields resulting from a plane wave whose electric field is polarized along the Northing direction. And superscript :math:`\! ^{(2)}` refers to fields resulting from a plane wave whose electric field is polarized along the Easting direction.
+
+
 
 
 ZTEM Data

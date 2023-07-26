@@ -7,7 +7,8 @@ Description
 -----------
 
 This manual provides instructions and background information for the E3DMT version 2 program library (2017).
-The library is capable of forward modeling and inverting magnetotelluric and ZTEM data. E3DMT version is is built in the same
+The library is capable of forward modeling and inverting magnetotelluric, expert geophysics mobile MT and ZTEM data.
+E3DMT version is is built in the same
 manner as AEM, so much of the background presented in this manual is identical to the AEM manual.
 In order to decrease computational time and increase accuracy by mesh refinement in areas of
 interest, conductivity models are discretized on an Octree mesh. 

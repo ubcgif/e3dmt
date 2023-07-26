@@ -33,6 +33,7 @@ Units
 **Input and outputs:**
 
     - **MT data:** Real and imaginary components of impedance tensor entries (V/A)
+    - **Mobile MT data:** Apparent conductivities  (S/m)
     - **ZTEM data:** Real and imaginary components of transfer function entries (unitless)
     - **Conductivity model:** S/m
     - **Reference/starting conductivity model:** S/m 

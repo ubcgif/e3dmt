@@ -2,7 +2,7 @@
 ED3MT (Version 2) package
 =========================
 
-The E3DMT version 2 package is a program library for carrying out forward modelling and inversion of magnetotelluric and Z-axis tipper EM data 3D.
+The E3DMT version 2 package is a program library for carrying out forward modelling and inversion of magnetotelluric, mobile MT and Z-axis tipper EM data 3D.
 
 .. figure:: content/images/title_image.png
     :align: center
@@ -17,6 +17,7 @@ Highlights
 Many advancements have been made since the creation of the original OcTree code (`E3DMT <https://e3dmt.readthedocs.io/en/e3dmt/>`__ ). Hightlights include:
 
   - the ability define electric and magnetic field receivers along arbitrary orientations
+  - being able to model MT, Mobile MT and ZTEM data
   - joint inversion of magnetotelluric and Z-axis tipper data
   - mesh generation for joint inversion
   - implimentation of improved direct solvers and paralellization
