@@ -142,7 +142,7 @@ The lines of a survey file with one or more blocks of natural source data are de
 
 .. _indexFile2_dflag:
 
-    - **dflag:** Specifies whether the following data array is MT or ZTEM data. To specify for each block, use the flag *MT* or *ZTEM*. Multiple MT or ZTEM data blocks can be used.
+    - **dflag:** Specifies whether the following data array is MT, expert geophysics mobile MT, or ZTEM data. To specify for each block, use the flag *MT*, *MOBILEMT* or *ZTEM*. Multiple MT, MOBILEMT and/or ZTEM data blocks can be used.
 
 
 MT Data Array
@@ -174,6 +174,39 @@ Below we show an example of a survey file for MT data. In this case, the impedan
 
     - The frequency indicies in row 1 cannot decrease in value; e.g. you cannot have a row which starts with 3 followed by a row that starts with 2.
     - The number of rows and receiver indicies for measurements at a given frequency do not need to match those for another frequency; e.g. you can have 50 stations taking measurements at 1 Hz and 65 completely different stations taking measurements at 10 Hz.
+
+
+Expert Geophysics MT Data Array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The indicies used to define Expert Geophysics mobile MT data arrays are as follows:
+
+|
+|
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+| :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
+| :ref:`f_ind<e3dmt_ind_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_ind_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_ind_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_ind_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_ind_ln5>` :math:`\;` :ref:`1<e3dmt_ind_ln7>`
+|
+|
+
+
+Below we show an example of a survey file for MT data. In this case, the apparent conductivity data are modeled at 3 frequencies. Receivers 1 and 2 are the e-field receivers at the base
+station used for all data locations each measurement site.
+
+.. figure:: images/mmtindex_file.png
+     :align: center
+     :width: 700
+
+     survey file for mobile MT data.
+
+
+.. important::
+
+    - The frequency indicies in row 1 cannot decrease in value; e.g. you cannot have a row which starts with 3 followed by a row that starts with 2.
+    - The number of rows and receiver indicies for measurements at a given frequency do not need to match those for another frequency; e.g. you can have 50 stations taking measurements at 1 Hz and 65 completely different stations taking measurements at 10 Hz.
+
 
 ZTEM Data Array
 ~~~~~~~~~~~~~~~
