@@ -228,10 +228,10 @@ where
 Below we show an example of a observations file for MT data.
 
 .. figure:: images/dobs2.png
-     :align: center
-     :width: 700
+    :align: center
+    :width: 700
 
-     Observed data file for MT data.
+    Observed data file for MT data.
 
 
 Mobile MT Data Array
@@ -241,11 +241,11 @@ The indicies used to define Expert Geophysics mobile MT data arrays are as follo
 
 |
 |
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; \sigma_a \; uncert `
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; \sigma_a \; uncert `
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; \sigma_a \; uncert `
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; \sigma_a \; uncert`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; \sigma_a \; uncert`
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; \sigma_a \; uncert`
 | :math:`\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \vdots`
-| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; \sigma_a \; uncert `
+| :ref:`f_ind<e3dmt_obs2_ln1>` :math:`\;` :ref:`Ey_ind<e3dmt_obs2_ln2>` :math:`\;` :ref:`Ex_ind<e3dmt_obs2_ln3>` :math:`\;` :ref:`Hy_ind<e3dmt_obs2_ln4>` :math:`\;` :ref:`Hx_ind<e3dmt_obs2_ln5>` :math:`\;` :ref:`1<e3dmt_obs2_ln7>` :math:`\; \sigma_a \; uncert`
 |
 |
 
@@ -254,6 +254,14 @@ where
     - :math:`\sigma_a` are apparent conductivity measurements, and
     - :math:`uncert` are the associated uncertainties 
 
+
+Below we show an example of a observations file for MT data.
+
+.. figure:: images/dobs2_mmt.png
+    :align: center
+    :width: 700
+
+    Observed data file for MobileMT data.
 
 ZTEM Data Array
 ~~~~~~~~~~~~~~~
@@ -287,6 +295,15 @@ where
 and similarly for :math:`T_{zy}`.
 
 .. important:: For standard natural source data, X = Northing, Y = Easting and Z = Down; which this code uses! Thus :math:`T_{zx}` is the transfer function related to an incident plane wave whose electric field is polarized along the Northing direction; which produces magnetic fields with components in the Easting direction. For more, see the :ref:`theory section<theory_nsem>`.
+
+Below we show an example of a observations file for ZTEM data.
+
+.. figure:: images/dobs2_ztem.png
+    :align: center
+    :width: 700
+
+    Observed data file for ZTEM data.
+
 
 Parameter Descriptions
 ^^^^^^^^^^^^^^^^^^^^^^

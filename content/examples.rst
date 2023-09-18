@@ -45,3 +45,21 @@ The full set of examples is parsed into 4 sections:
     Create octree model <exampleZTEM/create_model>
     Forward modeling <exampleZTEM/fwd>
     Inversion <exampleZTEM/inv>
+
+
+MobileMT
+--------
+
+Zip folders containing all necessary files for the MobileMT example can be downloaded here:
+
+    - Files for example using E3DMT version 2 are `downloaded here <https://github.com/ubcgif/e3dmt/raw/e3dmt_v2/assets/e3dmt_v2_example_MMT.zip>`__
+
+The full set of examples is parsed into 4 sections:
+
+.. toctree::
+    :maxdepth: 1
+
+    Create octree mesh <exampleMMT/create_octree>
+    Create octree model <exampleMMT/create_model>
+    Forward modeling <exampleMMT/fwd>
+    Inversion <exampleMMT/inv>
