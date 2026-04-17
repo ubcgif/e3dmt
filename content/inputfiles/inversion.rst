@@ -111,6 +111,7 @@ Line Descriptions
 .. important::
 
     - The number of layers in the 1D model for E3DMT ver 2 must equal the number of underlying mesh cells in the vertical direction. Thus if underlying mesh for the OcTree mesh is 1028 by 1028 by 512, the 1D model must have 512 layer conductivities.
+    - The layer conductivities are order from the top cell downward!!!
     - The boundary conditions computed using 1D models is only accurate when surface topography is minimal. In the case where surface topography is significant, 3D background models are suggested.
 
 
